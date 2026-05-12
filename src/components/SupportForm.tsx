@@ -14,7 +14,7 @@ export default function SupportForm() {
     setStatus('loading');
 
     try {
-      const response = await fetch('https://formfy.layline.ventures/glu@layline.ventures', {
+      const response = await fetch('https://formfy.layline.ventures/support@myglu.health', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
