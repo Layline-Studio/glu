@@ -8,6 +8,8 @@
       "namespace": "android_app",
       "package_name": "ventures.layline.glu",
       "sha256_cert_fingerprints": [
+        "9F:79:77:46:8A:C5:80:2A:ED:82:38:54:C4:06:23:17:88:E3:B6:0F:79:4B:47:12:8D:0F:39:E9:93:D1:06:F5",
+        "53:A7:7F:E4:93:75:E7:0E:AC:CA:FC:97:92:53:C2:06:AE:74:CB:70:1E:A6:4A:70:38:7D:4C:8D:31:6F:80:DE",
         "9F:E9:98:F9:F5:0C:94:15:21:28:92:B4:B9:4B:1C:DA:FE:87:33:87:E3:28:72:A2:6B:DE:0B:77:35:6E:A2:FF"
       ]
     }
