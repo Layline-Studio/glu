@@ -1,0 +1,226 @@
+---
+import { Image } from "astro:assets";
+import homeTrackers from "../assets/landing-page/home_trackers.png";
+import journeyInsight from "../assets/landing-page/journey_insight.png";
+import portionCheck from "../assets/landing-page/portion_check.png";
+import progressWeight from "../assets/landing-page/progress_weight.png";
+import glowUp from "../assets/landing-page/glow_up.png";
+
+const chapters = [
+    {
+        src: homeTrackers,
+        alt: "Glu home screen with medication, meal, movement, and symptom trackers",
+        title: "Everything in one place",
+        copy: "Medication, meals, movement, symptoms, water, reminders. One home for the whole journey, so nothing slips between apps and notebooks.",
+    },
+    {
+        src: progressWeight,
+        alt: "Glu weight progress chart showing a smooth downward trend",
+        title: "Watch the trend, not the noise",
+        copy: "Daily weigh-ins bounce around. Glu draws the line that actually matters, so one heavy Tuesday never shakes your confidence.",
+    },
+    {
+        src: journeyInsight,
+        alt: "Glu journey insights connecting logged data to how you feel",
+        title: "Understand your journey",
+        copy: "Insights connect what you logged to how you feel, week by week. Walk into every check-in with answers instead of guesses.",
+    },
+    {
+        src: portionCheck,
+        alt: "Glu portion check screen estimating a meal portion",
+        title: "Know your portions in seconds",
+        copy: "Appetite changes on GLP-1. A quick portion check helps you eat enough to feel good, and stop when you are done.",
+    },
+];
+---
+
+<section id="features" class="relative bg-surface-raised py-28 sm:py-36" aria-label="Features">
+    <div class="mx-auto w-full max-w-screen-2xl px-6 sm:px-10">
+        <div class="max-w-3xl">
+            <h2
+                data-reveal
+                class="font-display text-[clamp(2rem,4.5vw,3.4rem)] font-bold leading-[1.06] tracking-[-0.025em] text-ink"
+            >
+                Built around your treatment, not around logging.
+            </h2>
+            <p
+                data-reveal
+                style="--reveal-delay: 0.1s"
+                class="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg"
+            >
+                Four moments from the app, and what each one quietly does for
+                you.
+            </p>
+        </div>
+
+        <div data-showcase class="mt-10 lg:mt-0 lg:grid lg:grid-cols-2 lg:gap-24">
+            <div class="hidden lg:block">
+                <div
+                    class="sticky top-0 flex h-screen items-center justify-center gap-10"
+                >
+                    <div
+                        class="w-[330px] rounded-[44px] border border-white bg-white p-[7px] shadow-[0_60px_120px_-48px_rgba(30,58,138,0.38)] xl:w-[380px]"
+                    >
+                        <div
+                            class="relative aspect-[1250/2532] w-full overflow-hidden rounded-[37px] bg-slate-50"
+                        >
+                            {
+                                chapters.map((chapter, index) => (
+                                    <Image
+                                        data-showcase-screen={index}
+                                        src={chapter.src}
+                                        alt={chapter.alt}
+                                        class={`showcase-screen absolute inset-0 h-full w-full object-cover object-top ${
+                                            index === 0 ? "is-active" : ""
+                                        }`}
+                                        widths={[480, 760]}
+                                        sizes="380px"
+                                        format="webp"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <div
+                        class="relative h-44 w-px overflow-hidden rounded-full bg-slate-200"
+                        aria-hidden="true"
+                    >
+                        <div
+                            data-showcase-rail
+                            class="showcase-rail-fill absolute inset-x-0 top-0 h-full bg-brand"
+                            style="transform: scaleY(0.25)"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                {
+                    chapters.map((chapter, index) => (
+                        <article
+                            data-showcase-chapter={index}
+                            class={`showcase-chapter flex flex-col justify-center py-14 lg:min-h-screen lg:py-0 ${
+                                index === 0 ? "is-active" : ""
+                            }`}
+                        >
+                            <div
+                                data-reveal
+                                class="mx-auto mb-10 w-full max-w-[280px] rounded-[36px] border border-white bg-white p-[6px] shadow-[0_40px_90px_-40px_rgba(30,58,138,0.4)] lg:hidden"
+                            >
+                                <Image
+                                    src={chapter.src}
+                                    alt={chapter.alt}
+                                    class="aspect-[1250/2532] w-full rounded-[30px] object-cover object-top"
+                                    widths={[480, 640]}
+                                    sizes="280px"
+                                    format="webp"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </div>
+
+                            <div data-reveal class="max-w-md">
+                                <span class="font-display text-sm font-bold text-brand">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
+                                <h3 class="mt-3 font-display text-3xl font-bold leading-[1.08] tracking-[-0.02em] text-ink sm:text-4xl">
+                                    {chapter.title}
+                                </h3>
+                                <p class="mt-5 text-base leading-relaxed text-ink-soft sm:text-lg">
+                                    {chapter.copy}
+                                </p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section
+    id="glow"
+    class="relative overflow-hidden bg-surface px-6 py-28 text-center sm:px-10 sm:py-36"
+    aria-label="Glow up"
+>
+    <div class="mx-auto w-full max-w-screen-md">
+        <h2
+            data-reveal
+            class="font-display text-[clamp(2.2rem,5vw,3.8rem)] font-bold leading-[1.05] tracking-[-0.028em] text-ink"
+        >
+            This journey changes you.
+            <span class="text-brand">See it.</span>
+        </h2>
+        <p
+            data-reveal
+            style="--reveal-delay: 0.1s"
+            class="mx-auto mt-6 max-w-lg text-base leading-relaxed text-ink-soft sm:text-lg"
+        >
+            Side-by-side photos and milestones turn slow, invisible progress
+            into something you can actually feel proud of.
+        </p>
+
+        <div
+            data-reveal
+            style="--reveal-delay: 0.2s"
+            class="mx-auto mt-14 w-full max-w-[320px] rounded-[42px] border border-white bg-white p-[7px] shadow-[0_60px_120px_-48px_rgba(30,58,138,0.42)] sm:max-w-[360px]"
+        >
+            <Image
+                src={glowUp}
+                alt="Glu glow up screen comparing progress photos over time"
+                class="aspect-[1250/2532] w-full rounded-[35px] object-cover object-top"
+                widths={[480, 720]}
+                sizes="360px"
+                format="webp"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+    </div>
+</section>
+
+<script>
+    const showcase = document.querySelector("[data-showcase]");
+
+    if (showcase && "IntersectionObserver" in window) {
+        const chapterEls = Array.from(
+            showcase.querySelectorAll("[data-showcase-chapter]"),
+        );
+        const screenEls = Array.from(
+            showcase.querySelectorAll("[data-showcase-screen]"),
+        );
+        const rail = showcase.querySelector("[data-showcase-rail]");
+        const total = chapterEls.length;
+
+        const setActive = (index: number) => {
+            chapterEls.forEach((chapter, i) =>
+                chapter.classList.toggle("is-active", i === index),
+            );
+            screenEls.forEach((screen, i) =>
+                screen.classList.toggle("is-active", i === index),
+            );
+            if (rail instanceof HTMLElement && total > 0) {
+                rail.style.transform = `scaleY(${(index + 1) / total})`;
+            }
+        };
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const index = Number(
+                        entry.target.getAttribute("data-showcase-chapter"),
+                    );
+                    if (Number.isFinite(index)) setActive(index);
+                });
+            },
+            { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+        );
+
+        chapterEls.forEach((chapter) => observer.observe(chapter));
+    }
+</script>

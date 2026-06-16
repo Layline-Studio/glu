@@ -1,14 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
+import Showcase from '../components/Showcase.astro';
+import Trust from '../components/Trust.astro';
+import Cta from '../components/Cta.astro';
 import Footer from '../components/Footer.astro';
-import homeTrackers from '../assets/landing-page/home_trackers.png';
 ---
 
-<Layout title="Glu | GLP-1 Tracker" preloadImage={homeTrackers.src}>
-  <div class="min-h-screen bg-slate-50 text-slate-900">
+<Layout title="Glu | GLP-1 Tracker">
+  <div class="relative min-h-screen bg-surface text-slate-900">
+    <Nav />
     <Hero />
-
+    <Showcase />
+    <Trust />
+    <Cta />
     <Footer />
   </div>
 </Layout>

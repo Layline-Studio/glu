@@ -3,8 +3,15 @@
 @theme {
     --animate-marquee: marquee 12s linear infinite;
 
-    --font-sora: "Avenir Next", "Segoe UI Variable Display", "Segoe UI", sans-serif;
-    --font-dm-sans: "Avenir Next", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+    --font-display: "Schibsted Grotesk Variable", "Avenir Next", "Segoe UI Variable Display", "Segoe UI", sans-serif;
+    --font-body: "Schibsted Grotesk Variable", "Avenir Next", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+
+    /* Legacy aliases kept so secondary pages (terms, privacy, support) pick up the new family without churn. */
+    --font-sora: var(--font-display);
+    --font-dm-sans: var(--font-body);
+
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
     --color-gray-50: #f9fafb;
     --color-gray-100: #f3f4f6;
@@ -24,6 +31,7 @@
     --color-blue-400: #60a5fa;
     --color-blue-500: #3b82f6;
     --color-blue-600: #2563eb;
+    --color-blue-700: #1d4ed8;
 
     --color-slate-50: #f8fafc;
     --color-slate-100: #f1f5f9;
@@ -35,6 +43,16 @@
     --color-slate-700: #334155;
     --color-slate-800: #1e293b;
     --color-slate-900: #0f172a;
+
+    /* Brand-tinted surfaces and the one committed blue. */
+    --color-surface: oklch(0.988 0.004 255);
+    --color-surface-raised: oklch(0.997 0.002 255);
+    --color-ink: oklch(0.21 0.025 262);
+    --color-ink-soft: oklch(0.45 0.025 260);
+    --color-ink-faint: oklch(0.58 0.02 258);
+    --color-brand: oklch(0.55 0.19 262);
+    --color-brand-deep: oklch(0.42 0.16 263);
+    --color-brand-wash: oklch(0.95 0.022 258);
 }
 
 @layer base {
@@ -48,8 +66,8 @@
     }
 
     body {
-        font-family: var(--font-dm-sans);
-        background-color: #f7faff;
+        font-family: var(--font-body);
+        background-color: var(--color-surface);
         color: var(--color-slate-800);
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
@@ -99,43 +117,150 @@
     }
 }
 
+/* ------------------------------------------------------------------ */
+/* Motion system                                                       */
+/* ------------------------------------------------------------------ */
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes phone-in {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.965);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    /* Hero page-load choreography: stagger via --enter-delay. */
+    .hero-enter {
+        animation: rise-in 0.9s var(--ease-out-quint) both;
+        animation-delay: var(--enter-delay, 0s);
+    }
+
+    .hero-enter-phone {
+        animation: phone-in 1.1s var(--ease-out-quint) both;
+        animation-delay: var(--enter-delay, 0s);
+    }
+
+    /* Scroll reveals: elements opt in with data-reveal, staggered via --reveal-delay. */
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+            opacity 0.9s var(--ease-out-quint),
+            transform 0.9s var(--ease-out-quint);
+        transition-delay: var(--reveal-delay, 0s);
+    }
+
+    [data-reveal].is-revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* Page furniture                                                      */
+/* ------------------------------------------------------------------ */
+
 @layer components {
     .hero-premium-bg {
         background:
             radial-gradient(
-                85% 90% at 100% 0%,
-                rgba(59, 130, 246, 0.16),
-                rgba(59, 130, 246, 0) 62%
+                52% 58% at 78% 38%,
+                oklch(0.92 0.045 258 / 0.55),
+                transparent 70%
             ),
             radial-gradient(
-                80% 75% at 0% 100%,
-                rgba(191, 219, 254, 0.22),
-                rgba(191, 219, 254, 0) 65%
+                45% 40% at 12% 92%,
+                oklch(0.95 0.025 250 / 0.5),
+                transparent 72%
             ),
-            linear-gradient(180deg, #f8fbff 0%, #f3f7ff 56%, #eef4ff 100%);
+            linear-gradient(
+                180deg,
+                oklch(0.992 0.003 255) 0%,
+                oklch(0.982 0.007 255) 100%
+            );
     }
 
-    .hero-premium-bg::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background-image:
-            linear-gradient(
-                to right,
-                rgba(148, 163, 184, 0.08) 1px,
-                transparent 1px
+    .site-nav {
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+        transition:
+            background-color 0.5s var(--ease-out-quint),
+            border-color 0.5s var(--ease-out-quint),
+            box-shadow 0.5s var(--ease-out-quint);
+    }
+
+    .site-nav.is-scrolled {
+        background-color: oklch(0.99 0.003 255 / 0.82);
+        border-bottom-color: oklch(0.91 0.01 255);
+        box-shadow: 0 12px 32px -28px oklch(0.3 0.05 262 / 0.5);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Sticky showcase: screens crossfade, inactive chapters recede. */
+    .showcase-screen {
+        opacity: 0;
+        transition: opacity 0.7s var(--ease-out-quint);
+    }
+
+    .showcase-screen.is-active {
+        opacity: 1;
+    }
+
+    .showcase-chapter {
+        transition: opacity 0.6s var(--ease-out-quint);
+    }
+
+    @media (min-width: 1024px) {
+        .showcase-chapter:not(.is-active) {
+            opacity: 0.32;
+        }
+    }
+
+    .showcase-rail-fill {
+        transform-origin: top center;
+        transition: transform 0.7s var(--ease-out-quint);
+    }
+
+    /* The one committed-color moment on the page. */
+    .cta-band {
+        background:
+            radial-gradient(
+                90% 110% at 50% -20%,
+                oklch(0.62 0.18 258 / 0.85),
+                transparent 65%
             ),
             linear-gradient(
-                to bottom,
-                rgba(148, 163, 184, 0.08) 1px,
-                transparent 1px
+                180deg,
+                oklch(0.46 0.17 262) 0%,
+                oklch(0.38 0.15 264) 100%
             );
-        background-size: 42px 42px;
-        mask-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.45),
-            transparent 70%
-        );
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .showcase-screen,
+    .showcase-chapter,
+    .showcase-rail-fill {
+        transition: none;
     }
 }
