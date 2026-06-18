@@ -1,0 +1,68 @@
+---
+const testimonials = [
+  {
+    quote:
+      'I stopped juggling screenshots, notes, and reminders. Seeing doses, meals, and symptoms together makes my week easier to understand.',
+    name: 'Maya R.',
+    role: 'App Store',
+  },
+  {
+    quote:
+      'The weight trend view helps me focus on the pattern instead of reacting to every single day.',
+    name: 'Jordan T.',
+    role: 'Google Play',
+  },
+  {
+    quote:
+      'I wanted one place for reminders and side effects without a generic habit-tracker feel. Glu feels built for the routine I am actually following.',
+    name: 'Elena S.',
+    role: 'App Store',
+  },
+];
+---
+
+<section id="reviews" class="bg-surface-raised px-6 py-28 sm:px-10 sm:py-36" aria-label="Testimonials">
+    <div class="mx-auto w-full max-w-screen-xl">
+        <div class="max-w-3xl">
+            <h2
+                data-reveal
+                class="font-display text-[clamp(2rem,4.5vw,3.4rem)] font-bold leading-[1.06] tracking-[-0.025em] text-ink"
+            >
+                What users say about tracking with Glu
+            </h2>
+            <p
+                data-reveal
+                style="--reveal-delay: 0.12s"
+                class="mt-6 max-w-2xl text-base leading-relaxed text-ink-soft sm:text-lg"
+            >
+                Reviews consistently point to the same benefit: it is easier to
+                stay oriented when reminders, doses, food, symptoms, and
+                progress live in the same place.
+            </p>
+        </div>
+
+        <div class="mt-14 grid gap-5 lg:grid-cols-3">
+            {
+                testimonials.map((testimonial, index) => (
+                    <blockquote
+                        data-reveal
+                        style={`--reveal-delay: ${index * 0.08}s`}
+                        class="flex h-full flex-col rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_24px_60px_-44px_rgba(15,23,42,0.22)] sm:p-8"
+                    >
+                        <div class="text-sm font-semibold tracking-[0.16em] text-amber-500">
+                            ★★★★★
+                        </div>
+                        <p class="mt-4 font-display text-xl font-bold leading-[1.18] tracking-[-0.015em] text-ink">
+                            “{testimonial.quote}”
+                        </p>
+                        <footer class="mt-auto pt-8 text-sm leading-relaxed text-ink-faint">
+                            <span class="font-semibold text-ink">{testimonial.name}</span>
+                            <br />
+                            {testimonial.role}
+                        </footer>
+                    </blockquote>
+                ))
+            }
+        </div>
+    </div>
+</section>

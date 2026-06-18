@@ -1,36 +1,5 @@
 ---
-const faqs = [
-  {
-    question: "What does Glu track?",
-    answer:
-      "Glu helps track medication reminders, dose history, weight trends, meals, water, movement, symptoms, and day-to-day progress in one place.",
-  },
-  {
-    question: "Which GLP-1 medications does Glu support?",
-    answer:
-      "Glu is built for people using GLP-1 treatments across common shots and pills, including medications such as Zepbound, Mounjaro, Ozempic, Wegovy, and Rybelsus.",
-  },
-  {
-    question: "Can Glu help me notice patterns while on GLP-1?",
-    answer:
-      "Yes. Glu is designed to make it easier to compare reminders, doses, meals, symptoms, and progress over time so changes feel easier to interpret.",
-  },
-  {
-    question: "Why do people on GLP-1 track meals, symptoms, and weight together?",
-    answer:
-      "Many people want one record of how treatment timing, appetite, food choices, symptoms, and weight changes line up over time. Glu keeps those details together so the overall picture is easier to follow.",
-  },
-  {
-    question: "Does Glu replace medical advice?",
-    answer:
-      "No. Glu is for personal tracking and education only. It does not diagnose, treat, or replace guidance from a licensed healthcare professional.",
-  },
-  {
-    question: "How does Glu handle privacy and account deletion?",
-    answer:
-      "Glu links directly to its privacy policy and account deletion instructions, and you can contact support if you need help with account-related requests.",
-  },
-];
+import { homeFaqs } from '../data/homeFaqs';
 ---
 
 <section id="faq" class="bg-surface px-6 py-28 sm:px-10 sm:py-36" aria-label="Frequently asked questions">
@@ -47,26 +16,32 @@ const faqs = [
                 style="--reveal-delay: 0.08s"
                 class="mt-6 max-w-2xl text-base leading-relaxed text-ink-soft sm:text-lg"
             >
-                A few quick answers about what Glu is for, how people use it,
-                and where tracking ends and medical care begins.
+                A deeper set of answers about pricing, supported routines,
+                integrations, privacy, and how a GLP&#8209;1 tracker fits into
+                everyday treatment.
             </p>
         </div>
 
         <div class="mt-14 grid gap-5 lg:grid-cols-2">
             {
-                faqs.map((faq, index) => (
-                    <article
+                homeFaqs.map((faq, index) => (
+                    <details
                         data-reveal
                         style={`--reveal-delay: ${index * 0.06}s`}
-                        class="rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-[0_24px_60px_-44px_rgba(15,23,42,0.22)] sm:p-8"
+                        class="group rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-[0_24px_60px_-44px_rgba(15,23,42,0.22)] sm:p-8"
                     >
-                        <h3 class="font-display text-xl font-bold leading-[1.14] tracking-[-0.015em] text-ink">
-                            {faq.question}
-                        </h3>
-                        <p class="mt-4 text-[15px] leading-relaxed text-ink-soft sm:text-base">
+                        <summary class="flex cursor-pointer list-none items-start justify-between gap-4 marker:hidden">
+                            <h3 class="font-display text-xl font-bold leading-[1.14] tracking-[-0.015em] text-ink">
+                                {faq.question}
+                            </h3>
+                            <span class="mt-1 shrink-0 text-2xl leading-none text-ink-faint transition-transform duration-300 group-open:rotate-45">
+                                +
+                            </span>
+                        </summary>
+                        <p class="mt-4 pr-8 text-[15px] leading-relaxed text-ink-soft sm:text-base">
                             {faq.answer}
                         </p>
-                    </article>
+                    </details>
                 ))
             }
         </div>

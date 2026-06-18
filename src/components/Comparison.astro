@@ -1,0 +1,104 @@
+---
+const rows = [
+  {
+    label: 'Dose reminders and schedule awareness',
+    glu: 'Built in',
+    notes: 'Manual',
+    habits: 'Partial',
+  },
+  {
+    label: 'Dose history tied to progress tracking',
+    glu: 'Built in',
+    notes: 'Manual',
+    habits: 'Usually missing',
+  },
+  {
+    label: 'Meals, water, and symptom logging together',
+    glu: 'Built in',
+    notes: 'Scattered',
+    habits: 'Partial',
+  },
+  {
+    label: 'Weight trends in the same workflow',
+    glu: 'Built in',
+    notes: 'Manual',
+    habits: 'Usually separate',
+  },
+  {
+    label: 'Designed specifically for GLP-1 routines',
+    glu: 'Yes',
+    notes: 'No',
+    habits: 'No',
+  },
+];
+---
+
+<section id="comparison" class="bg-surface px-6 py-28 sm:px-10 sm:py-36" aria-label="Comparison">
+    <div class="mx-auto w-full max-w-screen-xl">
+        <div class="max-w-3xl">
+            <h2
+                data-reveal
+                class="font-display text-[clamp(2rem,4.5vw,3.4rem)] font-bold leading-[1.06] tracking-[-0.025em] text-ink"
+            >
+                Why use Glu instead of a generic tracker?
+            </h2>
+            <p
+                data-reveal
+                style="--reveal-delay: 0.08s"
+                class="mt-6 max-w-2xl text-base leading-relaxed text-ink-soft sm:text-lg"
+            >
+                Many people start with notes, reminders, or a general habit
+                app. Glu is different because it brings the details of a
+                GLP&#8209;1 routine into one view instead of asking you to build
+                that system yourself.
+            </p>
+        </div>
+
+        <div
+            data-reveal
+            style="--reveal-delay: 0.14s"
+            class="mt-14 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_60px_-44px_rgba(15,23,42,0.22)]"
+        >
+            <div class="overflow-x-auto">
+                <table class="min-w-full border-collapse">
+                    <thead class="bg-surface-raised">
+                        <tr>
+                            <th class="px-6 py-5 text-left font-display text-sm font-bold uppercase tracking-[0.16em] text-ink-faint sm:px-8">
+                                Capability
+                            </th>
+                            <th class="px-6 py-5 text-left font-display text-sm font-bold uppercase tracking-[0.16em] text-ink-faint sm:px-8">
+                                Glu
+                            </th>
+                            <th class="px-6 py-5 text-left font-display text-sm font-bold uppercase tracking-[0.16em] text-ink-faint sm:px-8">
+                                Notes app
+                            </th>
+                            <th class="px-6 py-5 text-left font-display text-sm font-bold uppercase tracking-[0.16em] text-ink-faint sm:px-8">
+                                Habit tracker
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            rows.map((row) => (
+                                <tr class="border-t border-slate-200">
+                                    <td class="px-6 py-5 text-[15px] leading-relaxed text-ink sm:px-8 sm:text-base">
+                                        {row.label}
+                                    </td>
+                                    <td class="px-6 py-5 text-[15px] font-semibold leading-relaxed text-brand sm:px-8 sm:text-base">
+                                        {row.glu}
+                                    </td>
+                                    <td class="px-6 py-5 text-[15px] leading-relaxed text-ink-soft sm:px-8 sm:text-base">
+                                        {row.notes}
+                                    </td>
+                                    <td class="px-6 py-5 text-[15px] leading-relaxed text-ink-soft sm:px-8 sm:text-base">
+                                        {row.habits}
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

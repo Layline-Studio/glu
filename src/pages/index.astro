@@ -4,11 +4,15 @@ import { getImage } from 'astro:assets';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Showcase from '../components/Showcase.astro';
+import Pricing from '../components/Pricing.astro';
+import Comparison from '../components/Comparison.astro';
+import Testimonials from '../components/Testimonials.astro';
 import Trust from '../components/Trust.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import Footer from '../components/Footer.astro';
 import homeTrackers from '../assets/landing-page/home_trackers.png';
+import { homeFaqs } from '../data/homeFaqs';
 
 const description =
   'Glu is a GLP-1 tracker for reminders, dose history, weight trends, side effects, meals, water, and daily progress.';
@@ -68,56 +72,14 @@ const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What does Glu track?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Glu helps track medication reminders, dose history, weight trends, meals, water, movement, symptoms, and day-to-day progress in one place.',
-        },
+    mainEntity: homeFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
       },
-      {
-        '@type': 'Question',
-        name: 'Which GLP-1 medications does Glu support?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Glu is built for people using GLP-1 treatments across common shots and pills, including medications such as Zepbound, Mounjaro, Ozempic, Wegovy, and Rybelsus.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Can Glu help me notice patterns while on GLP-1?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes. Glu is designed to make it easier to compare reminders, doses, meals, symptoms, and progress over time so changes feel easier to interpret.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Why do people on GLP-1 track meals, symptoms, and weight together?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Many people want one record of how treatment timing, appetite, food choices, symptoms, and weight changes line up over time. Glu keeps those details together so the overall picture is easier to follow.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Does Glu replace medical advice?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'No. Glu is for personal tracking and education only. It does not diagnose, treat, or replace guidance from a licensed healthcare professional.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'How does Glu handle privacy and account deletion?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Glu links directly to its privacy policy and account deletion instructions, and you can contact support if you need help with account-related requests.',
-        },
-      },
-    ],
+    })),
   },
 ];
 ---
@@ -137,6 +99,9 @@ const structuredData = [
     <Nav />
     <Hero />
     <Showcase />
+    <Pricing />
+    <Comparison />
+    <Testimonials />
     <Trust />
     <Faq />
     <Cta />
