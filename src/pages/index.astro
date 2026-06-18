@@ -6,6 +6,7 @@ import Showcase from '../components/Showcase.astro';
 import Trust from '../components/Trust.astro';
 import Cta from '../components/Cta.astro';
 import Footer from '../components/Footer.astro';
+import homeTrackers from '../assets/landing-page/home_trackers.png';
 
 const description =
   'Glu is a GLP-1 tracker for reminders, dose history, weight trends, side effects, meals, water, and daily progress.';
@@ -57,6 +58,7 @@ const structuredData = [
   title="Glu | GLP-1 Tracker for Daily Progress"
   description={description}
   structuredData={structuredData}
+  preloadImage={homeTrackers.src}
 >
   <div class="relative min-h-screen bg-surface text-slate-900">
     <Nav />

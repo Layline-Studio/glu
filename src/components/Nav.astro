@@ -50,18 +50,26 @@
 </header>
 
 <script>
-    const nav = document.querySelector("[data-site-nav]");
-    const sentinel = document.querySelector("[data-nav-sentinel]");
+    const initNav = () => {
+        const nav = document.querySelector("[data-site-nav]");
+        const sentinel = document.querySelector("[data-nav-sentinel]");
 
-    if (nav && sentinel && "IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                nav.classList.toggle("is-scrolled", !entry.isIntersecting);
-            },
-            { threshold: 0 },
-        );
-        observer.observe(sentinel);
-    } else if (nav) {
-        nav.classList.add("is-scrolled");
+        if (nav && sentinel && "IntersectionObserver" in window) {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    nav.classList.toggle("is-scrolled", !entry.isIntersecting);
+                },
+                { threshold: 0 },
+            );
+            observer.observe(sentinel);
+        } else if (nav) {
+            nav.classList.add("is-scrolled");
+        }
+    };
+
+    if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(initNav, { timeout: 1200 });
+    } else {
+        window.addEventListener("load", initNav, { once: true });
     }
 </script>

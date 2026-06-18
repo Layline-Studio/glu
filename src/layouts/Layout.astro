@@ -70,29 +70,38 @@ const ogImageUrl = new URL(ogImage, Astro.site);
       <slot />
     </main>
     <script>
-      const reveals = document.querySelectorAll("[data-reveal]");
+      const initReveals = () => {
+        const reveals = document.querySelectorAll("[data-reveal]");
 
-      if (reveals.length > 0) {
+        if (reveals.length === 0) return;
+
         const reduceMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)",
         ).matches;
 
         if (reduceMotion || !("IntersectionObserver" in window)) {
           reveals.forEach((el) => el.classList.add("is-revealed"));
-        } else {
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("is-revealed");
-                  observer.unobserve(entry.target);
-                }
-              });
-            },
-            { rootMargin: "0px 0px -12% 0px", threshold: 0.1 },
-          );
-          reveals.forEach((el) => observer.observe(el));
+          return;
         }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-revealed");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -12% 0px", threshold: 0.1 },
+        );
+        reveals.forEach((el) => observer.observe(el));
+      };
+
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(initReveals, { timeout: 1200 });
+      } else {
+        window.addEventListener("load", initReveals, { once: true });
       }
     </script>
   </body>
