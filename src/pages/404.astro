@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Page Not Found - Glu"
+  description="The page you requested could not be found. Return to the Glu homepage or visit support for help."
+  robots="noindex,nofollow"
+>
+  <div class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
+      <div class="mx-auto max-w-4xl px-6 py-6 sm:px-8">
+        <a href="/" class="inline-flex items-center gap-3">
+          <img src="/app_icon.png" alt="Glu" class="h-8 w-8 rounded-xl shadow-sm" />
+          <span class="font-sora text-lg font-semibold tracking-tight text-slate-900">Glu</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-4xl px-6 pb-20 sm:px-8">
+      <div class="pb-10 pt-16 sm:pb-14 sm:pt-24">
+        <span class="inline-flex items-center gap-2 rounded-full bg-slate-900/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">
+          404
+        </span>
+        <h1 class="mt-5 font-sora text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+          Page not found
+        </h1>
+        <p class="mt-4 max-w-xl text-lg leading-relaxed text-slate-500">
+          The link may be outdated, or the address may have been entered incorrectly.
+        </p>
+      </div>
+
+      <div class="rounded-3xl border border-slate-100 bg-white shadow-[0_24px_60px_-50px_rgba(15,23,42,0.6)]">
+        <div class="px-6 py-10 sm:px-10 sm:py-12 lg:px-12">
+          <p class="max-w-2xl font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
+            Try going back to the homepage, opening the support page, or checking the URL for typos.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/"
+              class="inline-flex items-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-slate-800"
+            >
+              Go to homepage
+            </a>
+            <a
+              href="/support"
+              class="inline-flex items-center rounded-xl border border-slate-200 px-5 py-3 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:text-slate-900"
+            >
+              Contact support
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>

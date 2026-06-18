@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="About Glu"
+  description="Learn about Glu, the GLP-1 tracking app by Layline Ventures, and how to contact the team."
+>
+  <div class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
+      <div class="mx-auto max-w-4xl px-6 py-6 sm:px-8">
+        <a href="/" class="inline-flex items-center gap-3">
+          <img src="/app_icon.png" alt="Glu" class="h-8 w-8 rounded-xl shadow-sm" />
+          <span class="font-sora text-lg font-semibold tracking-tight text-slate-900">Glu</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-4xl px-6 pb-20 sm:px-8">
+      <div class="pb-10 pt-16 sm:pb-14 sm:pt-24">
+        <span class="inline-flex items-center gap-2 rounded-full bg-slate-900/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">
+          About
+        </span>
+        <h1 class="mt-5 font-sora text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+          About Glu
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-500">
+          Glu is a GLP-1 tracking app built to make reminders, dose history, meals, progress, and everyday patterns easier to understand in one place.
+        </p>
+      </div>
+
+      <div class="rounded-3xl border border-slate-100 bg-white shadow-[0_24px_60px_-50px_rgba(15,23,42,0.6)]">
+        <div class="space-y-12 px-6 py-10 sm:px-10 sm:py-12 lg:px-12">
+          <section class="border-b border-slate-100 pb-12 last:border-b-0 last:pb-0">
+            <h2 class="mb-4 font-sora text-lg font-semibold text-slate-900 sm:text-xl">What Glu does</h2>
+            <p class="font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
+              The app brings medication reminders, dose logs, weight trends, meals, water, movement, symptoms, and progress into a single view so treatment patterns are easier to follow over time.
+            </p>
+          </section>
+
+          <section class="border-b border-slate-100 pb-12 last:border-b-0 last:pb-0">
+            <h2 class="mb-4 font-sora text-lg font-semibold text-slate-900 sm:text-xl">Who operates it</h2>
+            <p class="font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
+              Glu is operated by Layline Ventures Tecnologia da Informacao LTDA.
+            </p>
+          </section>
+
+          <section class="border-b border-slate-100 pb-12 last:border-b-0 last:pb-0">
+            <h2 class="mb-4 font-sora text-lg font-semibold text-slate-900 sm:text-xl">Contact</h2>
+            <p class="font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
+              For questions, feedback, bug reports, or account help, contact
+              <a href="mailto:support@myglu.health" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">support@myglu.health</a>
+              or visit the
+              <a href="/support" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">support page</a>.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="mb-4 font-sora text-lg font-semibold text-slate-900 sm:text-xl">Policies</h2>
+            <p class="font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
+              You can also review the
+              <a href="/privacy" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Privacy Policy</a>
+              and
+              <a href="/terms" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Terms of Service</a>.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>
