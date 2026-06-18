@@ -6,7 +6,12 @@ import schibstedGroteskLatin from '@fontsource-variable/schibsted-grotesk/files/
 interface Props {
   title: string;
   description?: string;
+  lang?: string;
   canonicalPath?: string;
+  alternateLocales?: Array<{
+    locale: string;
+    path: string;
+  }>;
   robots?: string;
   ogImage?: string;
   ogType?: string;
@@ -22,7 +27,9 @@ interface Props {
 const {
   title,
   description = 'Glu is a GLP-1 tracker for reminders, dose history, weight trends, side effects, meals, water, and daily progress.',
+  lang = 'en',
   canonicalPath,
+  alternateLocales,
   robots = 'index,follow',
   ogImage = '/app_icon.png',
   ogType = 'website',
@@ -35,13 +42,19 @@ const ogImageUrl = new URL(ogImage, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonicalUrl.href} />
+    {alternateLocales?.map((entry) => (
+      <link rel="alternate" hreflang={entry.locale} href={new URL(entry.path, Astro.site).href} />
+    ))}
+    {alternateLocales && (
+      <link rel="alternate" hreflang="x-default" href={new URL('/en-US/', Astro.site).href} />
+    )}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />

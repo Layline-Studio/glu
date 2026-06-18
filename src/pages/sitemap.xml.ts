@@ -3,8 +3,11 @@ import { stat } from 'node:fs/promises';
 
 export const prerender = true;
 
+const localeHomeSource = join(process.cwd(), 'src/pages/[locale]/index.astro');
+
 const pages = [
-  { loc: '/', source: join(process.cwd(), 'src/pages/index.astro') },
+  { loc: '/en-US/', source: localeHomeSource },
+  { loc: '/pt-BR/', source: localeHomeSource },
   { loc: '/about', source: join(process.cwd(), 'src/pages/about.astro') },
   { loc: '/delete-account', source: join(process.cwd(), 'src/pages/delete-account.astro') },
   { loc: '/privacy', source: join(process.cwd(), 'src/pages/privacy.astro') },

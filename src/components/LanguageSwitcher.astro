@@ -1,0 +1,31 @@
+---
+interface Props {
+  currentLocale: string;
+  links: Array<{
+    locale: string;
+    label: string;
+    href: string;
+  }>;
+}
+
+const { currentLocale, links } = Astro.props;
+---
+
+<div class="flex flex-wrap items-center gap-1.5">
+  {links.map((link) => {
+    const isCurrent = link.locale === currentLocale;
+
+    return isCurrent ? (
+      <span class="rounded-full bg-slate-950 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white">
+        {link.label}
+      </span>
+    ) : (
+      <a
+        href={link.href}
+        class="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-soft transition-colors hover:border-slate-300 hover:text-ink"
+      >
+        {link.label}
+      </a>
+    );
+  })}
+</div>

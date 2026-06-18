@@ -1,75 +1,92 @@
 ---
+interface Props {
+  homeHref: string;
+  aboutHref: string;
+  contactHref: string;
+  aboutLabel: string;
+  contactLabel: string;
+  ctaLabel: string;
+}
+
+const {
+  homeHref,
+  aboutHref,
+  contactHref,
+  aboutLabel,
+  contactLabel,
+  ctaLabel,
+} = Astro.props;
 ---
 
 <div
-    data-nav-sentinel
-    aria-hidden="true"
-    class="pointer-events-none absolute left-0 top-0 h-20 w-px"
+  data-nav-sentinel
+  aria-hidden="true"
+  class="pointer-events-none absolute left-0 top-0 h-20 w-px"
 >
 </div>
 
 <header data-site-nav class="site-nav fixed inset-x-0 top-0 z-50">
-    <nav
-        class="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-6 sm:px-10"
-        aria-label="Main"
-    >
-        <a href="/" class="flex items-center gap-2.5">
-            <img
-                src="/app_icon.png"
-                alt=""
-                class="h-8 w-8 rounded-[9px] shadow-[0_10px_22px_-12px_rgba(37,99,235,0.55)]"
-                width="32"
-                height="32"
-            />
-            <span class="font-display text-lg font-bold tracking-tight text-ink">
-                Glu
-            </span>
-        </a>
+  <nav
+    class="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between px-6 sm:px-10"
+    aria-label="Main"
+  >
+    <a href={homeHref} class="flex items-center gap-2.5">
+      <img
+        src="/app_icon.png"
+        alt=""
+        class="h-8 w-8 rounded-[9px] shadow-[0_10px_22px_-12px_rgba(37,99,235,0.55)]"
+        width="32"
+        height="32"
+      />
+      <span class="font-display text-lg font-bold tracking-tight text-ink">
+        Glu
+      </span>
+    </a>
 
-        <div class="flex items-center gap-2 sm:gap-5">
-            <a
-                href="/about"
-                class="hidden text-sm font-medium text-ink-soft transition-colors hover:text-ink sm:block"
-            >
-                About
-            </a>
-            <a
-                href="/support"
-                class="hidden text-sm font-medium text-ink-soft transition-colors hover:text-ink sm:block"
-            >
-                Contact
-            </a>
-            <a
-                href="#download"
-                class="inline-flex items-center rounded-full bg-slate-950 px-4.5 py-2 text-sm font-semibold text-white shadow-[0_14px_28px_-18px_rgba(15,23,42,0.7)] transition-all duration-300 ease-out-quint hover:-translate-y-0.5 hover:bg-slate-900"
-            >
-                Get the app
-            </a>
-        </div>
-    </nav>
+    <div class="flex items-center gap-2 sm:gap-4">
+      <a
+        href={aboutHref}
+        class="hidden text-sm font-medium text-ink-soft transition-colors hover:text-ink sm:block"
+      >
+        {aboutLabel}
+      </a>
+      <a
+        href={contactHref}
+        class="hidden text-sm font-medium text-ink-soft transition-colors hover:text-ink sm:block"
+      >
+        {contactLabel}
+      </a>
+      <a
+        href="#download"
+        class="inline-flex items-center rounded-full bg-slate-950 px-4.5 py-2 text-sm font-semibold text-white shadow-[0_14px_28px_-18px_rgba(15,23,42,0.7)] transition-all duration-300 ease-out-quint hover:-translate-y-0.5 hover:bg-slate-900"
+      >
+        {ctaLabel}
+      </a>
+    </div>
+  </nav>
 </header>
 
 <script>
-    const initNav = () => {
-        const nav = document.querySelector("[data-site-nav]");
-        const sentinel = document.querySelector("[data-nav-sentinel]");
+  const initNav = () => {
+    const nav = document.querySelector("[data-site-nav]");
+    const sentinel = document.querySelector("[data-nav-sentinel]");
 
-        if (nav && sentinel && "IntersectionObserver" in window) {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    nav.classList.toggle("is-scrolled", !entry.isIntersecting);
-                },
-                { threshold: 0 },
-            );
-            observer.observe(sentinel);
-        } else if (nav) {
-            nav.classList.add("is-scrolled");
-        }
-    };
-
-    if ("requestIdleCallback" in window) {
-        window.requestIdleCallback(initNav, { timeout: 1200 });
-    } else {
-        window.addEventListener("load", initNav, { once: true });
+    if (nav && sentinel && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          nav.classList.toggle("is-scrolled", !entry.isIntersecting);
+        },
+        { threshold: 0 },
+      );
+      observer.observe(sentinel);
+    } else if (nav) {
+      nav.classList.add("is-scrolled");
     }
+  };
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(initNav, { timeout: 1200 });
+  } else {
+    window.addEventListener("load", initNav, { once: true });
+  }
 </script>

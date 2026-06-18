@@ -1,0 +1,54 @@
+---
+import Nav from './Nav.astro';
+import Hero from './Hero.astro';
+import Showcase from './Showcase.astro';
+import Pricing from './Pricing.astro';
+import Comparison from './Comparison.astro';
+import Testimonials from './Testimonials.astro';
+import Trust from './Trust.astro';
+import Faq from './Faq.astro';
+import Cta from './Cta.astro';
+import Footer from './Footer.astro';
+import { localeLabels, locales, type Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  dict: any;
+}
+
+const { locale, dict } = Astro.props;
+const homeHref = `/${locale}/`;
+const languageLinks = locales.map((entry) => ({
+  locale: entry,
+  label: localeLabels[entry],
+  href: `/${entry}/`,
+}));
+---
+
+<div class="relative min-h-screen bg-surface text-slate-900">
+  <Nav
+    homeHref={homeHref}
+    aboutHref="/about"
+    contactHref="/support"
+    aboutLabel={dict.nav.about}
+    contactLabel={dict.nav.contact}
+    ctaLabel={dict.nav.cta}
+  />
+  <Hero copy={dict.hero} />
+  <Showcase copy={dict.showcase} />
+  <Testimonials copy={dict.testimonials} />
+  <Comparison copy={dict.comparison} />
+  <Trust copy={dict.trust} />
+  <Pricing copy={dict.pricing} />
+  <Faq copy={dict.faq} />
+  <Cta copy={dict.cta} />
+  <Footer
+    homeHref={homeHref}
+    links={dict.footer.links}
+    disclaimerTitle={dict.footer.disclaimerTitle}
+    disclaimerBody={dict.footer.disclaimerBody}
+    copyright={dict.footer.copyright}
+    currentLocale={locale}
+    languageLinks={languageLinks}
+  />
+</div>

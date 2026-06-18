@@ -1,110 +1,23 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getImage } from 'astro:assets';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Showcase from '../components/Showcase.astro';
-import Pricing from '../components/Pricing.astro';
-import Comparison from '../components/Comparison.astro';
-import Testimonials from '../components/Testimonials.astro';
-import Trust from '../components/Trust.astro';
-import Faq from '../components/Faq.astro';
-import Cta from '../components/Cta.astro';
-import Footer from '../components/Footer.astro';
-import homeTrackers from '../assets/landing-page/home_trackers.png';
-import { homeFaqs } from '../data/homeFaqs';
-
-const description =
-  'Glu is a GLP-1 tracker for reminders, dose history, weight trends, side effects, meals, water, and daily progress.';
-
-const heroPreload = await getImage({
-  src: homeTrackers,
-  width: 480,
-  format: 'webp',
-});
-
-const heroPreloadLarge = await getImage({
-  src: homeTrackers,
-  width: 860,
-  format: 'webp',
-});
-
-const structuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Glu',
-    url: 'https://myglu.health',
-    logo: 'https://myglu.health/app_icon.png',
-    email: 'support@myglu.health',
-    sameAs: ['https://www.instagram.com/myglu.health/'],
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'Glu',
-    applicationCategory: 'HealthApplication',
-    operatingSystem: 'iOS, Android',
-    description,
-    url: 'https://myglu.health',
-    image: 'https://myglu.health/app_icon.png',
-    offers: [
-      {
-        '@type': 'Offer',
-        name: 'Monthly plan',
-        price: '9.99',
-        priceCurrency: 'USD',
-        description: 'Monthly subscription',
-      },
-      {
-        '@type': 'Offer',
-        name: 'Annual plan',
-        price: '89.99',
-        priceCurrency: 'USD',
-        description: 'Annual subscription',
-      },
-    ],
-    downloadUrl: [
-      'https://play.google.com/store/apps/details?id=ventures.layline.glu',
-      'https://apps.apple.com/us/app/glu-glp-1-weight-loss-tracker/id6761419458',
-    ],
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: homeFaqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  },
-];
+const target = '/en-US/';
 ---
 
-<Layout
-  title="Glu | GLP-1 Tracker for Daily Progress"
-  description={description}
-  structuredData={structuredData}
-  preloadImage={{
-    href: heroPreload.src,
-    srcset: `${heroPreload.src} 480w, ${heroPreloadLarge.src} 860w`,
-    sizes: '(min-width: 1024px) 430px, 360px',
-    type: 'image/webp',
-  }}
->
-  <div class="relative min-h-screen bg-surface text-slate-900">
-    <Nav />
-    <Hero />
-    <Showcase />
-    <Pricing />
-    <Comparison />
-    <Testimonials />
-    <Trust />
-    <Faq />
-    <Cta />
-    <Footer />
-  </div>
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="https://myglu.health/en-US/" />
+    <script is:inline>
+      window.location.replace('/en-US/');
+    </script>
+    <title>Redirecting…</title>
+  </head>
+  <body>
+    <p>
+      Redirecting to
+      <a href={target}>{target}</a>
+    </p>
+  </body>
+</html>

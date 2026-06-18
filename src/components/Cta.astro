@@ -1,32 +1,42 @@
 ---
 import StoreButtons from "./StoreButtons.astro";
+
+interface Props {
+  copy: {
+    titleLines: string[];
+    bodyLines: string[];
+  };
+}
+
+const { copy } = Astro.props;
 ---
 
 <section id="download" class="px-6 pb-28 pt-4 sm:px-10 sm:pb-36" aria-label="Download">
-    <div
-        data-reveal
-        class="cta-band mx-auto w-full max-w-screen-xl overflow-hidden rounded-[2.5rem] px-6 py-20 text-center sm:px-12 sm:py-28"
+  <div
+    data-reveal
+    class="cta-band mx-auto w-full max-w-screen-xl overflow-hidden rounded-[2.5rem] px-6 py-20 text-center sm:px-12 sm:py-28"
+  >
+    <img
+      src="/app_icon.png"
+      alt=""
+      class="mx-auto h-16 w-16 rounded-[18px] shadow-[0_24px_50px_-20px_rgba(2,6,23,0.6)]"
+      width="64"
+      height="64"
+      loading="lazy"
+    />
+    <h2
+      class="mx-auto mt-8 max-w-2xl font-display text-[clamp(2rem,4.5vw,3.4rem)] font-bold leading-[1.08] tracking-[-0.025em] text-white"
     >
-        <img
-            src="/app_icon.png"
-            alt=""
-            class="mx-auto h-16 w-16 rounded-[18px] shadow-[0_24px_50px_-20px_rgba(2,6,23,0.6)]"
-            width="64"
-            height="64"
-            loading="lazy"
-        />
-        <h2
-            class="mx-auto mt-8 max-w-2xl font-display text-[clamp(2rem,4.5vw,3.4rem)] font-bold leading-[1.08] tracking-[-0.025em] text-white"
-        >
-            Start tracking
-            <br />
-            with clarity today
-        </h2>
-        <p class="mx-auto mt-5 max-w-md text-base leading-relaxed text-blue-100 sm:text-lg">
-            Available on iPhone and Android.
-            <br />
-            Set up your first tracker in under a minute.
-        </p>
-        <StoreButtons variant="dark" class="mt-10 justify-center" />
-    </div>
+      {copy.titleLines[0]}
+      <br />
+      {copy.titleLines[1]}
+    </h2>
+    <p class="mx-auto mt-5 max-w-md text-base leading-relaxed text-blue-100 sm:text-lg">
+      {copy.bodyLines[0]}
+      <br />
+      {copy.bodyLines[1]}
+    </p>
+
+    <StoreButtons variant="dark" class="mt-10 justify-center" />
+  </div>
 </section>
