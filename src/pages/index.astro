@@ -18,6 +18,7 @@ const structuredData = [
     url: 'https://myglu.health',
     logo: 'https://myglu.health/app_icon.png',
     email: 'support@myglu.health',
+    sameAs: ['https://www.instagram.com/myglu.health/'],
   },
   {
     '@context': 'https://schema.org',
@@ -28,11 +29,22 @@ const structuredData = [
     description,
     url: 'https://myglu.health',
     image: 'https://myglu.health/app_icon.png',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'Monthly plan',
+        price: '9.99',
+        priceCurrency: 'USD',
+        description: 'Monthly subscription',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Annual plan',
+        price: '89.99',
+        priceCurrency: 'USD',
+        description: 'Annual subscription',
+      },
+    ],
     downloadUrl: [
       'https://play.google.com/store/apps/details?id=ventures.layline.glu',
       'https://apps.apple.com/br/app/glu-glp-1-weight-loss-tracker/id6761419458?l=en-GB',
