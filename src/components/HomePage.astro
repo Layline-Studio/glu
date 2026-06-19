@@ -9,7 +9,7 @@ import Trust from './Trust.astro';
 import Faq from './Faq.astro';
 import Cta from './Cta.astro';
 import Footer from './Footer.astro';
-import { localeLabels, locales, type Locale } from '../i18n/config';
+import { getLocalePath, localeLabels, locales, type Locale } from '../i18n/config';
 
 interface Props {
   locale: Locale;
@@ -17,11 +17,11 @@ interface Props {
 }
 
 const { locale, dict } = Astro.props;
-const homeHref = `/${locale}/`;
+const homeHref = getLocalePath(locale);
 const languageLinks = locales.map((entry) => ({
   locale: entry,
   label: localeLabels[entry],
-  href: `/${entry}/`,
+  href: getLocalePath(entry),
 }));
 ---
 

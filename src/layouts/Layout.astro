@@ -52,9 +52,7 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     {alternateLocales?.map((entry) => (
       <link rel="alternate" hreflang={entry.locale} href={new URL(entry.path, Astro.site).href} />
     ))}
-    {alternateLocales && (
-      <link rel="alternate" hreflang="x-default" href={new URL('/en-US/', Astro.site).href} />
-    )}
+    {alternateLocales && <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />

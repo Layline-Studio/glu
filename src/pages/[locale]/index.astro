@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getImage } from 'astro:assets';
 import homeTrackers from '../../assets/landing-page/home_trackers.png';
 import HomePage from '../../components/HomePage.astro';
-import { locales, type Locale } from '../../i18n/config';
+import { defaultLocale, getLocalePath, locales, type Locale } from '../../i18n/config';
 import { getDictionary } from '../../lib/i18n';
 
 export function getStaticPaths() {
@@ -29,7 +29,7 @@ const heroPreloadLarge = await getImage({
 
 const alternateLocales = locales.map((entry) => ({
   locale: entry,
-  path: `/${entry}/`,
+  path: getLocalePath(entry),
 }));
 
 const structuredData = [
@@ -49,7 +49,7 @@ const structuredData = [
     applicationCategory: 'HealthApplication',
     operatingSystem: 'iOS, Android',
     description: dict.meta.homeDescription,
-    url: `https://myglu.health/${locale}/`,
+    url: `https://myglu.health${getLocalePath(locale)}`,
     image: 'https://myglu.health/app_icon.png',
     offers: [
       {
@@ -91,7 +91,7 @@ const structuredData = [
   lang={locale}
   title={dict.meta.homeTitle}
   description={dict.meta.homeDescription}
-  canonicalPath={`/${locale}/`}
+  canonicalPath={locale === defaultLocale ? '/' : `/${locale}/`}
   alternateLocales={alternateLocales}
   structuredData={structuredData}
   preloadImage={{

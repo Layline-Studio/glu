@@ -1,13 +1,15 @@
 import { join } from 'node:path';
 import { stat } from 'node:fs/promises';
+import { getLocalePath, localizedLocales } from '../i18n/config';
 
 export const prerender = true;
 
+const homeSource = join(process.cwd(), 'src/pages/index.astro');
 const localeHomeSource = join(process.cwd(), 'src/pages/[locale]/index.astro');
 
 const pages = [
-  { loc: '/en-US/', source: localeHomeSource },
-  { loc: '/pt-BR/', source: localeHomeSource },
+  { loc: '/', source: homeSource },
+  ...localizedLocales.map((locale) => ({ loc: getLocalePath(locale), source: localeHomeSource })),
   { loc: '/about', source: join(process.cwd(), 'src/pages/about.astro') },
   { loc: '/delete-account', source: join(process.cwd(), 'src/pages/delete-account.astro') },
   { loc: '/privacy', source: join(process.cwd(), 'src/pages/privacy.astro') },

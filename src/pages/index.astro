@@ -1,23 +1,99 @@
 ---
-const target = '/en-US/';
+import Layout from '../layouts/Layout.astro';
+import { getImage } from 'astro:assets';
+import homeTrackers from '../assets/landing-page/home_trackers.png';
+import HomePage from '../components/HomePage.astro';
+import { defaultLocale, getLocalePath, locales } from '../i18n/config';
+import { getDictionary } from '../lib/i18n';
+
+const locale = defaultLocale;
+const dict = getDictionary(locale);
+
+const heroPreload = await getImage({
+  src: homeTrackers,
+  width: 480,
+  format: 'webp',
+});
+
+const heroPreloadLarge = await getImage({
+  src: homeTrackers,
+  width: 860,
+  format: 'webp',
+});
+
+const alternateLocales = locales.map((entry) => ({
+  locale: entry,
+  path: getLocalePath(entry),
+}));
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Glu',
+    url: 'https://myglu.health',
+    logo: 'https://myglu.health/app_icon.png',
+    email: 'support@myglu.health',
+    sameAs: ['https://www.instagram.com/myglu.health/'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Glu',
+    applicationCategory: 'HealthApplication',
+    operatingSystem: 'iOS, Android',
+    description: dict.meta.homeDescription,
+    url: 'https://myglu.health/',
+    image: 'https://myglu.health/app_icon.png',
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'Monthly plan',
+        price: '9.99',
+        priceCurrency: 'USD',
+        description: 'Monthly subscription',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Annual plan',
+        price: '89.99',
+        priceCurrency: 'USD',
+        description: 'Annual subscription',
+      },
+    ],
+    downloadUrl: [
+      'https://play.google.com/store/apps/details?id=ventures.layline.glu',
+      'https://apps.apple.com/us/app/glu-glp-1-weight-loss-tracker/id6761419458',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: dict.faq.items.map((faq: { question: string; answer: string }) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
-    <meta name="robots" content="noindex,follow" />
-    <link rel="canonical" href="https://myglu.health/en-US/" />
-    <script is:inline>
-      window.location.replace('/en-US/');
-    </script>
-    <title>Redirecting…</title>
-  </head>
-  <body>
-    <p>
-      Redirecting to
-      <a href={target}>{target}</a>
-    </p>
-  </body>
-</html>
+<Layout
+  lang={locale}
+  title={dict.meta.homeTitle}
+  description={dict.meta.homeDescription}
+  canonicalPath="/"
+  alternateLocales={alternateLocales}
+  structuredData={structuredData}
+  preloadImage={{
+    href: heroPreload.src,
+    srcset: `${heroPreload.src} 480w, ${heroPreloadLarge.src} 860w`,
+    sizes: '(min-width: 1024px) 430px, 360px',
+    type: 'image/webp',
+  }}
+>
+  <HomePage locale={locale} dict={dict} />
+</Layout>
