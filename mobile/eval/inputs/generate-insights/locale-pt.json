@@ -1,0 +1,116 @@
+{
+  "description": "Portuguese locale should produce a Portuguese insight.",
+  "currentTimestamp": "2026-05-20T19:30:00-03:00",
+  "profile": {
+    "subscription_tier": "pro",
+    "timezone": "America/Sao_Paulo",
+    "settings": {
+      "app_locale": "pt",
+      "preferred_name": "Ava",
+      "primary_goal": "consistency",
+      "medication_status": "ongoing",
+      "medication_method": "injection",
+      "medication_name": "semaglutide",
+      "current_dose_mg": 2.4
+    },
+    "goals": {
+      "water": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_ml": 2500, "target_unit": "ml" }
+        ]
+      },
+      "exercise": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "weekly", "target_minutes": 150, "target_unit": "minutes" }
+        ]
+      },
+      "meals": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_value": 3 }
+        ]
+      },
+      "protein": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_grams": 120, "target_unit": "g" }
+        ]
+      },
+      "fiber": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_grams": 25, "target_unit": "g" }
+        ]
+      },
+      "weight": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "weekly", "target_kg": 84, "target_unit": "kg" }
+        ]
+      }
+    }
+  },
+  "records": {
+    "water": [
+      { "logged_at": "2026-05-20T08:15:00-03:00", "quantity": 500, "unit": "ml" },
+      { "logged_at": "2026-05-20T12:30:00-03:00", "quantity": 500, "unit": "ml" }
+    ],
+    "exercise": [
+      {
+        "logged_at": "2026-05-20T07:00:00-03:00",
+        "activity_type": "Walking",
+        "duration_minutes": 30,
+        "intensity": "light"
+      }
+    ],
+    "weight": [
+      { "logged_at": "2026-05-20T07:30:00-03:00", "quantity": 86.8, "unit": "kg" }
+    ],
+    "meals": [
+      {
+        "logged_at": "2026-05-20T08:00:00-03:00",
+        "calories": 390,
+        "carbs": 40,
+        "proteins": 27,
+        "fats": 11,
+        "fiber": 6,
+        "notes": "Iogurte com frutas"
+      },
+      {
+        "logged_at": "2026-05-20T13:00:00-03:00",
+        "calories": 540,
+        "carbs": 48,
+        "proteins": 34,
+        "fats": 15,
+        "fiber": 7,
+        "notes": "Frango com salada"
+      }
+    ],
+    "symptoms": [
+      {
+        "logged_at": "2026-05-20T21:00:00-03:00",
+        "symptoms": ["nausea"],
+        "severity": "mild"
+      }
+    ],
+    "supplements": [],
+    "doses": [
+      {
+        "logged_at": "2026-05-20T20:00:00-03:00",
+        "method": "injection",
+        "medication": "semaglutide"
+      }
+    ],
+    "mood": [
+      { "logged_at": "2026-05-20T21:15:00-03:00", "feeling": "good" }
+    ],
+    "glowup": []
+  },
+  "assertions": {
+    "minSummaryLength": 20,
+    "maxSummaryLength": 700,
+    "expectedLocale": "pt"
+  }
+}

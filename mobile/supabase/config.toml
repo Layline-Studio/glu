@@ -1,0 +1,42 @@
+project_id = "glu"
+
+[api]
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[edge_runtime]
+policy = "per_worker"
+
+[studio]
+port = 54323
+
+[realtime]
+enabled = true
+
+[auth]
+site_url = "glu://login-callback"
+additional_redirect_urls = [
+  "http://localhost:4321/signin-callback",
+  "https://myglu.health/signin-callback",
+  "glu://login-callback",
+]
+jwt_expiry = 3600
+enable_signup = true
+
+[auth.external.google]
+enabled = true
+client_id = "env(GOOGLE_WEB_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+skip_nonce_check = true
+
+[auth.external.apple]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_APPLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_APPLE_SECRET)"

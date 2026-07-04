@@ -1,0 +1,20 @@
+{
+  "description": "Nutrition facts label photo should extract visible per-serving macros",
+  "input": {
+    "imagePath": "eval/inputs/snap-macro/images/nutrition-facts.jpg",
+    "mimeType": "image/jpeg"
+  },
+  "expectations": {
+    "success": true,
+    "requireFields": ["name", "calories", "carbs", "proteins", "fats", "fiber"],
+    "allowNote": true,
+    "toleranceProfile": "nutrition_label",
+    "real": {
+      "calories": 120,
+      "carbs": 27,
+      "proteins": 0,
+      "fats": 2,
+      "fiber": 0
+    }
+  }
+}

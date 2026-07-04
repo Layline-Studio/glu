@@ -1,0 +1,20 @@
+{
+  "description": "Pasta plate with sauce and garnish",
+  "input": {
+    "imagePath": "eval/inputs/snap-macro/images/pasta-plate.webp",
+    "mimeType": "image/jpeg"
+  },
+  "expectations": {
+    "success": true,
+    "requireFields": ["name", "calories", "carbs", "proteins", "fats", "fiber"],
+    "allowNote": true,
+    "toleranceProfile": "meal_photo",
+    "real": {
+      "calories": 371,
+      "fats": 11,
+      "carbs": 48,
+      "fiber": 9,
+      "proteins": 16
+    }
+  }
+}

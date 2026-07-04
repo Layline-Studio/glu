@@ -1,0 +1,117 @@
+{
+  "description": "A single-day smoke test that should summarize the logs and stay concise.",
+  "currentTimestamp": "2026-05-15T19:30:00-03:00",
+  "profile": {
+    "subscription_tier": "pro",
+    "timezone": "America/Sao_Paulo",
+    "settings": {
+      "app_locale": "en",
+      "preferred_name": "Ava",
+      "primary_goal": "consistency",
+      "medication_status": "ongoing",
+      "medication_method": "injection",
+      "medication_name": "semaglutide",
+      "current_dose_mg": 2.4
+    },
+    "goals": {
+      "water": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_ml": 2500, "target_unit": "ml" }
+        ]
+      },
+      "exercise": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "weekly", "target_minutes": 150, "target_unit": "minutes" }
+        ]
+      },
+      "meals": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_value": 3 }
+        ]
+      },
+      "protein": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_grams": 120, "target_unit": "g" }
+        ]
+      },
+      "fiber": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_grams": 25, "target_unit": "g" }
+        ]
+      },
+      "weight": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "weekly", "target_kg": 84, "target_unit": "kg" }
+        ]
+      }
+    }
+  },
+  "records": {
+    "water": [
+      { "logged_at": "2026-05-15T08:15:00-03:00", "quantity": 500, "unit": "ml" },
+      { "logged_at": "2026-05-15T13:00:00-03:00", "quantity": 650, "unit": "ml" }
+    ],
+    "exercise": [
+      {
+        "logged_at": "2026-05-15T07:00:00-03:00",
+        "activity_type": "Walking",
+        "duration_minutes": 30,
+        "intensity": "light"
+      }
+    ],
+    "weight": [
+      { "logged_at": "2026-05-15T07:30:00-03:00", "quantity": 86.2, "unit": "kg" }
+    ],
+    "meals": [
+      {
+        "logged_at": "2026-05-15T08:00:00-03:00",
+        "calories": 410,
+        "carbs": 38,
+        "proteins": 28,
+        "fats": 12,
+        "fiber": 6,
+        "notes": "Greek yogurt and berries"
+      },
+      {
+        "logged_at": "2026-05-15T13:00:00-03:00",
+        "calories": 560,
+        "carbs": 44,
+        "proteins": 36,
+        "fats": 18,
+        "fiber": 7,
+        "notes": "Chicken bowl"
+      }
+    ],
+    "symptoms": [
+      {
+        "logged_at": "2026-05-15T21:00:00-03:00",
+        "symptoms": ["nausea"],
+        "severity": "mild"
+      }
+    ],
+    "supplements": [],
+    "doses": [
+      {
+        "logged_at": "2026-05-15T20:00:00-03:00",
+        "method": "injection",
+        "medication": "semaglutide"
+      }
+    ],
+    "mood": [
+      { "logged_at": "2026-05-15T21:15:00-03:00", "feeling": "good" }
+    ],
+    "glowup": []
+  },
+  "assertions": {
+    "minSummaryLength": 30,
+    "maxSummaryLength": 700,
+    "includeAny": ["water", "meal", "exercise", "nausea", "dose", "weight"],
+    "expectedLocale": "en"
+  }
+}

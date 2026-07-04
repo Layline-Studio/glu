@@ -1,0 +1,83 @@
+{
+  "description": "Sparse data should stay helpful without inventing a repeatable pattern.",
+  "currentTimestamp": "2026-06-15T19:30:00-03:00",
+  "profile": {
+    "subscription_tier": "pro",
+    "timezone": "America/Sao_Paulo",
+    "settings": {
+      "app_locale": "en",
+      "preferred_name": "Ava",
+      "primary_goal": "consistency",
+      "medication_status": "ongoing",
+      "medication_method": "injection",
+      "medication_name": "semaglutide",
+      "current_dose_mg": 2.4
+    },
+    "goals": {
+      "water": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_ml": 2500, "target_unit": "ml" }
+        ]
+      },
+      "exercise": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "weekly", "target_minutes": 150, "target_unit": "minutes" }
+        ]
+      },
+      "meals": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_value": 3 }
+        ]
+      },
+      "protein": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_grams": 120, "target_unit": "g" }
+        ]
+      },
+      "fiber": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "daily", "target_grams": 25, "target_unit": "g" }
+        ]
+      },
+      "weight": {
+        "enabled": true,
+        "history": [
+          { "mode": "target", "timeframe": "weekly", "target_kg": 84, "target_unit": "kg" }
+        ]
+      }
+    }
+  },
+  "records": {
+    "water": [
+      { "logged_at": "2026-05-12T08:15:00-03:00", "quantity": 450, "unit": "ml" }
+    ],
+    "meals": [
+      {
+        "logged_at": "2026-05-18T13:00:00-03:00",
+        "calories": 480,
+        "carbs": 42,
+        "proteins": 31,
+        "fats": 14,
+        "fiber": 5
+      }
+    ],
+    "exercise": [],
+    "weight": [],
+    "symptoms": [],
+    "supplements": [],
+    "doses": [],
+    "mood": [],
+    "glowup": []
+  },
+  "assertions": {
+    "minSummaryLength": 20,
+    "maxSummaryLength": 700,
+    "excludeAny": ["every week this month", "3+ times", "nausea"],
+    "expectedLocale": "en"
+  }
+}

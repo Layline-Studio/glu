@@ -1,0 +1,11 @@
+{
+  "description": "Non-food image should fail gracefully",
+  "input": {
+    "imagePath": "eval/inputs/snap-macro/images/not-food.jpg",
+    "mimeType": "image/jpeg"
+  },
+  "expectations": {
+    "success": false,
+    "reasonMinLength": 8
+  }
+}

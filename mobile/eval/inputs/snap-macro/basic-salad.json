@@ -1,0 +1,20 @@
+{
+  "description": "Single plated salad meal with visible protein",
+  "input": {
+    "imagePath": "eval/inputs/snap-macro/images/basic-salad.jpg",
+    "mimeType": "image/jpeg"
+  },
+  "expectations": {
+    "success": true,
+    "requireFields": ["name", "calories", "carbs", "proteins", "fats", "fiber"],
+    "allowNote": true,
+    "toleranceProfile": "meal_photo",
+    "real": {
+      "calories": 150,
+      "carbs": 9,
+      "proteins": 3,
+      "fats": 11,
+      "fiber": 3
+    }
+  }
+}
