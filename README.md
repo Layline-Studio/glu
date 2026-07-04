@@ -1,7 +1,24 @@
 # Glu
 
-Landing site for Glu, a GLP-1 tracker.
+Monorepo for the Glu app.
 
-## 👀 Want to learn more?
+| Folder | What | Stack |
+|---|---|---|
+| [`web/`](web/) | Landing page / website (deployed on Cloudflare Pages) | Astro + React + Tailwind |
+| [`mobile/`](mobile/) | Mobile app | Flutter |
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Web
+
+```sh
+cd web
+npm install
+npm run dev
+```
+
+## Mobile
+
+```sh
+cd mobile
+flutter pub get
+flutter run
+```
