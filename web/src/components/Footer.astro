@@ -2,19 +2,14 @@
 import LanguageSwitcher from './LanguageSwitcher.astro';
 
 interface Props {
-  showFeaturedIn?: boolean;
   homeHref?: string;
+  tagline?: string;
   links?: {
     about: string;
     contact: string;
     terms: string;
     privacy: string;
     support: string;
-  };
-  resourceLinks?: {
-    guides: string;
-    glossary: string;
-    printable: string;
   };
   disclaimerTitle?: string;
   disclaimerBody?: string;
@@ -28,19 +23,14 @@ interface Props {
 }
 
 const {
-  showFeaturedIn: _showFeaturedIn = false,
   homeHref = '/',
+  tagline = 'The GLP-1 tracker for shots, doses, side effects, and progress — in one place.',
   links = {
     about: 'About',
     contact: 'Contact',
-    terms: 'Terms',
-    privacy: 'Privacy',
+    terms: 'Terms of Service',
+    privacy: 'Privacy Policy',
     support: 'Support',
-  },
-  resourceLinks = {
-    guides: 'GLP-1 Guides',
-    glossary: 'Glossary',
-    printable: 'Free Shot Tracker',
   },
   disclaimerTitle = 'Medical Disclaimer',
   disclaimerBody = 'Glu is intended for personal tracking and educational use only. It does not provide medical advice, diagnosis, or treatment, and should not be used as a substitute for guidance from a licensed physician or other qualified healthcare professional. Always consult your healthcare provider before making decisions about medication, dosing, nutrition, exercise, or any aspect of your treatment plan.',
@@ -48,42 +38,79 @@ const {
   currentLocale = 'en-US',
   languageLinks = [],
 } = Astro.props;
+
+const columns = [
+  {
+    heading: 'Product',
+    links: [
+      { href: homeHref, label: 'Overview' },
+      { href: '/glp-1-injection-tracker', label: 'Injection Tracker' },
+      { href: '/about', label: links.about },
+      { href: '/support', label: links.support },
+    ],
+  },
+  {
+    heading: 'Resources',
+    links: [
+      { href: '/guides', label: 'GLP-1 Guides' },
+      { href: '/glossary', label: 'Glossary' },
+      { href: '/printable-glp-1-tracker', label: 'Free Shot Tracker' },
+    ],
+  },
+  {
+    heading: 'Legal',
+    links: [
+      { href: '/terms', label: links.terms },
+      { href: '/privacy', label: links.privacy },
+      { href: '/delete-account', label: 'Delete Account' },
+    ],
+  },
+];
 ---
 
 <footer class="border-t border-slate-200/80 bg-surface-raised">
-  <div class="mx-auto max-w-screen-xl px-6 py-12 sm:px-10 sm:py-16">
-    <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-      <a href={homeHref} class="flex items-center gap-2.5">
-        <img
-          src="/app_icon.png"
-          alt=""
-          class="h-7 w-7 rounded-lg"
-          width="28"
-          height="28"
-          loading="lazy"
-        />
-        <span class="font-display text-base font-bold tracking-tight text-ink">Glu</span>
-      </a>
-      <div class="flex flex-wrap items-center justify-center gap-7 text-sm text-ink-soft">
-        <a href="/about" class="transition-colors hover:text-ink">{links.about}</a>
-        <a href="/guides" class="transition-colors hover:text-ink">{resourceLinks.guides}</a>
-        <a href="/glossary" class="transition-colors hover:text-ink">{resourceLinks.glossary}</a>
-        <a href="/printable-glp-1-tracker" class="transition-colors hover:text-ink">{resourceLinks.printable}</a>
-        <a href="/support" class="transition-colors hover:text-ink">{links.contact}</a>
-        <a href="/terms" class="transition-colors hover:text-ink">{links.terms}</a>
-        <a href="/privacy" class="transition-colors hover:text-ink">{links.privacy}</a>
-        <a href="/support" class="transition-colors hover:text-ink">{links.support}</a>
+  <div class="mx-auto max-w-screen-xl px-6 py-14 sm:px-10 sm:py-16">
+    <div class="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
+      <div class="max-w-xs">
+        <a href={homeHref} class="inline-flex items-center gap-2.5">
+          <img
+            src="/app_icon.png"
+            alt=""
+            class="h-8 w-8 rounded-lg"
+            width="32"
+            height="32"
+            loading="lazy"
+          />
+          <span class="font-display text-lg font-bold tracking-tight text-ink">Glu</span>
+        </a>
+        <p class="mt-4 text-sm leading-relaxed text-ink-soft">{tagline}</p>
       </div>
-      <p class="text-sm text-ink-faint">{copyright}</p>
+
+      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-14">
+        {columns.map((column) => (
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-ink-faint">{column.heading}</p>
+            <ul class="mt-4 flex flex-col gap-2.5">
+              {column.links.map((link) => (
+                <li>
+                  <a href={link.href} class="text-sm text-ink-soft transition-colors hover:text-ink">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
 
     {languageLinks.length > 0 && (
-      <div class="mt-6 flex justify-center">
+      <div class="mt-12 flex justify-center lg:justify-start">
         <LanguageSwitcher currentLocale={currentLocale} links={languageLinks} />
       </div>
     )}
 
-    <div class="mt-10 h-px w-full bg-linear-to-r from-transparent via-slate-200 to-transparent"></div>
+    <div class="mt-12 h-px w-full bg-linear-to-r from-transparent via-slate-200 to-transparent"></div>
 
     <div class="mx-auto mt-8 max-w-3xl text-center">
       <p class="text-xs font-semibold uppercase tracking-[0.18em] text-ink-faint">{disclaimerTitle}</p>
@@ -91,5 +118,7 @@ const {
         {disclaimerBody}
       </p>
     </div>
+
+    <p class="mt-8 text-center text-sm text-ink-faint">{copyright}</p>
   </div>
 </footer>

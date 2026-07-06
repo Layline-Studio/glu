@@ -1,80 +1,82 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://myglu.health/' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: 'https://myglu.health/about' },
+  ],
+};
 ---
 
 <Layout
-  title="About Glu"
-  description="Learn about Glu, the GLP-1 tracking app by Layline Ventures, and how to contact the team."
+  title="About Glu — Tracking Built for GLP-1 Treatment"
+  description="Why we built Glu: a calm, focused tracker for life on GLP-1 medications — shots, doses, side effects, and progress in one place, made by the independent studio Layline Ventures."
+  canonicalPath="/about"
+  structuredData={breadcrumbs}
 >
   <div class="min-h-screen bg-slate-50 text-slate-900">
     <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
-      <div class="mx-auto max-w-4xl px-6 py-6 sm:px-8">
+      <div class="mx-auto max-w-screen-md px-6 py-6 sm:px-8">
         <a href="/" class="inline-flex items-center gap-3">
-          <img src="/app_icon.png" alt="Glu" class="h-8 w-8 rounded-xl shadow-sm" />
+          <img src="/app_icon.png" alt="Glu" class="h-8 w-8 rounded-xl shadow-sm" width="32" height="32" />
           <span class="font-sora text-lg font-semibold tracking-tight text-slate-900">Glu</span>
         </a>
       </div>
     </header>
 
-    <main class="mx-auto max-w-4xl px-6 pb-20 sm:px-8">
-      <div class="pb-10 pt-16 sm:pb-14 sm:pt-24">
-        <span class="inline-flex items-center gap-2 rounded-full bg-slate-900/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">
-          About
-        </span>
-        <h1 class="mt-5 font-sora text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-          About Glu
-        </h1>
-        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-500">
-          Glu is a GLP-1 tracking app built to make reminders, dose history, meals, progress, and everyday patterns easier to understand in one place.
+    <section class="mx-auto w-full max-w-screen-md px-6 pb-20 pt-16 sm:px-8 sm:pt-20">
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">About</p>
+      <h1 class="mt-3 font-sora text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+        Tracking built for GLP-1 treatment
+      </h1>
+
+      <div class="mt-8 flex flex-col gap-6 font-dm-sans text-base leading-relaxed text-slate-700">
+        <p>
+          Glu exists because GLP-1 treatment generates a surprising amount to keep track of — a weekly
+          shot on the right day, an injection site to rotate, side effects that come and go, doses that
+          step up every few weeks, and weight that moves slowly enough to be easy to misread. Most apps
+          were never built for that rhythm, so the tracking ends up scattered across notes, memory, and
+          the back of a prescription box.
+        </p>
+        <p>
+          We built one place for all of it. Glu keeps your shot day, dose history, injection sites, side
+          effects, weight trends, meals and protein, and daily habits together — so the patterns that
+          actually matter become visible. When your prescriber asks how it's been going, you arrive with
+          a clear record instead of a best guess, and titration decisions get made on your data rather
+          than your memory.
+        </p>
+        <p>
+          It's made for people on semaglutide or tirzepatide — Wegovy, Ozempic, Zepbound, Mounjaro, or a
+          compounded regimen — who want to understand their own treatment. The design goal is the lowest
+          possible friction: a few taps on shot day, trends you can read at a glance, and nothing you
+          have to fight to log. The best tracker is the one you'll actually keep using.
+        </p>
+        <p>
+          Glu is a tracking and educational tool, not a medical device. It doesn't provide medical
+          advice, diagnosis, or treatment — your prescriber knows your history, and important decisions
+          belong with them.
+        </p>
+        <p>
+          Glu is made by <a href="https://layline.ventures" target="_blank" rel="noopener noreferrer" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Layline Ventures</a>,
+          a small independent studio (operated by Layline Ventures Tecnologia da Informação LTDA).
+          Questions, feedback, or bug reports? Write to
+          <a href="mailto:support@myglu.health" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">support@myglu.health</a>
+          or visit the <a href="/support" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">support page</a>.
+          You can also review our
+          <a href="/privacy" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Privacy Policy</a>
+          and <a href="/terms" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Terms of Service</a>.
         </p>
       </div>
 
-      <div class="rounded-3xl border border-slate-100 bg-white shadow-[0_24px_60px_-50px_rgba(15,23,42,0.6)]">
-        <div class="space-y-12 px-6 py-10 sm:px-10 sm:py-12 lg:px-12">
-          <section class="border-b border-slate-100 pb-12 last:border-b-0 last:pb-0">
-            <h2 class="mb-4 font-sora text-lg font-semibold text-slate-900 sm:text-xl">What Glu does</h2>
-            <p class="font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
-              The app brings medication reminders, dose logs, weight trends, meals, water, movement, symptoms, and progress into a single view so treatment patterns are easier to follow over time.
-            </p>
-          </section>
-
-          <section class="border-b border-slate-100 pb-12 last:border-b-0 last:pb-0">
-            <h2 class="mb-4 font-sora text-lg font-semibold text-slate-900 sm:text-xl">Who operates it</h2>
-            <p class="font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
-              Glu is operated by Layline Ventures Tecnologia da Informacao LTDA.
-            </p>
-          </section>
-
-          <section class="border-b border-slate-100 pb-12 last:border-b-0 last:pb-0">
-            <h2 class="mb-4 font-sora text-lg font-semibold text-slate-900 sm:text-xl">Contact</h2>
-            <p class="font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
-              For questions, feedback, bug reports, or account help, contact
-              <a href="mailto:support@myglu.health" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">support@myglu.health</a>
-              or visit the
-              <a href="/support" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">support page</a>.
-            </p>
-          </section>
-
-          <section>
-            <h2 class="mb-4 font-sora text-lg font-semibold text-slate-900 sm:text-xl">Policies</h2>
-            <p class="font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
-              You can also review the
-              <a href="/privacy" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Privacy Policy</a>
-              and
-              <a href="/terms" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Terms of Service</a>.
-            </p>
-            <p class="mt-4 font-dm-sans text-[15px] leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
-              If you need help with the app, visit
-              <a href="/support" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Support</a>
-              or return to the
-              <a href="/" class="text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900">Glu homepage</a>
-              to learn more about the GLP-1 tracker.
-            </p>
-          </section>
-        </div>
+      <div class="mt-12">
+        <StoreButtons />
       </div>
-    </main>
+    </section>
 
     <Footer />
   </div>
