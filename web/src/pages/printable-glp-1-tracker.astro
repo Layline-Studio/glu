@@ -15,16 +15,16 @@ const structuredData = [
 ];
 
 const rows = [
-  { label: 'Date, dose & injection site', body: 'The core record — including site rotation, so "where did last week’s shot go?" always has an answer.' },
-  { label: 'Weekly weight', body: 'One weigh-in per row. Eight weeks makes a real trend; single days are just noise.' },
-  { label: 'Worst side effect this week', body: 'One honest line. Patterns against dose changes are what titration decisions are made on.' },
-  { label: 'When hunger came back', body: 'The day food noise returned each week — the clearest everyday signal of whether your dose holds the full seven days.' },
+  { label: 'Shot done + injection site', body: 'Fill one dot, mark one of six site dots (abdomen, thigh, arm — left/right). Your marks should zigzag down the page: that’s rotation, visible at a glance.' },
+  { label: 'Symptoms — tick, don’t describe', body: 'A checkbox matrix: nausea, constipation, fatigue, headache, reflux, or none. Ticks against dose changes are what titration decisions are made on.' },
+  { label: 'Hunger back on day…', body: 'Circle a number, 3 through 7. The day food noise returned is the clearest everyday signal of whether your dose holds the full week.' },
+  { label: 'How the week felt', body: 'Circle one of three faces. Twelve faces later, you have a mood trend without having written a word.' },
 ];
 ---
 
 <Layout
   title="Free Printable GLP-1 Shot Tracker (PDF) | Glu"
-  description="A free one-page printable GLP-1 injection tracker: eight weeks of doses, injection sites, weight, and side-effect notes for Wegovy, Ozempic, Zepbound, or Mounjaro. No email required."
+  description="A free one-page printable GLP-1 injection tracker: 12 weeks of shots, sites, symptoms, and weight — all checkboxes and circles, almost no writing. For Wegovy, Ozempic, Zepbound, or Mounjaro. No email required."
   canonicalPath="/printable-glp-1-tracker"
   structuredData={structuredData}
 >
@@ -47,9 +47,11 @@ const rows = [
           The GLP-1 shot tracker, on one printable page
         </h1>
         <p class="mt-4 text-lg leading-relaxed text-slate-500">
-          Eight weeks of doses, injection sites, weekly weigh-ins, and side-effect notes — our
+          Twelve weeks of shots, sites, symptoms, and weigh-ins — designed so you
+          <strong class="font-semibold text-slate-700">mark instead of write</strong>. Circle your
+          medication once, write your start date, then every week is dots, ticks, and circles: our
           <a href="/guides/glp-1-shot-day-checklist" class="text-blue-600 hover:underline">five-minute shot-day routine</a>
-          as a sheet you can stick on the fridge. Free, no email required, print as many as you like.
+          on a sheet that lives on the fridge. Free, no email required, print as many as you like.
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
@@ -66,7 +68,7 @@ const rows = [
 
       <section class="border-t border-slate-200/80 py-12">
         <h2 class="font-sora text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
-          What each row captures
+          Every week is four marks, zero sentences
         </h2>
         <div class="mt-8 space-y-5">
           {rows.map((row) => (
@@ -87,7 +89,7 @@ const rows = [
 
       <section class="rounded-3xl border border-slate-100 bg-white px-6 py-10 text-center shadow-[0_24px_60px_-50px_rgba(15,23,42,0.6)] sm:px-10">
         <h2 class="font-sora text-xl font-semibold tracking-tight text-slate-900">
-          When eight weeks becomes eight months
+          When twelve weeks becomes twelve months
         </h2>
         <p class="mx-auto mt-3 max-w-md text-sm leading-relaxed text-slate-500">
           Paper is a great start — trends, reminders, and dose-vs-symptom timelines are where the
