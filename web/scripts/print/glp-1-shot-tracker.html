@@ -16,10 +16,12 @@
   }
 
   /* ---------- header ---------- */
-  .head { display: flex; justify-content: space-between; align-items: baseline; }
+  .head { display: flex; justify-content: space-between; align-items: center; }
   h1 { font-size: 20px; letter-spacing: -0.02em; }
   h1 span { color: #2563eb; }
-  .head .site { font-size: 10px; color: #94a3b8; }
+  .brand { display: flex; align-items: center; gap: 6px; }
+  .brand img { width: 20px; height: 20px; border-radius: 5px; }
+  .brand b { font-size: 14px; letter-spacing: -0.02em; }
   .setup {
     margin-top: 12px;
     display: flex; align-items: center; gap: 14px;
@@ -84,7 +86,7 @@
 <body>
   <div class="head">
     <h1><span>●</span> 12-Week GLP-1 Shot Tracker</h1>
-    <span class="site">myglu.health</span>
+    <div class="brand"><img src="app_icon_64.png" alt="" /><b>Glu</b></div>
   </div>
 
   <div class="setup">
