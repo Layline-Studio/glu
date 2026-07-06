@@ -289,6 +289,6 @@ export const ptBR = {
     disclaimerTitle: 'Aviso Médico',
     disclaimerBody:
       'O Glu foi criado apenas para rastreamento pessoal e uso educacional. Ele não fornece aconselhamento médico, diagnóstico ou tratamento e não deve ser usado como substituto da orientação de um médico licenciado ou outro profissional de saúde qualificado. Sempre consulte seu profissional de saúde antes de tomar decisões sobre medicação, dosagem, nutrição, exercício ou qualquer aspecto do seu plano de tratamento.',
-    copyright: '© 2026 Layline Ventures',
+    copyright: '© 2026 Layline',
   },
 } as const;

@@ -289,6 +289,6 @@ export const enUS = {
     disclaimerTitle: 'Medical Disclaimer',
     disclaimerBody:
       'Glu is intended for personal tracking and educational use only. It does not provide medical advice, diagnosis, or treatment, and should not be used as a substitute for guidance from a licensed physician or other qualified healthcare professional. Always consult your healthcare provider before making decisions about medication, dosing, nutrition, exercise, or any aspect of your treatment plan.',
-    copyright: '© 2026 Layline Ventures',
+    copyright: '© 2026 Layline',
   },
 } as const;

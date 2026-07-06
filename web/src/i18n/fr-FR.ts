@@ -223,6 +223,6 @@ export const frFR = {
     disclaimerTitle: 'Avertissement médical',
     disclaimerBody:
       'Glu est destiné uniquement au suivi personnel et à un usage éducatif. Il ne fournit pas de conseils médicaux, de diagnostic ni de traitement, et ne doit pas être utilisé comme substitut à l’avis d’un médecin agréé ou d’un autre professionnel de santé qualifié. Consultez toujours votre professionnel de santé avant de prendre des décisions concernant un médicament, un dosage, la nutrition, l’exercice ou tout autre aspect de votre plan de traitement.',
-    copyright: '© 2026 Layline Ventures',
+    copyright: '© 2026 Layline',
   },
 } as const;

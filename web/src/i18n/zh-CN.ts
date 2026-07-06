@@ -223,6 +223,6 @@ export const zhCN = {
     disclaimerTitle: '医疗免责声明',
     disclaimerBody:
       'Glu 仅供个人追踪和教育使用。它不提供医疗建议、诊断或治疗，也不应替代持证医生或其他合格医疗专业人士的指导。在就药物、剂量、营养、运动或治疗计划任何方面做出决定前，请始终咨询你的医疗服务提供者。',
-    copyright: '© 2026 Layline Ventures',
+    copyright: '© 2026 Layline',
   },
 } as const;
