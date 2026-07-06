@@ -1,8 +1,8 @@
 ---
 title: 'Switching GLP-1 Medications: What to Expect When You Change'
 description: 'Moving from Wegovy to Zepbound, Ozempic to Mounjaro, or off compounded to brand? Why people switch, how dosing usually restarts, and what to track so the change goes smoothly.'
-pubDate: 2026-07-02
-updatedDate: 2026-07-08
+pubDate: 2026-06-30
+updatedDate: 2026-07-06
 tags: ['shot day', 'logistics', 'dosing']
 ---
 

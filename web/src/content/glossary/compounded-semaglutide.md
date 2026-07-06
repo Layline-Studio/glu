@@ -1,7 +1,7 @@
 ---
 title: 'Compounded semaglutide'
 description: 'Semaglutide made by compounding pharmacies rather than the brand manufacturer. Cheaper and widely used during shortages — but not FDA-approved, with real quality and safety caveats.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['semaglutide', 'supply-and-shortages']
 ---
 

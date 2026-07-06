@@ -1,7 +1,7 @@
 ---
 title: 'Hypoglycemia'
 description: 'Low blood sugar. Uncommon from GLP-1s alone, but the risk rises sharply when combined with insulin or sulfonylureas — a key reason to tell every prescriber you''re on one.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['glp-1', 'semaglutide']
 ---
 

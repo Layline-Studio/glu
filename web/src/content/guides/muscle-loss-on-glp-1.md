@@ -1,8 +1,8 @@
 ---
 title: 'Muscle Loss on GLP-1s: The Real Numbers and the Two Fixes'
 description: 'In DXA substudies, roughly 40% of GLP-1 weight loss was lean mass. What that number actually means, who should worry, and the two evidence-backed countermeasures: protein and resistance training.'
-pubDate: 2026-06-24
-updatedDate: 2026-07-08
+pubDate: 2026-06-22
+updatedDate: 2026-07-06
 tags: ['nutrition', 'protein', 'progress']
 howto:
   name: 'Protecting muscle during GLP-1 weight loss'

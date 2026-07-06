@@ -1,8 +1,8 @@
 ---
 title: 'High-Protein Meals for a Small Appetite: A GLP-1 Cheat Sheet'
 description: 'When a GLP-1 shrinks your meals, hitting your protein target gets hard. A practical cheat sheet: how much you need, protein-dense small foods, quick meal templates, and no-appetite backups.'
-pubDate: 2026-06-29
-updatedDate: 2026-07-08
+pubDate: 2026-06-27
+updatedDate: 2026-07-06
 tags: ['nutrition', 'protein']
 howto:
   name: 'Hitting your protein target on a GLP-1'

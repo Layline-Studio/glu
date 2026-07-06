@@ -1,7 +1,7 @@
 ---
 title: 'Body recomposition'
 description: 'Losing fat while keeping (or gaining) muscle, so your shape changes even when the scale barely moves. Why measurements can beat weight as a progress signal.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['lean-mass-loss', 'non-scale-victory', 'weight-loss-plateau']
 ---
 

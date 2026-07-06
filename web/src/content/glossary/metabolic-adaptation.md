@@ -1,7 +1,7 @@
 ---
 title: 'Metabolic adaptation'
 description: 'The way your body burns fewer calories as you lose weight — beyond what the smaller size alone predicts. A real reason weight loss slows and regain is easy.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['weight-loss-plateau', 'set-point', 'lean-mass-loss']
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: 'Traveling With a GLP-1: Storage, Flying, and Shot Day on the Road'
 description: 'How to keep your Wegovy, Ozempic, Zepbound, or Mounjaro pen safe on trips: refrigeration and out-of-fridge limits, flying with needles, sharps on the road, and handling shot day across time zones.'
-pubDate: 2026-07-01
-updatedDate: 2026-07-08
+pubDate: 2026-06-29
+updatedDate: 2026-07-06
 tags: ['shot day', 'logistics', 'travel']
 howto:
   name: 'Traveling with a GLP-1 medication'

@@ -1,7 +1,7 @@
 ---
 title: 'Sulfur burps'
 description: 'Burps that smell like rotten eggs — an unpleasant but usually harmless GLP-1 side effect, tied to slowed digestion. Sometimes a warning sign worth checking.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['gastric-emptying', 'gastroparesis']
 ---
 

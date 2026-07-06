@@ -1,7 +1,7 @@
 ---
 title: 'Traveling with GLP-1s'
 description: 'How to keep your medication safe and your schedule intact on trips: pen storage limits, flying with needles, and handling time-zone shot days.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['pen-storage', 'shot-day', 'sharps-container']
 ---
 

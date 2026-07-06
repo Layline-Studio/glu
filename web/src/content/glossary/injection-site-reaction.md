@@ -1,7 +1,7 @@
 ---
 title: 'Injection-site reaction'
 description: 'Redness, itching, or a small bump where you injected. Usually minor and short-lived — distinct from the lumpy tissue that poor site rotation causes.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['injection-site-rotation', 'shot-day']
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'Pancreatitis'
 description: 'Inflammation of the pancreas — a rare but serious GLP-1 warning. The key is recognizing the one symptom that means stop and seek care: severe, persistent belly pain.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['gallstones', 'gastroparesis']
 ---
 

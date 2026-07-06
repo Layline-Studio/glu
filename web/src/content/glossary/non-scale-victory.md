@@ -1,7 +1,7 @@
 ---
 title: 'Non-scale victory (NSV)'
 description: 'A sign of progress the scale can''t show — looser clothes, better bloodwork, more stamina. The antidote to plateau panic and daily weigh-in obsession.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['weight-loss-plateau', 'body-recomposition', 'lean-mass-loss']
 ---
 

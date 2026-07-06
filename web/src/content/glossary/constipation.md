@@ -1,7 +1,7 @@
 ---
 title: 'Constipation'
 description: 'The other big GI side effect after nausea — driven by slower digestion plus eating and drinking less. Mostly solved with fiber, fluids, and movement.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['gastric-emptying', 'what-to-eat-on-glp-1']
 ---
 

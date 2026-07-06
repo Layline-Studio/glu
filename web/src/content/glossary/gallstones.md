@@ -1,7 +1,7 @@
 ---
 title: 'Gallstones'
 description: 'Hardened deposits in the gallbladder made more likely by rapid weight loss — on or off GLP-1s. Known cause, known symptom pattern, partly preventable.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['pancreatitis', 'weight-loss-plateau']
 ---
 

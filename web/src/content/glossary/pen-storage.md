@@ -1,7 +1,7 @@
 ---
 title: 'Pen storage (cold chain)'
 description: 'GLP-1 pens are refrigerated medications with specific temperature limits — including how long they can stay out of the fridge, which matters for travel.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['shot-day', 'glp-1-travel']
 ---
 

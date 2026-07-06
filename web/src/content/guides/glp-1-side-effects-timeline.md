@@ -1,8 +1,8 @@
 ---
 title: 'GLP-1 Side Effects, Week by Week: What to Expect and When'
 description: 'A realistic timeline of GLP-1 side effects from your first shot through maintenance: what tends to happen in week 1, during dose increases, and once your body adapts — plus the red flags at every stage.'
-pubDate: 2026-06-25
-updatedDate: 2026-07-08
+pubDate: 2026-06-23
+updatedDate: 2026-07-06
 tags: ['side effects', 'titration', 'getting started']
 ---
 

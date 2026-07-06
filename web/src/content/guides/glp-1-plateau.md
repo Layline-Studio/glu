@@ -1,8 +1,8 @@
 ---
 title: 'The GLP-1 Plateau: Why the Scale Stops and What To Do'
 description: 'Weight loss on GLP-1s flattens out — it did in the trials too, around week 60. What separates a real plateau from scale noise, why plateaus happen, and the options that actually exist.'
-pubDate: 2026-06-23
-updatedDate: 2026-07-08
+pubDate: 2026-06-21
+updatedDate: 2026-07-06
 tags: ['progress', 'science', 'tracking']
 ---
 

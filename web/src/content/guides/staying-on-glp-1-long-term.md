@@ -1,8 +1,8 @@
 ---
 title: 'Staying on a GLP-1 Long-Term: Maintenance, Not a Finish Line'
 description: 'What happens after you reach your goal weight on a GLP-1? The evidence on stopping vs staying, why obesity medicine treats it as chronic management, and how to think about maintenance doses.'
-pubDate: 2026-07-04
-updatedDate: 2026-07-08
+pubDate: 2026-07-02
+updatedDate: 2026-07-06
 tags: ['progress', 'maintenance', 'science']
 ---
 

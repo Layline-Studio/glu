@@ -1,7 +1,7 @@
 ---
 title: 'Fatigue'
 description: 'Tiredness some people feel on GLP-1s, especially early or after dose increases. Usually a downstream effect of eating far less — often fixable.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['what-to-eat-on-glp-1', 'protein-first', 'hypoglycemia']
 ---
 

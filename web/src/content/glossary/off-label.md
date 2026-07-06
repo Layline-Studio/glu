@@ -1,7 +1,7 @@
 ---
 title: 'Off-label'
 description: 'Prescribing a drug for a use the FDA hasn''t formally approved — like Ozempic for weight loss. Legal and common, but it affects insurance coverage.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['prior-authorization', 'semaglutide', 'tirzepatide']
 ---
 

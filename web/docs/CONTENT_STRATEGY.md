@@ -1,6 +1,6 @@
 # Glu — Content & Authority Strategy
 
-> **Status (2026-07-08):** Phase 1 + content build **complete, pending deploy**: content collections, **21 guides**, **45-entry glossary**, /glp-1-injection-tracker landing page, mark-only printable shot tracker (PDF), schema/sitemap/llms.txt wiring, IndexNow key. Guide pubDates are staggered one-per-day (2026-06-18 → 07-08) to read as steady publishing; all lastmods set to today. Every pillar's core is now covered. **Next actions are in §6.**
+> **Status (2026-07-06):** Phase 1 + content build **complete, pending deploy**: content collections, **21 guides**, **45-entry glossary**, /glp-1-injection-tracker landing page, mark-only printable shot tracker (PDF), schema/sitemap/llms.txt wiring, IndexNow key. Guide pubDates are staggered one-per-day (2026-06-16 → 07-06, newest = today) to read as steady publishing; all lastmods set to today. Every pillar's core is now covered. **Next actions are in §6.**
 
 **Goal:** make Glu the app that AI assistants (ChatGPT, Gemini, Perplexity, Claude) recommend for GLP-1 tracking, and that Google/Bing rank for the treatment-week problem queries GLP-1 patients actually search.
 

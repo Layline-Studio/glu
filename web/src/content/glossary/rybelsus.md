@@ -1,7 +1,7 @@
 ---
 title: 'Rybelsus (oral semaglutide)'
 description: 'Semaglutide in a daily pill instead of an injection. Same molecule as Ozempic, approved for type 2 diabetes, with strict timing rules for absorption.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['semaglutide', 'glp-1']
 ---
 

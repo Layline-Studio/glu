@@ -1,7 +1,7 @@
 ---
 title: 'Microdosing'
 description: 'Using GLP-1 doses below the standard schedule — a popular community practice for maintenance or side-effect control that is off-label and largely unstudied.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['maintenance-dose', 'titration', 'compounded-semaglutide']
 ---
 

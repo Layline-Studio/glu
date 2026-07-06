@@ -1,7 +1,7 @@
 ---
 title: 'GLP-1'
 description: 'Glucagon-like peptide-1 — the natural gut hormone these medications imitate. It signals fullness, slows digestion, and helps control blood sugar.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['semaglutide', 'tirzepatide', 'gastric-emptying']
 ---
 

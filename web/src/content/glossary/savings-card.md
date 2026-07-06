@@ -1,7 +1,7 @@
 ---
 title: 'Savings card (copay card)'
 description: 'Manufacturer discount programs that can lower the out-of-pocket cost of brand-name GLP-1s. Real savings, with eligibility fine print worth reading.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['prior-authorization', 'off-label']
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'Gastroparesis'
 description: 'Severely delayed stomach emptying — an extreme of the effect GLP-1s produce on purpose. Usually mild and reversible, but a symptom pattern worth knowing.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['gastric-emptying', 'sulfur-burps', 'pancreatitis']
 ---
 

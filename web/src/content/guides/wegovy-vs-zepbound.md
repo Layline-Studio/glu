@@ -1,8 +1,8 @@
 ---
 title: 'Wegovy vs Zepbound: An Honest, Evidence-Based Comparison'
 description: 'Wegovy (semaglutide) vs Zepbound (tirzepatide): how they differ in mechanism, average weight loss, side effects, dosing, and cost — based on the published trials, including the head-to-head SURMOUNT-5.'
-pubDate: 2026-07-07
-updatedDate: 2026-07-08
+pubDate: 2026-07-05
+updatedDate: 2026-07-06
 tags: ['medications', 'science', 'comparison']
 ---
 

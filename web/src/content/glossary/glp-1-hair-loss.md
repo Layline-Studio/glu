@@ -1,7 +1,7 @@
 ---
 title: 'Hair loss (telogen effluvium)'
 description: 'Temporary hair shedding some people notice a few months into treatment. It''s driven by rapid weight loss, not the drug directly — and it regrows.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['lean-mass-loss', 'protein-first']
 ---
 

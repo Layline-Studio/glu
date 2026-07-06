@@ -1,7 +1,7 @@
 ---
 title: 'Retatrutide'
 description: 'An investigational "triple agonist" (GLP-1 + GIP + glucagon) in clinical trials. Early results are striking, but it is not yet approved — one to watch, not to seek.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['tirzepatide', 'gip', 'semaglutide']
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'BMI'
 description: 'Body mass index — weight over height squared. The number insurers use to gate GLP-1 coverage, and a useful-but-crude measure with real blind spots.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['prior-authorization', 'body-recomposition', 'lean-mass-loss']
 ---
 

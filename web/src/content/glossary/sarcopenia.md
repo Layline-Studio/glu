@@ -1,7 +1,7 @@
 ---
 title: 'Sarcopenia'
 description: 'Age-related loss of muscle mass and strength. Rapid weight loss can accelerate it — the main reason muscle protection matters most for older adults on GLP-1s.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['lean-mass-loss', 'muscle-loss-on-glp-1', 'protein-first']
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'Sharps container'
 description: 'The puncture-proof container for used needles and pens. Simple, cheap, and the safe (often legally required) way to dispose of injection waste.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['shot-day', 'injection-site-rotation']
 ---
 

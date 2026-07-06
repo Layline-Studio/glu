@@ -1,7 +1,7 @@
 ---
 title: 'Half-life'
 description: 'How long it takes for half a dose to clear your body. Semaglutide''s ~7-day half-life is why it''s dosed weekly — and why missed doses have catch-up windows.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['titration', 'shot-day', 'maintenance-dose']
 ---
 

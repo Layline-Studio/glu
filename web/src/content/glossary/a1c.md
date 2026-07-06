@@ -1,7 +1,7 @@
 ---
 title: 'A1C'
 description: 'A blood test showing your average blood sugar over ~3 months. The key number for diabetes management — and a common non-scale victory on GLP-1s.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['non-scale-victory', 'semaglutide', 'hypoglycemia']
 ---
 

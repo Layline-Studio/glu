@@ -1,8 +1,8 @@
 ---
 title: 'Measuring GLP-1 Progress Beyond the Scale'
 description: 'The scale is one noisy number that can''t tell fat from muscle. A practical guide to the measurements, benchmarks, and health markers that show whether your GLP-1 treatment is really working.'
-pubDate: 2026-07-05
-updatedDate: 2026-07-08
+pubDate: 2026-07-03
+updatedDate: 2026-07-06
 tags: ['progress', 'tracking']
 howto:
   name: 'Tracking GLP-1 progress beyond weight'

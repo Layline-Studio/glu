@@ -1,7 +1,7 @@
 ---
 title: 'Thyroid (boxed warning)'
 description: 'The FDA boxed warning on GLP-1s about thyroid C-cell tumors, based on rodent studies. What it means, who it excludes from treatment, and how to read it honestly.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['semaglutide', 'tirzepatide']
 ---
 

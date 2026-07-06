@@ -1,7 +1,7 @@
 ---
 title: 'Liraglutide (Saxenda, Victoza)'
 description: 'The first-generation GLP-1 medication — a daily injection rather than weekly. Largely superseded by semaglutide and tirzepatide, but still prescribed.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['semaglutide', 'tirzepatide', 'glp-1']
 ---
 

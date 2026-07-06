@@ -1,8 +1,8 @@
 ---
 title: 'Sulfur Burps on a GLP-1: Why They Happen and How to Stop Them'
 description: 'Rotten-egg burps are an unpleasant but usually harmless GLP-1 side effect tied to slowed digestion. What causes them, the food and timing fixes that help, and the symptom combination that means call your doctor.'
-pubDate: 2026-06-28
-updatedDate: 2026-07-08
+pubDate: 2026-06-26
+updatedDate: 2026-07-06
 tags: ['side effects', 'nutrition']
 howto:
   name: 'Reducing GLP-1 sulfur burps'

@@ -1,7 +1,7 @@
 ---
 title: 'What to Look for in a GLP-1 Tracking App'
 description: 'A practical guide to choosing a GLP-1 tracking app: the features that actually matter for treatment — dose history, injection-site rotation, symptom-vs-dose timelines, weight trends, and protein — and how to tell useful from cluttered.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 tags: ['tracking', 'tools']
 ---
 

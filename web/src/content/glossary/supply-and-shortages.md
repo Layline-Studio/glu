@@ -1,7 +1,7 @@
 ---
 title: 'Supply and shortages'
 description: 'GLP-1 demand has repeatedly outpaced supply, causing intermittent shortages. They drive dose gaps, pharmacy-hopping, and the rise of compounded versions.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['compounded-semaglutide', 'missed-glp-1-dose', 'titration']
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'Gastric emptying'
 description: 'How fast food leaves your stomach. GLP-1 medications slow it down — the direct cause of both early fullness and most nausea.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['glp-1', 'gastroparesis', 'food-noise']
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 'GIP'
 description: 'Glucose-dependent insulinotropic polypeptide — the second gut hormone that tirzepatide (Zepbound, Mounjaro) targets alongside GLP-1.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['tirzepatide', 'glp-1', 'semaglutide']
 ---
 

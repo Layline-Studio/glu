@@ -1,7 +1,7 @@
 ---
 title: 'Set point'
 description: 'The weight range your body defends by adjusting hunger and metabolism. The leading explanation for why weight is regained — and why GLP-1s may work by lowering it.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['rebound-weight-gain', 'weight-loss-plateau', 'food-noise']
 ---
 

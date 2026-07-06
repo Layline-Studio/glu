@@ -1,7 +1,7 @@
 ---
 title: 'Prior authorization'
 description: 'The insurer''s approval step before they''ll cover a GLP-1. Understanding it — and documenting your case — is often what gets a prescription paid for.'
-pubDate: 2026-07-08
+pubDate: 2026-07-06
 related: ['savings-card', 'off-label']
 ---
 

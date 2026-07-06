@@ -1,8 +1,8 @@
 ---
 title: 'Tired on a GLP-1? Why It Happens and How to Get Energy Back'
 description: 'Fatigue is a common GLP-1 side effect, especially early and after dose increases. It''s usually a downstream effect of eating and drinking too little — here''s how to find your energy again.'
-pubDate: 2026-06-27
-updatedDate: 2026-07-08
+pubDate: 2026-06-25
+updatedDate: 2026-07-06
 tags: ['side effects', 'nutrition']
 howto:
   name: 'Beating GLP-1 fatigue'

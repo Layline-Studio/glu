@@ -1,8 +1,8 @@
 ---
 title: 'How to Get Your GLP-1 Covered by Insurance'
 description: 'A practical playbook for GLP-1 coverage: how prior authorization works, what documentation helps, how to appeal a denial, and the savings-card and cash options when insurance says no.'
-pubDate: 2026-07-06
-updatedDate: 2026-07-08
+pubDate: 2026-07-04
+updatedDate: 2026-07-06
 tags: ['logistics', 'cost', 'access']
 howto:
   name: 'Getting a GLP-1 covered by insurance'

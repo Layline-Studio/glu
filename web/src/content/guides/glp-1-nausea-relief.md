@@ -1,8 +1,8 @@
 ---
 title: 'GLP-1 Nausea: Why It Happens and What Actually Helps'
 description: 'Nausea is the most common GLP-1 side effect — around 44% on semaglutide in trials, mostly during dose increases. What causes it, the food and timing tactics that help, and the red flags that mean call your doctor.'
-pubDate: 2026-06-20
-updatedDate: 2026-07-08
+pubDate: 2026-06-18
+updatedDate: 2026-07-06
 tags: ['side effects', 'titration']
 howto:
   name: 'Reducing GLP-1 nausea'

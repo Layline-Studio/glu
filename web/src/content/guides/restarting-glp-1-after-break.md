@@ -1,8 +1,8 @@
 ---
 title: 'Restarting a GLP-1 After a Break: How to Avoid a Rough Restart'
 description: 'Coming back to Wegovy, Ozempic, or Zepbound after a gap from shortage, cost, or a pause? Why you may need to re-titrate, how tolerance resets, and how to make the restart smoother.'
-pubDate: 2026-07-03
-updatedDate: 2026-07-08
+pubDate: 2026-07-01
+updatedDate: 2026-07-06
 tags: ['shot day', 'logistics', 'dosing']
 ---
 

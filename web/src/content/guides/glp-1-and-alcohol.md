@@ -1,8 +1,8 @@
 ---
 title: 'GLP-1s and Alcohol: What Changes and What to Watch'
 description: 'There''s no formal ban on drinking while on a GLP-1, but a lot changes: tolerance, calories, hypoglycemia risk, and — for many — the desire to drink at all. An honest, practical rundown.'
-pubDate: 2026-06-30
-updatedDate: 2026-07-08
+pubDate: 2026-06-28
+updatedDate: 2026-07-06
 tags: ['nutrition', 'lifestyle']
 ---
 

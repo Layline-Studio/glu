@@ -1,8 +1,8 @@
 ---
 title: 'GLP-1 Constipation: Why It Happens and How to Fix It'
 description: 'Constipation is the second-most-common GLP-1 side effect after nausea. Here''s why slowed digestion plus a smaller diet causes it — and the fiber, fluid, and movement fixes that actually work.'
-pubDate: 2026-06-26
-updatedDate: 2026-07-08
+pubDate: 2026-06-24
+updatedDate: 2026-07-06
 tags: ['side effects', 'nutrition']
 howto:
   name: 'Relieving GLP-1 constipation'
