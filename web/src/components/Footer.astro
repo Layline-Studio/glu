@@ -11,6 +11,11 @@ interface Props {
     privacy: string;
     support: string;
   };
+  resourceLinks?: {
+    guides: string;
+    glossary: string;
+    printable: string;
+  };
   disclaimerTitle?: string;
   disclaimerBody?: string;
   copyright?: string;
@@ -31,6 +36,11 @@ const {
     terms: 'Terms',
     privacy: 'Privacy',
     support: 'Support',
+  },
+  resourceLinks = {
+    guides: 'GLP-1 Guides',
+    glossary: 'Glossary',
+    printable: 'Free Shot Tracker',
   },
   disclaimerTitle = 'Medical Disclaimer',
   disclaimerBody = 'Glu is intended for personal tracking and educational use only. It does not provide medical advice, diagnosis, or treatment, and should not be used as a substitute for guidance from a licensed physician or other qualified healthcare professional. Always consult your healthcare provider before making decisions about medication, dosing, nutrition, exercise, or any aspect of your treatment plan.',
@@ -56,6 +66,9 @@ const {
       </a>
       <div class="flex flex-wrap items-center justify-center gap-7 text-sm text-ink-soft">
         <a href="/about" class="transition-colors hover:text-ink">{links.about}</a>
+        <a href="/guides" class="transition-colors hover:text-ink">{resourceLinks.guides}</a>
+        <a href="/glossary" class="transition-colors hover:text-ink">{resourceLinks.glossary}</a>
+        <a href="/printable-glp-1-tracker" class="transition-colors hover:text-ink">{resourceLinks.printable}</a>
         <a href="/support" class="transition-colors hover:text-ink">{links.contact}</a>
         <a href="/terms" class="transition-colors hover:text-ink">{links.terms}</a>
         <a href="/privacy" class="transition-colors hover:text-ink">{links.privacy}</a>

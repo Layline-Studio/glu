@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://myglu.health/' },
+      { '@type': 'ListItem', position: 2, name: 'Printable GLP-1 Tracker', item: 'https://myglu.health/printable-glp-1-tracker' },
+    ],
+  },
+];
+
+const rows = [
+  { label: 'Date, dose & injection site', body: 'The core record — including site rotation, so "where did last week’s shot go?" always has an answer.' },
+  { label: 'Weekly weight', body: 'One weigh-in per row. Eight weeks makes a real trend; single days are just noise.' },
+  { label: 'Worst side effect this week', body: 'One honest line. Patterns against dose changes are what titration decisions are made on.' },
+  { label: 'When hunger came back', body: 'The day food noise returned each week — the clearest everyday signal of whether your dose holds the full seven days.' },
+];
+---
+
+<Layout
+  title="Free Printable GLP-1 Shot Tracker (PDF) | Glu"
+  description="A free one-page printable GLP-1 injection tracker: eight weeks of doses, injection sites, weight, and side-effect notes for Wegovy, Ozempic, Zepbound, or Mounjaro. No email required."
+  canonicalPath="/printable-glp-1-tracker"
+  structuredData={structuredData}
+>
+  <div class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
+      <div class="mx-auto max-w-screen-md px-6 py-6 sm:px-8">
+        <a href="/" class="inline-flex items-center gap-3">
+          <img src="/app_icon.png" alt="Glu" class="h-8 w-8 rounded-xl shadow-sm" width="32" height="32" />
+          <span class="font-sora text-lg font-semibold tracking-tight text-slate-900">Glu</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-screen-md px-6 pb-20 sm:px-8">
+      <section class="pb-10 pt-16 sm:pt-20">
+        <span class="inline-flex items-center gap-2 rounded-full bg-slate-900/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">
+          Free download
+        </span>
+        <h1 class="mt-5 font-sora text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+          The GLP-1 shot tracker, on one printable page
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-slate-500">
+          Eight weeks of doses, injection sites, weekly weigh-ins, and side-effect notes — our
+          <a href="/guides/glp-1-shot-day-checklist" class="text-blue-600 hover:underline">five-minute shot-day routine</a>
+          as a sheet you can stick on the fridge. Free, no email required, print as many as you like.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href="/downloads/glu-glp-1-shot-tracker.pdf"
+            download
+            class="inline-flex items-center rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 ease-out-quint hover:-translate-y-0.5 hover:bg-slate-900"
+          >
+            Download the PDF
+          </a>
+          <span class="text-sm text-slate-400">Letter size · prints in black &amp; white</span>
+        </div>
+      </section>
+
+      <section class="border-t border-slate-200/80 py-12">
+        <h2 class="font-sora text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
+          What each row captures
+        </h2>
+        <div class="mt-8 space-y-5">
+          {rows.map((row) => (
+            <div class="rounded-2xl border border-slate-100 bg-white p-6">
+              <p class="font-sora text-sm font-semibold text-slate-900">{row.label}</p>
+              <p class="mt-1.5 text-sm leading-relaxed text-slate-500">{row.body}</p>
+            </div>
+          ))}
+        </div>
+        <p class="mt-8 text-sm leading-relaxed text-slate-500">
+          The sheet also carries the missed-dose windows for each medication and the red-flag
+          symptoms worth a call to your prescriber — the two things worth having on paper when you
+          need them. Details in the
+          <a href="/guides/missed-glp-1-dose" class="text-blue-600 hover:underline">missed-dose guide</a> and the
+          <a href="/guides/glp-1-nausea-relief" class="text-blue-600 hover:underline">nausea guide</a>.
+        </p>
+      </section>
+
+      <section class="rounded-3xl border border-slate-100 bg-white px-6 py-10 text-center shadow-[0_24px_60px_-50px_rgba(15,23,42,0.6)] sm:px-10">
+        <h2 class="font-sora text-xl font-semibold tracking-tight text-slate-900">
+          When eight weeks becomes eight months
+        </h2>
+        <p class="mx-auto mt-3 max-w-md text-sm leading-relaxed text-slate-500">
+          Paper is a great start — trends, reminders, and dose-vs-symptom timelines are where the
+          app takes over. Same routine, plus the pattern-finding.
+        </p>
+        <div class="mt-6 flex justify-center">
+          <StoreButtons />
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</Layout>

@@ -1,0 +1,162 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import StoreButtons from '../../components/StoreButtons.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides', ({ data }) => !data.draft);
+  return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+
+const allGuides = await getCollection('guides', ({ data }) => !data.draft);
+const relatedGuides = allGuides
+  .filter((other) => other.id !== guide.id)
+  .map((other) => ({
+    guide: other,
+    shared: other.data.tags.filter((tag) => guide.data.tags.includes(tag)).length,
+  }))
+  .sort((a, b) => b.shared - a.shared || b.guide.data.pubDate.valueOf() - a.guide.data.pubDate.valueOf())
+  .slice(0, 3)
+  .map((scored) => scored.guide);
+
+const words = guide.body?.split(/\s+/).length ?? 0;
+const readingMinutes = Math.max(1, Math.round(words / 200));
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const canonicalPath = `/guides/${guide.id}`;
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: guide.data.title,
+    description: guide.data.description,
+    datePublished: guide.data.pubDate.toISOString(),
+    dateModified: (guide.data.updatedDate ?? guide.data.pubDate).toISOString(),
+    url: `https://myglu.health${canonicalPath}`,
+    author: {
+      '@type': 'Organization',
+      name: 'Glu',
+      url: 'https://myglu.health',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Glu',
+      logo: { '@type': 'ImageObject', url: 'https://myglu.health/app_icon.png' },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://myglu.health/' },
+      { '@type': 'ListItem', position: 2, name: 'Guides', item: 'https://myglu.health/guides' },
+      { '@type': 'ListItem', position: 3, name: guide.data.title, item: `https://myglu.health${canonicalPath}` },
+    ],
+  },
+  ...(guide.data.howto
+    ? [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'HowTo',
+          name: guide.data.howto.name,
+          description: guide.data.description,
+          step: guide.data.howto.steps.map((step, index) => ({
+            '@type': 'HowToStep',
+            position: index + 1,
+            text: step,
+          })),
+        },
+      ]
+    : []),
+];
+---
+
+<Layout
+  title={`${guide.data.title} | Glu Guides`}
+  description={guide.data.description}
+  canonicalPath={canonicalPath}
+  ogType="article"
+  structuredData={structuredData}
+>
+  <div class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/80 backdrop-blur-xl">
+      <div class="mx-auto max-w-screen-md px-6 py-6 sm:px-8">
+        <a href="/" class="inline-flex items-center gap-3">
+          <img src="/app_icon.png" alt="Glu" class="h-8 w-8 rounded-xl shadow-sm" width="32" height="32" />
+          <span class="font-sora text-lg font-semibold tracking-tight text-slate-900">Glu</span>
+        </a>
+      </div>
+    </header>
+
+    <article class="mx-auto w-full max-w-screen-md px-6 pb-20 pt-14 sm:px-8 sm:pt-16">
+      <a href="/guides" class="text-sm font-medium text-slate-500 transition-colors hover:text-slate-900">
+        ← All guides
+      </a>
+      <h1 class="mt-6 font-sora text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl">
+        {guide.data.title}
+      </h1>
+      <div class="mt-4 flex flex-wrap items-center gap-3 text-sm text-slate-500">
+        <time datetime={guide.data.pubDate.toISOString()}>{formatDate(guide.data.pubDate)}</time>
+        {guide.data.updatedDate && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>Updated {formatDate(guide.data.updatedDate)}</span>
+          </>
+        )}
+        <span aria-hidden="true">·</span>
+        <span>{readingMinutes} min read</span>
+      </div>
+
+      <div class="mt-8 rounded-2xl border border-blue-100 bg-blue-50/60 px-5 py-4 text-[13px] leading-relaxed text-slate-600">
+        <strong class="font-semibold text-slate-800">Educational content, not medical advice.</strong>
+        {' '}This guide summarizes published research and official prescribing information for
+        general education. Your prescriber knows your history — always confirm medication
+        decisions with them.
+      </div>
+
+      <div class="prose prose-slate mt-10 max-w-none prose-headings:font-sora prose-headings:tracking-tight prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+        <Content />
+      </div>
+
+      {relatedGuides.length > 0 && (
+        <div class="mt-14">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Keep reading</p>
+          <div class="mt-4 grid gap-4 sm:grid-cols-3">
+            {relatedGuides.map((related) => (
+              <a
+                href={`/guides/${related.id}`}
+                class="group rounded-2xl border border-slate-100 bg-white p-5 shadow-[0_20px_45px_-40px_rgba(15,23,42,0.6)] transition-all duration-300 ease-out-quint hover:-translate-y-0.5"
+              >
+                <h3 class="font-sora text-sm font-semibold leading-snug text-slate-900 transition-colors group-hover:text-blue-600">
+                  {related.data.title}
+                </h3>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div class="mt-14 rounded-3xl border border-slate-100 bg-white px-6 py-8 text-center shadow-[0_24px_60px_-50px_rgba(15,23,42,0.6)] sm:px-10">
+        <p class="font-sora text-lg font-semibold text-slate-900">
+          Track your doses, symptoms, and progress in one place
+        </p>
+        <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-500">
+          Glu keeps your shot schedule, side-effect notes, meals, and weight trends together — so
+          appointments start with data instead of memory.
+        </p>
+        <div class="mt-6 flex justify-center">
+          <StoreButtons />
+        </div>
+      </div>
+    </article>
+
+    <Footer />
+  </div>
+</Layout>

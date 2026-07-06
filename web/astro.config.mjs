@@ -47,13 +47,28 @@ export default defineConfig({
           url: 'https://myglu.health/delete-account',
           description: 'Account deletion instructions',
         },
+        {
+          label: 'GLP-1 Guides',
+          url: 'https://myglu.health/guides',
+          description: 'Practical, evidence-based guides for life on GLP-1 medications',
+        },
+        {
+          label: 'GLP-1 Glossary',
+          url: 'https://myglu.health/glossary',
+          description: 'Plain-language definitions of GLP-1 treatment terms',
+        },
+        {
+          label: 'GLP-1 Injection Tracker',
+          url: 'https://myglu.health/glp-1-injection-tracker',
+          description: 'How Glu tracks doses, injection sites, weight, and side effects',
+        },
       ],
       docSet: [
         {
           title: 'Glu site index',
           description: 'Compact index of the key public pages on myglu.health.',
           url: '/llms-small.txt',
-          include: ['about/', 'delete-account/', 'privacy/', 'support/', 'terms/'],
+          include: ['about/', 'delete-account/', 'guides/**', 'glossary/**', 'glp-1-injection-tracker/', 'printable-glp-1-tracker/', 'privacy/', 'support/', 'terms/'],
           onlyStructure: true,
           promote: ['about/'],
         },
@@ -61,7 +76,7 @@ export default defineConfig({
           title: 'Glu full site content',
           description: 'Full content for the key public pages on myglu.health.',
           url: '/llms-full.txt',
-          include: ['about/', 'delete-account/', 'privacy/', 'support/', 'terms/'],
+          include: ['about/', 'delete-account/', 'guides/**', 'glossary/**', 'glp-1-injection-tracker/', 'printable-glp-1-tracker/', 'privacy/', 'support/', 'terms/'],
           promote: ['about/'],
         },
       ],

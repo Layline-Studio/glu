@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Glu — 8-Week GLP-1 Shot Tracker</title>
+<style>
+  @page { size: letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 8.5in; height: 11in; }
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #0f172a;
+    padding: 0.55in 0.6in 0.45in;
+    display: flex;
+    flex-direction: column;
+  }
+  .head { display: flex; justify-content: space-between; align-items: baseline; }
+  h1 { font-size: 21px; letter-spacing: -0.02em; }
+  .head .site { font-size: 11px; color: #64748b; }
+  .sub { margin-top: 5px; font-size: 11px; color: #475569; line-height: 1.5; }
+  .meta { margin-top: 14px; display: flex; gap: 26px; font-size: 11px; color: #0f172a; }
+  .meta span { border-bottom: 1px solid #94a3b8; min-width: 140px; display: inline-block; padding: 0 4px 2px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  th {
+    text-align: left; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: #64748b; padding: 0 6px 6px; border-bottom: 1.5px solid #0f172a;
+  }
+  td { border-bottom: 1px solid #cbd5e1; padding: 0 6px; height: 0.62in; vertical-align: bottom; }
+  td .hint { font-size: 8px; color: #94a3b8; padding-bottom: 4px; }
+  .wk { font-size: 13px; font-weight: 700; color: #0f172a; vertical-align: middle; width: 0.35in; }
+  .sites { margin-top: 14px; display: flex; gap: 10px; align-items: center; font-size: 9.5px; color: #475569; }
+  .sites b { font-size: 9.5px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.08em; }
+  .sites span { border: 1px solid #cbd5e1; border-radius: 999px; padding: 2px 8px; }
+  .rules { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; font-size: 9.5px; color: #475569; line-height: 1.5; }
+  .rules b { color: #0f172a; }
+  .foot {
+    margin-top: auto; padding-top: 12px; border-top: 1px solid #e2e8f0;
+    display: flex; justify-content: space-between; font-size: 8.5px; color: #94a3b8; line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>8-Week GLP-1 Shot Tracker</h1>
+    <span class="site">myglu.health</span>
+  </div>
+  <p class="sub">One row per shot day: log the dose the moment you inject, then fill the rest at your weekly check-in. Rotate injection sites — never the same spot two weeks running.</p>
+
+  <div class="meta">
+    <div>Medication: <span></span></div>
+    <div>Shot day: <span></span></div>
+    <div>Starting weight: <span></span></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th style="width:0.9in">Date</th>
+        <th style="width:0.8in">Dose</th>
+        <th style="width:1.05in">Site</th>
+        <th style="width:0.85in">Weight</th>
+        <th style="width:1.7in">Worst side effect this week</th>
+        <th>Hunger / food noise back by day…</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="wk">1</td><td></td><td></td><td class="hint"></td><td></td><td></td><td></td></tr>
+      <tr><td class="wk">2</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="wk">3</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="wk">4</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="wk">5</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="wk">6</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="wk">7</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td class="wk">8</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="sites">
+    <b>Sites</b>
+    <span>L·abdomen</span><span>R·abdomen</span><span>L·thigh</span><span>R·thigh</span><span>L·arm</span><span>R·arm</span>
+  </div>
+
+  <div class="rules">
+    <p><b>Missed a dose?</b> Each medication's label gives a catch-up window (Wegovy: 48&nbsp;h before next dose · Ozempic: 5 days · Zepbound/Mounjaro: 4 days). Never double up — when unsure, call your pharmacist.</p>
+    <p><b>Weigh weekly, judge monthly.</b> Same scale, same conditions, once a week. Day-to-day swings are water, not fat — the trend over 4+ weeks is the real signal.</p>
+    <p><b>Rough week after a dose increase?</b> Small, low-fat, bland meals; stay upright after eating; sip fluids all day. Severe abdominal pain or vomiting that won't stop → call your prescriber.</p>
+    <p><b>Bring this sheet to appointments.</b> Eight weeks of doses, weights, and side-effect notes is exactly the record titration decisions are made on.</p>
+  </div>
+
+  <div class="foot">
+    <span>Educational tool, not medical advice. Always follow your prescriber's instructions and the current prescribing information.</span>
+    <span>Free from Glu — the GLP-1 tracking app · myglu.health</span>
+  </div>
+</body>
+</html>
