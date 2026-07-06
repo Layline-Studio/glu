@@ -1,7 +1,8 @@
 ---
 title: 'What Is Food Noise? The Constant Chatter GLP-1s Switch Off'
 description: 'Food noise is the intrusive, always-on mental chatter about food. Here''s what it is, the brain science behind why GLP-1 medications quiet it, and why its return is worth tracking.'
-pubDate: 2026-07-06
+pubDate: 2026-06-22
+updatedDate: 2026-07-08
 tags: ['appetite', 'science']
 ---
 

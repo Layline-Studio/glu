@@ -1,7 +1,8 @@
 ---
 title: 'Missed Your GLP-1 Dose? What Each Label Actually Says'
 description: 'Missed a Wegovy, Ozempic, Zepbound, or Mounjaro dose? The official prescribing information gives a specific window for each — here they are in one place, plus what happens after longer gaps.'
-pubDate: 2026-07-06
+pubDate: 2026-06-19
+updatedDate: 2026-07-08
 tags: ['shot day', 'logistics', 'dosing']
 ---
 

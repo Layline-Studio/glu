@@ -1,7 +1,8 @@
 ---
 title: 'The GLP-1 Shot Day Checklist: A 5-Minute Weekly Routine'
 description: 'A simple shot day checklist for Wegovy, Zepbound, Ozempic, or Mounjaro: prepare the pen, rotate the site, inject, and log the four things your prescriber will actually ask about.'
-pubDate: 2026-07-06
+pubDate: 2026-06-18
+updatedDate: 2026-07-08
 tags: ['shot day', 'logistics', 'tracking']
 howto:
   name: 'The GLP-1 shot day routine'

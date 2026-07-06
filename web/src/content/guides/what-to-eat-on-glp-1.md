@@ -1,7 +1,8 @@
 ---
 title: 'What to Eat on GLP-1s: Making a Small Appetite Count'
 description: 'GLP-1 medications shrink how much you can eat, not what your body needs. A practical eating framework: protein first, real numbers for targets, foods that fight nausea, and what to do when nothing sounds good.'
-pubDate: 2026-07-06
+pubDate: 2026-06-21
+updatedDate: 2026-07-08
 tags: ['nutrition', 'protein']
 howto:
   name: 'Eating well on a GLP-1'
