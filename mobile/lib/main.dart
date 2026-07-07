@@ -50,7 +50,7 @@ class _GluBootstrapAppState extends ConsumerState<GluBootstrapApp> {
     if (widget.config.hasSupabase) {
       await Supabase.initialize(
         url: widget.config.supabaseUrl,
-        anonKey: widget.config.supabaseAnonKey,
+        publishableKey: widget.config.supabaseAnonKey,
         authOptions: const FlutterAuthClientOptions(
           detectSessionInUri: false,
         ),

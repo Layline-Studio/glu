@@ -42,6 +42,7 @@ app.*.map.json
 /android/app/release
 /android/key.properties
 /android/app/google-services.json
+/android/.kotlin/
 
 # Supabase env files
 supabase/.env

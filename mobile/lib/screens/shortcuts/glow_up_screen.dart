@@ -227,16 +227,18 @@ class _GlowUpScreenState extends ConsumerState<GlowUpScreen> {
 
       await _persistGlowUpAssets(comparisonBytes);
 
-      await Share.shareXFiles(
-        [
-          XFile.fromData(
-            comparisonBytes,
-            mimeType: 'image/png',
-            name: 'glu_glowup_${DateTime.now().millisecondsSinceEpoch}.png',
-          ),
-        ],
-        text: 'My Glow Up progress',
-        sharePositionOrigin: _sharePositionOrigin(originKey),
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [
+            XFile.fromData(
+              comparisonBytes,
+              mimeType: 'image/png',
+              name: 'glu_glowup_${DateTime.now().millisecondsSinceEpoch}.png',
+            ),
+          ],
+          text: 'My Glow Up progress',
+          sharePositionOrigin: _sharePositionOrigin(originKey),
+        ),
       );
     } catch (error) {
       if (mounted) {
