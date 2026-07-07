@@ -25,6 +25,7 @@ import '../providers/today_meals_provider.dart';
 import '../providers/profile_service_provider.dart';
 import '../providers/record_service_provider.dart';
 import '../providers/subscription_provider.dart';
+import '../services/doctor_report_flow.dart';
 import '../services/record_service.dart';
 import '../widgets/estimated_medication_levels_card.dart';
 import '../widgets/pro_gate.dart';
@@ -422,6 +423,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
+  Future<void> _createDoctorReport() async {
+    HapticFeedback.selectionClick();
+    await requestDoctorReport(
+      context: context,
+      ref: ref,
+      analyticsSource: 'home',
+      proAccessSource: 'home_doctor_report',
+    );
+  }
+
   Future<void> _markShowcaseSeen(String key) async {
     await ref.read(profileServiceProvider).updateSettings({key: true});
     Future<void>(() {
@@ -489,6 +500,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final medicationLevelLogs = ref.watch(homeMedicationDoseLogsProvider);
     final hasMedicationLevelLogs =
         medicationLevelLogs.asData?.value.isNotEmpty == true;
+    final hasLogsToday = _hasLogsToday(stats);
+    final insightCardMode =
+        (profile?.settings['debug_insight_card_mode'] as String?)
+            ?.trim()
+            .toLowerCase();
 
     final showCarousel = showDosePage || showSupplementPage;
 
@@ -665,15 +681,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   const SizedBox(height: 22),
                 ],
-                if (hasMedicationLevelLogs ||
-                    medicationLevelLogs.isLoading) ...[
-                  EstimatedMedicationLevelsCard(
-                    doseLogs: medicationLevelLogs.asData?.value ??
-                        const <Map<String, dynamic>>[],
-                    isLoading: medicationLevelLogs.isLoading,
-                  ),
-                  const SizedBox(height: 22),
-                ],
+                TodayInsightCard(
+                  hasLogsToday: hasLogsToday,
+                  title: todayInsightCardTitle(hasLogsToday, l10n),
+                  copy: todayInsightCardCopy(hasLogsToday, l10n),
+                  insightCardMode: insightCardMode,
+                  isPro: isPro,
+                ),
+                const SizedBox(height: 12),
+                _DoctorReportCard(onTap: _createDoctorReport),
+                const SizedBox(height: 22),
                 _HomeShortcutsSection(
                   items: [
                     _ShortcutItem(
@@ -699,6 +716,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                   ],
                 ),
+                if (hasMedicationLevelLogs ||
+                    medicationLevelLogs.isLoading) ...[
+                  const SizedBox(height: 22),
+                  EstimatedMedicationLevelsCard(
+                    doseLogs: medicationLevelLogs.asData?.value ??
+                        const <Map<String, dynamic>>[],
+                    isLoading: medicationLevelLogs.isLoading,
+                  ),
+                ],
                 const SizedBox(height: 22),
                 if (showGoalStatusCard) ...[
                   _HomeGoalsStatusCard(
@@ -1442,6 +1468,112 @@ class _StreakBadge extends StatelessWidget {
 
 String _streakDayKey(DateTime value) {
   return DateFormat('yyyyMMdd').format(value.toLocal());
+}
+
+/// Same visual language as [TodayInsightCard]'s header row: a soft purple
+/// gradient card with an icon chip, title/body, and a trailing chevron.
+/// Subscription gating happens inside [onTap] (see [requestDoctorReport]).
+class _DoctorReportCard extends StatelessWidget {
+  const _DoctorReportCard({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    const highlight = Color(0xFF367DE8);
+    const bodyColor = Color(0xFF5F7190);
+    final iconChipBackground = Colors.white.withValues(alpha: 0.92);
+
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFFEEF4FF),
+              Color(0xFFF3F7FF),
+              Color(0xFFE0EAFB),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(22),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.72)),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(21),
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(21),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 52,
+                    height: 52,
+                    decoration: BoxDecoration(
+                      color: iconChipBackground,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Icon(
+                      Icons.summarize_rounded,
+                      size: 24,
+                      color: highlight,
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          l10n.homeDoctorReportTitle,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: const Color(0xFF20324A),
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15.5,
+                            height: 1.08,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          l10n.homeDoctorReportBody,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: bodyColor,
+                            fontSize: 12.5,
+                            height: 1.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: highlight.withValues(alpha: 0.88),
+                    ),
+                    child: const Icon(
+                      Icons.chevron_right_rounded,
+                      size: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class TodayInsightCard extends ConsumerStatefulWidget {

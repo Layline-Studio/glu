@@ -1,6 +1,8 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import '../l10n/l10n.dart';
@@ -104,8 +106,9 @@ class _FilledState extends StatelessWidget {
   }
 }
 
-class MedicationLevelAreaChart extends StatelessWidget {
+class MedicationLevelAreaChart extends StatefulWidget {
   static const double _plotHorizontalInset = 6;
+  static const double _yAxisLabelRightPadding = 4;
 
   const MedicationLevelAreaChart({
     super.key,
@@ -121,7 +124,55 @@ class MedicationLevelAreaChart extends StatelessWidget {
   final DateTime asOf;
 
   @override
+  State<MedicationLevelAreaChart> createState() =>
+      _MedicationLevelAreaChartState();
+}
+
+class _MedicationLevelAreaChartState extends State<MedicationLevelAreaChart> {
+  int? _selectedIndex;
+
+  @override
+  void didUpdateWidget(covariant MedicationLevelAreaChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.values != widget.values ||
+        oldWidget.start != widget.start ||
+        oldWidget.asOf != widget.asOf) {
+      _selectedIndex = null;
+    }
+  }
+
+  void _handleTap(Offset localPosition, double chartWidth) {
+    final values = widget.values;
+    if (values.isEmpty) return;
+    const leftInset = MedicationLevelAreaChart._plotHorizontalInset;
+    const rightInset = MedicationLevelAreaChart._plotHorizontalInset;
+    final plotWidth = math.max(chartWidth - leftInset - rightInset, 0.0);
+    final stepX = values.length == 1 ? 0.0 : plotWidth / (values.length - 1);
+
+    int? nearest;
+    var minDistance = double.infinity;
+    for (var i = 0; i < values.length; i++) {
+      if (values[i] == null) continue;
+      final x = leftInset + (stepX * i);
+      final distance = (localPosition.dx - x).abs();
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearest = i;
+      }
+    }
+    if (nearest == null) return;
+
+    if (nearest == _selectedIndex) {
+      setState(() => _selectedIndex = null);
+    } else {
+      HapticFeedback.selectionClick();
+      setState(() => _selectedIndex = nearest);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final values = widget.values;
     if (!values.any((value) => value != null && value > 0)) {
       return Container(
         decoration: BoxDecoration(
@@ -142,12 +193,34 @@ class MedicationLevelAreaChart extends StatelessWidget {
     final nonNullValues = values.whereType<double>().toList();
     final maxValue = math.max(nonNullValues.reduce(math.max), 0.1);
     final yLabels = _buildYLabels(maxValue);
-    final xLabels = _buildXLabels(start, asOf);
+    final xLabels = _buildXLabels(widget.start, widget.asOf);
     final verticalGridLines = {
       ...xLabels.map((label) => label.position),
       1.0,
     }.toList()
       ..sort();
+
+    final yAxisLabelStyle =
+        Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: context.appColors.textSecondary,
+              fontSize: 11,
+              fontWeight: FontWeight.w500,
+            ) ??
+            const TextStyle(fontSize: 11, fontWeight: FontWeight.w500);
+    final yAxisLabelWidth = _measureYAxisLabelWidth(yLabels, yAxisLabelStyle);
+
+    final selectedIndex = _selectedIndex;
+    final selectedValue =
+        selectedIndex != null && selectedIndex < values.length
+            ? values[selectedIndex]
+            : null;
+    final selectedPrimaryLabel =
+        selectedValue != null ? '${selectedValue.toStringAsFixed(1)} mg' : null;
+    final selectedSecondaryLabel = selectedIndex != null
+        ? DateFormat('MMM d').format(
+            widget.start.add(Duration(days: selectedIndex)),
+          )
+        : null;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(2, 4, 2, 0),
@@ -158,7 +231,7 @@ class MedicationLevelAreaChart extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  width: 44,
+                  width: yAxisLabelWidth,
                   child: Stack(
                     children: [
                       for (final label in yLabels)
@@ -166,18 +239,17 @@ class MedicationLevelAreaChart extends StatelessWidget {
                           alignment: Alignment(
                               1, 1 - (label.position.clamp(0, 1) * 2)),
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 4),
+                            padding: const EdgeInsets.only(
+                              right:
+                                  MedicationLevelAreaChart._yAxisLabelRightPadding,
+                            ),
                             child: Text(
                               label.label,
                               textAlign: TextAlign.right,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: context.appColors.textSecondary,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                              maxLines: 1,
+                              softWrap: false,
+                              overflow: TextOverflow.visible,
+                              style: yAxisLabelStyle,
                             ),
                           ),
                         ),
@@ -185,16 +257,30 @@ class MedicationLevelAreaChart extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: CustomPaint(
-                    painter: _MedicationLevelAreaChartPainter(
-                      values: values,
-                      tint: tint,
-                      maxValue: maxValue,
-                      horizontalGridLines:
-                          yLabels.map((label) => label.position).toList(),
-                      verticalGridLines: verticalGridLines,
-                    ),
-                    child: const SizedBox.expand(),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTapUp: (details) => _handleTap(
+                          details.localPosition,
+                          constraints.maxWidth,
+                        ),
+                        child: CustomPaint(
+                          painter: _MedicationLevelAreaChartPainter(
+                            values: values,
+                            tint: widget.tint,
+                            maxValue: maxValue,
+                            horizontalGridLines:
+                                yLabels.map((label) => label.position).toList(),
+                            verticalGridLines: verticalGridLines,
+                            selectedIndex: selectedIndex,
+                            selectedPrimaryLabel: selectedPrimaryLabel,
+                            selectedSecondaryLabel: selectedSecondaryLabel,
+                          ),
+                          child: const SizedBox.expand(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -204,9 +290,10 @@ class MedicationLevelAreaChart extends StatelessWidget {
           SizedBox(
             height: 26,
             child: Padding(
-              padding: const EdgeInsets.only(
-                left: 44 + _plotHorizontalInset,
-                right: 2 + _plotHorizontalInset,
+              padding: EdgeInsets.only(
+                left: yAxisLabelWidth +
+                    MedicationLevelAreaChart._plotHorizontalInset,
+                right: 2 + MedicationLevelAreaChart._plotHorizontalInset,
               ),
               child: Stack(
                 children: [
@@ -244,6 +331,25 @@ class MedicationLevelAreaChart extends StatelessWidget {
         position: ratio,
       );
     });
+  }
+
+  /// Widest y-axis label's rendered width, so the column is exactly as wide
+  /// as the current max value needs (e.g. "0.0 mg" vs "25.1 mg") instead of
+  /// a fixed guess that either wraps long labels or over-pads short ones.
+  double _measureYAxisLabelWidth(
+    List<_ChartAxisLabel> labels,
+    TextStyle style,
+  ) {
+    var maxWidth = 0.0;
+    for (final label in labels) {
+      final painter = TextPainter(
+        text: TextSpan(text: label.label, style: style),
+        textDirection: ui.TextDirection.ltr,
+        maxLines: 1,
+      )..layout();
+      maxWidth = math.max(maxWidth, painter.width);
+    }
+    return maxWidth + MedicationLevelAreaChart._yAxisLabelRightPadding;
   }
 
   List<_ChartAxisLabel> _buildXLabels(DateTime start, DateTime asOf) {
@@ -367,6 +473,9 @@ class _MedicationLevelAreaChartPainter extends CustomPainter {
     required this.maxValue,
     required this.horizontalGridLines,
     required this.verticalGridLines,
+    this.selectedIndex,
+    this.selectedPrimaryLabel,
+    this.selectedSecondaryLabel,
   });
 
   final List<double?> values;
@@ -374,6 +483,9 @@ class _MedicationLevelAreaChartPainter extends CustomPainter {
   final double maxValue;
   final List<double> horizontalGridLines;
   final List<double> verticalGridLines;
+  final int? selectedIndex;
+  final String? selectedPrimaryLabel;
+  final String? selectedSecondaryLabel;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -482,6 +594,39 @@ class _MedicationLevelAreaChartPainter extends CustomPainter {
       3.4,
       Paint()..color = tint,
     );
+
+    final selected = selectedIndex;
+    if (selected != null &&
+        selected >= 0 &&
+        selected < values.length &&
+        values[selected] != null) {
+      final value = values[selected]!;
+      final normalized = (value / usableRange).clamp(0.0, 1.0);
+      final x = leftInset + (stepX * selected);
+      final y = size.height -
+          bottomInset -
+          (normalized * (size.height - topInset - bottomInset));
+      final anchor = Offset(x, y);
+
+      final guidelinePaint = Paint()
+        ..color = tint.withValues(alpha: 0.32)
+        ..strokeWidth = 1;
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), guidelinePaint);
+
+      canvas.drawCircle(anchor, 6, Paint()..color = tint.withValues(alpha: 0.16));
+      canvas.drawCircle(anchor, 3.6, Paint()..color = tint);
+      canvas.drawCircle(anchor, 1.5, Paint()..color = Colors.white);
+
+      if (selectedPrimaryLabel != null) {
+        _drawMedicationLevelCallout(
+          canvas,
+          size,
+          anchor: anchor,
+          primaryLabel: selectedPrimaryLabel!,
+          secondaryLabel: selectedSecondaryLabel,
+        );
+      }
+    }
   }
 
   @override
@@ -490,7 +635,112 @@ class _MedicationLevelAreaChartPainter extends CustomPainter {
         oldDelegate.tint != tint ||
         oldDelegate.maxValue != maxValue ||
         oldDelegate.horizontalGridLines != horizontalGridLines ||
-        oldDelegate.verticalGridLines != verticalGridLines;
+        oldDelegate.verticalGridLines != verticalGridLines ||
+        oldDelegate.selectedIndex != selectedIndex ||
+        oldDelegate.selectedPrimaryLabel != selectedPrimaryLabel ||
+        oldDelegate.selectedSecondaryLabel != selectedSecondaryLabel;
+  }
+}
+
+/// Draws a rounded speech-bubble callout with a tail pointing at [anchor],
+/// showing the tapped point's value (bold) and date (dimmed). Placed above
+/// the point when there's room, below otherwise; clamped to stay on-canvas.
+void _drawMedicationLevelCallout(
+  Canvas canvas,
+  Size size, {
+  required Offset anchor,
+  required String primaryLabel,
+  String? secondaryLabel,
+}) {
+  const backgroundColor = Color(0xFF20324A);
+  const primaryTextColor = Colors.white;
+  final secondaryTextColor = Colors.white.withValues(alpha: 0.72);
+
+  final primaryPainter = TextPainter(
+    text: TextSpan(
+      text: primaryLabel,
+      style: const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w700,
+        color: primaryTextColor,
+      ),
+    ),
+    textDirection: ui.TextDirection.ltr,
+    maxLines: 1,
+  )..layout();
+
+  final secondaryPainter = secondaryLabel == null
+      ? null
+      : (TextPainter(
+          text: TextSpan(
+            text: secondaryLabel,
+            style: TextStyle(
+              fontSize: 9.5,
+              fontWeight: FontWeight.w500,
+              color: secondaryTextColor,
+            ),
+          ),
+          textDirection: ui.TextDirection.ltr,
+          maxLines: 1,
+        )..layout());
+
+  const horizontalPadding = 8.0;
+  const verticalPadding = 5.0;
+  const gap = 1.0;
+  const tailHeight = 5.0;
+  const tailWidth = 8.0;
+  final badgeWidth = math.max(
+        primaryPainter.width,
+        secondaryPainter?.width ?? 0,
+      ) +
+      horizontalPadding * 2;
+  final badgeHeight = primaryPainter.height +
+      (secondaryPainter == null ? 0 : secondaryPainter.height + gap) +
+      verticalPadding * 2;
+
+  final left = (anchor.dx - badgeWidth / 2)
+      .clamp(0.0, math.max(size.width - badgeWidth, 0.0))
+      .toDouble();
+  const minTopMargin = 2.0;
+  final preferredTopAbove = anchor.dy - badgeHeight - tailHeight - 6;
+  final placeAbove = preferredTopAbove >= minTopMargin;
+  final preferredTop =
+      placeAbove ? preferredTopAbove : anchor.dy + tailHeight + 6;
+  final top = preferredTop
+      .clamp(0.0, math.max(size.height - badgeHeight, 0.0))
+      .toDouble();
+
+  final rect = RRect.fromRectAndRadius(
+    Rect.fromLTWH(left, top, badgeWidth, badgeHeight),
+    const Radius.circular(8),
+  );
+  canvas.drawRRect(rect, Paint()..color = backgroundColor);
+
+  final tailBaseX = (anchor.dx - left)
+      .clamp(8.0, math.max(badgeWidth - 8.0, 8.0))
+      .toDouble();
+  final badgeIsAbove = top < anchor.dy;
+  final tailAnchorY = badgeIsAbove ? anchor.dy - 3 : anchor.dy + 3;
+  final tailEdgeY = badgeIsAbove ? top + badgeHeight - 0.5 : top + 0.5;
+  final tailPath = Path()
+    ..moveTo(left + tailBaseX - tailWidth / 2, tailEdgeY)
+    ..lineTo(left + tailBaseX, tailAnchorY)
+    ..lineTo(left + tailBaseX + tailWidth / 2, tailEdgeY)
+    ..close();
+  canvas.drawPath(tailPath, Paint()..color = backgroundColor);
+
+  primaryPainter.paint(
+    canvas,
+    Offset(left + horizontalPadding, top + verticalPadding),
+  );
+  if (secondaryPainter != null) {
+    secondaryPainter.paint(
+      canvas,
+      Offset(
+        left + horizontalPadding,
+        top + verticalPadding + primaryPainter.height + gap,
+      ),
+    );
   }
 }
 

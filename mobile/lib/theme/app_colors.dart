@@ -43,7 +43,7 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color heroEnd;
 
   static const light = AppColors(
-    canvas: Color(0xFFEEF8FB),
+    canvas: Color(0xFFF5F6F8),
     surface: Color(0xFFFFFFFF),
     softSurface: Color(0xFFE7F5FB),
     elevatedSurface: Color(0xFFF8FDFF),
