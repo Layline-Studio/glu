@@ -1,134 +1,164 @@
 <en-US>
-Glu 1.4.1 focuses on a smoother onboarding and feedback experience.
+Glu 1.5.0 brings richer health tracking, smarter home screen cards, and new personalization options.
 
-- Onboarding now fits better on smaller screens.
-- Feedback is easier to reach from settings.
-- Notification tokens stay in sync more reliably.
-- Guided showcase overlays were removed from release builds.
+- A new card shows your estimated medication levels over time.
+- The BMI chart now displays a target weight marker with legends.
+- Log screens have a new list view toggle for a compact overview.
+- Doctor reports are now a Pro feature.
+- Disabled goals are hidden from the Today card to keep your focus sharp.
+- Gender and health goal preferences are now available in settings.
 </en-US>
 
 <pt-BR>
-A Glu 1.4.1 deixa a primeira experiência e o feedback mais suaves.
+A Glu 1.5.0 traz um acompanhamento de saúde mais rico, cards mais inteligentes e novas opções de personalização.
 
-- O onboarding agora se adapta melhor a telas menores.
-- O feedback ficou mais fácil de acessar nas configurações.
-- Os tokens de notificação ficam sincronizados com mais confiabilidade.
-- As sobreposições guiadas do showcase foram removidas das versões de release.
+- Um novo card mostra os níveis estimados de medicação ao longo do tempo.
+- O gráfico de IMC agora exibe um marcador de peso-alvo com legendas.
+- As telas de registros têm um novo botão de visualização em lista.
+- Relatórios médicos agora são uma funcionalidade Pro.
+- Metas desativadas ficam ocultas no card de Hoje para manter o foco.
+- Preferências de gênero e objetivo de saúde já estão disponíveis nas configurações.
 </pt-BR>
 
 <it-IT>
-Glu 1.4.1 rende l’onboarding e il feedback più fluidi.
+Glu 1.5.0 offre un monitoraggio della salute più ricco, card più intelligenti e nuove opzioni di personalizzazione.
 
-- L’onboarding ora si adatta meglio agli schermi più piccoli.
-- Il feedback è più facile da aprire dalle impostazioni.
-- I token delle notifiche restano sincronizzati in modo più affidabile.
-- Le sovrapposizioni guidate del showcase sono state rimosse dalle build di release.
+- Una nuova card mostra i livelli stimati del farmaco nel tempo.
+- Il grafico BMI ora mostra un indicatore del peso target con legende.
+- Le schermate dei log hanno un nuovo pulsante per la vista a elenco.
+- I referti medici sono ora una funzione Pro.
+- Gli obiettivi disattivati sono nascosti dalla card Oggi per mantenere la concentrazione.
+- Le preferenze di genere e obiettivo di salute sono ora disponibili nelle impostazioni.
 </it-IT>
 
 <es-ES>
-Glu 1.4.1 hace que el onboarding y el feedback sean más fluidos.
+Glu 1.5.0 trae un seguimiento de salud más completo, tarjetas más inteligentes y nuevas opciones de personalización.
 
-- El onboarding ahora se adapta mejor a pantallas pequeñas.
-- El feedback es más fácil de abrir desde ajustes.
-- Los tokens de notificación se sincronizan con más fiabilidad.
-- Las superposiciones guiadas del showcase se quitaron de las compilaciones de release.
+- Una nueva tarjeta muestra tus niveles estimados de medicación a lo largo del tiempo.
+- El gráfico de IMC ahora muestra un marcador de peso objetivo con leyendas.
+- Las pantallas de registros tienen un nuevo botón para la vista en lista.
+- Los informes médicos ahora son una función Pro.
+- Los objetivos desactivados se ocultan en la tarjeta de Hoy para mantener el foco.
+- Las preferencias de género y objetivo de salud ya están disponibles en ajustes.
 </es-ES>
 
 <fr-FR>
-Glu 1.4.1 rend l’onboarding et le retour d’expérience plus fluides.
+Glu 1.5.0 apporte un suivi de santé plus riche, des cartes plus intelligentes et de nouvelles options de personnalisation.
 
-- L’onboarding s’adapte mieux aux petits écrans.
-- Le retour d’expérience est plus facile à ouvrir depuis les réglages.
-- Les jetons de notification restent synchronisés de façon plus fiable.
-- Les surcouches guidées du showcase ont été retirées des versions de release.
+- Une nouvelle carte affiche vos niveaux de médicaments estimés dans le temps.
+- Le graphique IMC affiche désormais un marqueur de poids cible avec des légendes.
+- Les écrans de journaux disposent d'un nouveau bouton de vue en liste.
+- Les rapports médicaux sont désormais une fonctionnalité Pro.
+- Les objectifs désactivés sont masqués de la carte Aujourd'hui pour rester concentré.
+- Les préférences de genre et d'objectif de santé sont maintenant disponibles dans les réglages.
 </fr-FR>
 
 <de-DE>
-Glu 1.4.1 macht das Onboarding und Feedback flüssiger.
+Glu 1.5.0 bringt reichhaltigeres Gesundheits-Tracking, intelligentere Karten und neue Personalisierungsoptionen.
 
-- Das Onboarding passt sich jetzt besser an kleinere Bildschirme an.
-- Feedback ist in den Einstellungen leichter erreichbar.
-- Benachrichtigungs-Token bleiben zuverlässiger synchronisiert.
-- Die geführten Showcase-Overlays wurden aus Release-Builds entfernt.
+- Eine neue Karte zeigt deine geschätzten Medikamentenspiegel im Zeitverlauf.
+- Das BMI-Diagramm zeigt jetzt einen Zielgewicht-Marker mit Legenden.
+- Log-Screens haben einen neuen Schalter für die Listenansicht.
+- Arztberichte sind jetzt eine Pro-Funktion.
+- Deaktivierte Ziele werden auf der Heute-Karte ausgeblendet, um den Fokus zu schärfen.
+- Geschlecht und Gesundheitsziel können jetzt in den Einstellungen festgelegt werden.
 </de-DE>
 
 <nl-NL>
-Glu 1.4.1 maakt onboarding en feedback vloeiender.
+Glu 1.5.0 brengt rijkere gezondheidstracking, slimmere kaarten en nieuwe personalisatie-opties.
 
-- De onboarding past zich nu beter aan kleinere schermen aan.
-- Feedback is makkelijker te openen vanuit de instellingen.
-- Meldings-tokens blijven betrouwbaarder gesynchroniseerd.
-- De begeleide showcase-overlays zijn uit release-builds verwijderd.
+- Een nieuwe kaart toont je geschatte medicatieniveaus over de tijd.
+- De BMI-grafiek toont nu een doelgewichtmarkering met legenda's.
+- Logschermen hebben een nieuwe schakelaar voor de lijstweergave.
+- Doktersrapporten zijn nu een Pro-functie.
+- Uitgeschakelde doelen worden verborgen op de Vandaag-kaart voor meer focus.
+- Geslacht en gezondheidsdoel zijn nu beschikbaar in de instellingen.
 </nl-NL>
 
 <da-DK>
-Glu 1.4.1 gør onboarding og feedback mere gnidningsfrie.
+Glu 1.5.0 giver rigere sundhedssporing, smartere kort og nye personaliseringsmuligheder.
 
-- Onboarding tilpasser sig nu bedre til mindre skærme.
-- Feedback er lettere at åbne fra indstillingerne.
-- Notifikationstokens holdes mere pålideligt synkroniseret.
-- De guidede showcase-overlays er fjernet fra release-builds.
+- Et nyt kort viser dine estimerede medicinniveauer over tid.
+- BMI-diagrammet viser nu en målvægtsmarkør med forklaringer.
+- Logskærme har en ny knap til listevisning.
+- Lægerapporter er nu en Pro-funktion.
+- Deaktiverede mål skjules fra Dagens-kortet for at bevare fokus.
+- Køn og sundhedsmål kan nu indstilles under indstillinger.
 </da-DK>
 
 <fi-FI>
-Glu 1.4.1 tekee aloituksesta ja palautteesta sujuvampaa.
+Glu 1.5.0 tuo rikkaamman terveyden seurannan, älykkäämpiä kortteja ja uusia personointivaihtoehtoja.
 
-- Käyttöönotto mukautuu nyt paremmin pienille näytöille.
-- Palautteen avaaminen asetuksista on helpompaa.
-- Ilmoitustunnisteet pysyvät luotettavammin synkronissa.
-- Opastetut showcase-peittokuvat on poistettu release-versioista.
+- Uusi kortti näyttää arvioidut lääketasosi ajan kuluessa.
+- BMI-kaavio näyttää nyt tavoitepainomarkerin ja selitteet.
+- Lokien näytöillä on uusi listanäkymä-kytkin.
+- Lääkäriraportit ovat nyt Pro-ominaisuus.
+- Poistetut käytöstä tavoitteet piilotetaan Tänään-kortilta.
+- Sukupuoli- ja terveysasetukset ovat nyt saatavilla asetuksista.
 </fi-FI>
 
 <no-NO>
-Glu 1.4.1 gjør onboarding og tilbakemelding mer smidig.
+Glu 1.5.0 gir rikere helsesporing, smartere kort og nye personaliseringsalternativer.
 
-- Onboarding tilpasser seg nå bedre til mindre skjermer.
-- Tilbakemelding er lettere å åpne fra innstillingene.
-- Varsel-tokens holdes mer pålitelig synkronisert.
-- De veiledede showcase-overleggene er fjernet fra release-bygg.
+- Et nytt kort viser dine estimerte medisinnivåer over tid.
+- BMI-diagrammet viser nå en målvektmarkering med forklaringer.
+- Loggskjermer har en ny bryter for listevisning.
+- Legerapporter er nå en Pro-funksjon.
+- Deaktiverte mål skjules fra Dagens-kortet for bedre fokus.
+- Kjønn og helsemål kan nå angis i innstillingene.
 </no-NO>
 
 <hi-IN>
-Glu 1.4.1 में onboarding और feedback अब और smooth हैं।
+Glu 1.5.0 में बेहतर health tracking, smarter cards और नए personalization options हैं।
 
-- नया onboarding अब छोटे screens पर बेहतर fit होता है.
-- Settings से feedback खोलना आसान हो गया है.
-- Notification tokens अब ज्यादा reliably sync रहते हैं.
-- Guided showcase overlays release builds से हटा दिए गए हैं.
+- एक नया card समय के साथ आपके estimated medication levels दिखाता है।
+- BMI chart में अब target weight marker और legends दिखते हैं।
+- Log screens पर अब list view toggle उपलब्ध है।
+- Doctor reports अब Pro feature हैं।
+- Disabled goals, Today card से छुपे रहते हैं ताकि focus बना रहे।
+- Settings में अब gender और health goal preferences उपलब्ध हैं।
 </hi-IN>
 
 <ru-RU>
-Glu 1.4.1 делает онбординг и обратную связь более плавными.
+Glu 1.5.0 предлагает более глубокое отслеживание здоровья, улучшенные карточки и новые параметры персонализации.
 
-- Экран онбординга теперь лучше помещается на небольших экранах.
-- Обратную связь проще открыть из настроек.
-- Токены уведомлений синхронизируются надежнее.
-- Направляющие overlay showcase удалены из release-сборок.
+- Новая карточка показывает расчётные уровни препарата с течением времени.
+- На графике ИМТ теперь отображается маркер целевого веса с легендой.
+- На экранах журналов появился переключатель режима списка.
+- Врачебные отчёты теперь доступны только в Pro.
+- Отключённые цели скрываются с карточки «Сегодня» для концентрации внимания.
+- В настройках теперь можно указать пол и цель здоровья.
 </ru-RU>
 
 <ar>
-يجعل Glu 1.4.1 onboarding وfeedback أكثر سلاسة.
+يقدم Glu 1.5.0 تتبعاً صحياً أغنى وبطاقات أذكى وخيارات تخصيص جديدة.
 
-- يتناسب onboarding الآن بشكل أفضل مع الشاشات الصغيرة.
-- أصبح فتح الملاحظات من الإعدادات أسهل.
-- تتم مزامنة رموز الإشعارات بشكل أكثر موثوقية.
-- تمت إزالة طبقات showcase الإرشادية من نسخ release.
+- بطاقة جديدة تعرض مستويات الدواء المقدرة عبر الزمن.
+- يعرض مخطط مؤشر كتلة الجسم الآن علامة الوزن المستهدف مع وسائل الإيضاح.
+- تحتوي شاشات السجلات على زر جديد للعرض بالقائمة.
+- أصبحت تقارير الطبيب ميزة Pro.
+- تُخفى الأهداف المعطلة من بطاقة اليوم للحفاظ على التركيز.
+- تفضيلات الجنس والهدف الصحي متاحة الآن في الإعدادات.
 </ar>
 
 <zh-CN>
-Glu 1.4.1 让 onboarding 和反馈体验更顺畅。
+Glu 1.5.0 带来更丰富的健康追踪、更智能的卡片和全新个性化选项。
 
-- 新手引导现在更适配小屏幕。
-- 可以更方便地从设置中打开反馈。
-- 通知令牌的同步更可靠。
-- 已从发布版本中移除引导式 showcase 覆盖层。
+- 新卡片展示随时间变化的估计药物水平。
+- BMI 图表现在显示目标体重标记和图例。
+- 日志页面新增列表视图切换按钮。
+- 医生报告现已成为 Pro 功能。
+- 已禁用的目标将从今日卡片中隐藏，保持专注。
+- 设置中现已支持性别和健康目标偏好。
 </zh-CN>
 
 <sv-SE>
-Glu 1.4.1 gör onboarding och feedback smidigare.
+Glu 1.5.0 ger rikare hälsospårning, smartare kort och nya personaliseringsalternativ.
 
-- Onboardingen anpassar sig nu bättre till mindre skärmar.
-- Feedback är enklare att öppna från inställningarna.
-- Notifikationstoken hålls mer tillförlitligt synkade.
-- De guidade showcase-overläggen har tagits bort från releasebyggen.
+- Ett nytt kort visar dina uppskattade läkemedelsnivåer över tid.
+- BMI-diagrammet visar nu en målviktsmarkör med förklaringar.
+- Loggskärmar har en ny knapp för listvy.
+- Läkarrapporter är nu en Pro-funktion.
+- Inaktiverade mål döljs från Idag-kortet för bättre fokus.
+- Kön och hälsomål kan nu ställas in under inställningar.
 </sv-SE>
