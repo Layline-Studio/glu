@@ -122,8 +122,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get paywallTitle => 'Откройте Glu Pro';
 
   @override
-  String get paywallSubtitle =>
-      'Защитите свой прогресс и не допускайте возврата веса.';
+  String get paywallSubtitle => 'Без Pro вы теряете это:';
 
   @override
   String get paywallMonthlyTitle => 'Ежемесячно';
@@ -195,23 +194,24 @@ class AppLocalizationsRu extends AppLocalizations {
       'Восстановление не удалось. Попробуйте еще раз.';
 
   @override
-  String get paywallBenefitReminders => 'Напоминания о дозе и добавках';
+  String get paywallBenefitReminders => 'Пропущенные дозы без напоминаний';
 
   @override
-  String get paywallBenefitShareProgress => 'Удобно делиться прогрессом';
+  String get paywallBenefitShareProgress => 'Сложнее делиться прогрессом';
 
   @override
-  String get paywallBenefitSpotRegain => 'Раньше замечать возврат веса';
+  String get paywallBenefitSpotRegain =>
+      'Признаки возврата веса останутся незамеченными';
 
   @override
-  String get paywallBenefitInsights => 'Ежедневные инсайты и паттерны';
+  String get paywallBenefitInsights =>
+      'Ваши повседневные паттерны останутся незамеченными';
 
   @override
-  String get paywallBenefitWeeklyGoals => 'Простые еженедельные цели';
+  String get paywallBenefitWeeklyGoals => 'Теряется еженедельная структура';
 
   @override
-  String get paywallBenefitHealthyHabits =>
-      'Проще удерживать здоровые привычки';
+  String get paywallBenefitHealthyHabits => 'Привычки слабеют без поддержки';
 
   @override
   String get onboardingWelcomeTitle => 'Сохраняйте вес';
@@ -1081,6 +1081,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeGlowUpBody => 'Создайте свою историю до и после';
 
   @override
+  String get homeDoctorReportTitle => 'Отчёт для врача';
+
+  @override
+  String get homeDoctorReportBody => 'Поделитесь своим прогрессом с врачом';
+
+  @override
   String get homeGoalsStatusTitle => 'Цели на сегодня';
 
   @override
@@ -1114,36 +1120,39 @@ class AppLocalizationsRu extends AppLocalizations {
   String get homeMoodTitle => 'Настроение';
 
   @override
+  String get homeCravingsTitle => 'Тяга';
+
+  @override
   String get homeDoseTitle => 'Доза';
 
   @override
-  String get homeMedicationLevelTitle => 'Estimated medication level';
+  String get homeMedicationLevelTitle => 'Расчётный уровень препарата';
 
   @override
-  String get homeMedicationLevelInfoTitle => 'How to read this chart';
+  String get homeMedicationLevelInfoTitle => 'Как читать этот график';
 
   @override
   String get homeMedicationLevelInfoBody =>
-      'This chart estimates how much of your medication may still be active based on the doses you logged and the medication\'s half-life.\n\nHigher points usually mean a more recent or larger dose. The line slopes down over time as the medication clears from your system.\n\nUse this as a trend view, not as an exact measurement or medical recommendation.';
+      'Этот график оценивает, сколько препарата может всё ещё оставаться активным, на основе внесённых доз и периода полувыведения препарата.\n\nБолее высокие точки обычно означают более недавнюю или большую дозу. Линия снижается со временем по мере выведения препарата из организма.\n\nИспользуйте это как отображение тенденции, а не как точное измерение или медицинскую рекомендацию.';
 
   @override
-  String get homeMedicationLevelInfoDismiss => 'Got it';
+  String get homeMedicationLevelInfoDismiss => 'Понятно';
 
   @override
   String get homeMedicationLevelEmptyBody =>
-      'Log your doses so Glu can estimate how much medication is still active in your system.';
+      'Регистрируйте свои дозы, чтобы Glu мог оценить, сколько препарата всё ещё активно в вашем организме.';
 
   @override
-  String get homeMedicationLevelOfRecentPeak => 'of recent peak';
+  String get homeMedicationLevelOfRecentPeak => 'от недавнего пика';
 
   @override
-  String get homeMedicationLevelActiveNow => 'Active now';
+  String get homeMedicationLevelActiveNow => 'Активно сейчас';
 
   @override
-  String get homeMedicationLevelHalfLife => 'Half-life';
+  String get homeMedicationLevelHalfLife => 'Период полувыведения';
 
   @override
-  String get homeMedicationLevelLastDose => 'Last dose';
+  String get homeMedicationLevelLastDose => 'Последняя доза';
 
   @override
   String get homeStartHydration => 'Начните пить воду';
@@ -1190,6 +1199,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => 'Запишите, как вы себя чувствуете';
+
+  @override
+  String get homeLogACraving => 'Записать тягу';
 
   @override
   String get homeLogTodaysDose => 'Запишите сегодняшнюю дозу';
@@ -1315,6 +1327,84 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => 'Добавлено в журнал настроения';
+
+  @override
+  String get cravingsLogTitle => 'Тяга';
+
+  @override
+  String get cravingsEditTitle => 'Изменить запись о тяге';
+
+  @override
+  String get cravingsWhatsGoingOn => 'Что происходит';
+
+  @override
+  String get cravingsTypeGeneral => 'Желание поесть';
+
+  @override
+  String get cravingsTypeSweet => 'Что-то сладкое';
+
+  @override
+  String get cravingsTypeSalty => 'Что-то солёное';
+
+  @override
+  String get cravingsIntensityLabel => 'Интенсивность (необязательно)';
+
+  @override
+  String get cravingsIntensityMild => 'Слабая';
+
+  @override
+  String get cravingsIntensityModerate => 'Умеренная';
+
+  @override
+  String get cravingsIntensityStrong => 'Сильная';
+
+  @override
+  String get cravingsOutcomeLabel => 'Что произошло (необязательно)';
+
+  @override
+  String get cravingsOutcomeResisted => 'Устоял(а)';
+
+  @override
+  String get cravingsOutcomeGaveIn => 'Поддался(лась)';
+
+  @override
+  String get cravingsNotes => 'Заметки';
+
+  @override
+  String get cravingsAnythingWorthRemembering =>
+      'Есть ли что-то, что стоит запомнить об этой тяге?';
+
+  @override
+  String get cravingsCouldNotSave =>
+      'Пока не удалось сохранить эту запись о тяге.';
+
+  @override
+  String get cravingsDeleteTitle => 'Удалить эту запись о тяге?';
+
+  @override
+  String get cravingsDeleteMessage => 'Это действие нельзя отменить.';
+
+  @override
+  String get cravingsDeleteLog => 'Удалить запись';
+
+  @override
+  String get cravingsSaving => 'Сохраняем...';
+
+  @override
+  String get cravingsAddLog => '+ Добавить запись о тяге';
+
+  @override
+  String get cravingsLogged => 'Тяга записана';
+
+  @override
+  String get cravingsDeleted => 'Запись о тяге удалена';
+
+  @override
+  String get cravingsCouldNotDelete =>
+      'Пока не удалось удалить эту запись о тяге.';
+
+  @override
+  String get cravingsAddedToLog => 'Добавлено в журнал тяги';
 
   @override
   String get portionCheckTitle => 'Портион Чек';
@@ -1859,11 +1949,11 @@ class AppLocalizationsRu extends AppLocalizations {
       'Записывайте действия, которые для вас важны, каждый день.';
 
   @override
-  String get logWaterShowcaseTitle => 'Начните с воды';
+  String get logMoodShowcaseTitle => 'Начните с настроения';
 
   @override
-  String get logWaterShowcaseDescription =>
-      'Сначала записывайте воду, а затем остальные данные, чтобы Glu точнее замечал привычки и паттерны.';
+  String get logMoodShowcaseDescription =>
+      'Сначала записывайте настроение, а затем остальные данные, чтобы Glu точнее замечал привычки и паттерны.';
 
   @override
   String get mainShellProgressShowcaseTitle => 'Смотрите свой прогресс';
@@ -2110,6 +2200,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get progressMoodProgressTitle => 'Прогресс настроения';
 
   @override
+  String get progressCravingsProgressTitle => 'Прогресс по тяге';
+
+  @override
+  String get progressResisted => 'Устоял(а)';
+
+  @override
+  String get progressCravingsResistedSubtitle =>
+      'Доля зафиксированных случаев тяги, когда вы устояли.';
+
+  @override
   String get progressWeightChangeTitle => 'Изменение веса';
 
   @override
@@ -2189,6 +2289,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => 'Пока нет записей настроения';
+
+  @override
+  String get progressNoCravingsLoggedYet => 'Пока нет записей о тяге';
 
   @override
   String get progressFutureTrendTitle => 'Будущая тенденция';
@@ -2428,6 +2531,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get progressMoodTitle => 'Настроение';
+
+  @override
+  String get progressCravingsTitle => 'Тяга';
 
   @override
   String get progressTrend => 'Тенденция';

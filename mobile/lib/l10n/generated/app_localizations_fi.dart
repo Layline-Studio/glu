@@ -122,8 +122,7 @@ class AppLocalizationsFi extends AppLocalizations {
   String get paywallTitle => 'Avaa Glu Pro';
 
   @override
-  String get paywallSubtitle =>
-      'Suojaa edistymisesi ja vältä painon palautuminen.';
+  String get paywallSubtitle => 'Ilman Pro-versiota menetät tämän:';
 
   @override
   String get paywallMonthlyTitle => 'Kuukausi';
@@ -194,25 +193,24 @@ class AppLocalizationsFi extends AppLocalizations {
   String get paywallRestoreFailed => 'Palautus epäonnistui. Yritä uudelleen.';
 
   @override
-  String get paywallBenefitReminders =>
-      'Muistutuksia annoksista ja lisäravinteista';
+  String get paywallBenefitReminders => 'Annokset unohtuvat ilman muistutuksia';
 
   @override
-  String get paywallBenefitShareProgress => 'Jaa edistymisesi helposti';
+  String get paywallBenefitShareProgress => 'Vaikeampi jakaa edistymistäsi';
 
   @override
-  String get paywallBenefitSpotRegain => 'Huomaa painon palautuminen ajoissa';
+  String get paywallBenefitSpotRegain =>
+      'Painon nousun merkit jäävät huomaamatta';
 
   @override
-  String get paywallBenefitInsights => 'Näe päivittäiset analyysit ja trendit';
+  String get paywallBenefitInsights =>
+      'Päivittäiset kaavasi jäävät huomaamatta';
 
   @override
-  String get paywallBenefitWeeklyGoals =>
-      'Pidä kiinni yksinkertaisista viikkotavoitteista';
+  String get paywallBenefitWeeklyGoals => 'Viikoittainen rakenteesi katoaa';
 
   @override
-  String get paywallBenefitHealthyHabits =>
-      'Tee terveiden tapojen ylläpitämisestä helpompaa';
+  String get paywallBenefitHealthyHabits => 'Tavat herpaantuvat ilman tukea';
 
   @override
   String get onboardingWelcomeTitle => 'Pidä paino poissa';
@@ -1074,6 +1072,12 @@ class AppLocalizationsFi extends AppLocalizations {
   String get homeGlowUpBody => 'Luo ennen-jälkeen-tarinasi';
 
   @override
+  String get homeDoctorReportTitle => 'Lääkäriraportti';
+
+  @override
+  String get homeDoctorReportBody => 'Jaa edistymisesi lääkärillesi';
+
+  @override
   String get homeGoalsStatusTitle => 'Tämän päivän tavoitteet';
 
   @override
@@ -1107,36 +1111,39 @@ class AppLocalizationsFi extends AppLocalizations {
   String get homeMoodTitle => 'Mieli';
 
   @override
+  String get homeCravingsTitle => 'Himot';
+
+  @override
   String get homeDoseTitle => 'Annos';
 
   @override
-  String get homeMedicationLevelTitle => 'Estimated medication level';
+  String get homeMedicationLevelTitle => 'Arvioitu lääkepitoisuus';
 
   @override
-  String get homeMedicationLevelInfoTitle => 'How to read this chart';
+  String get homeMedicationLevelInfoTitle => 'Näin luet tätä kaaviota';
 
   @override
   String get homeMedicationLevelInfoBody =>
-      'This chart estimates how much of your medication may still be active based on the doses you logged and the medication\'s half-life.\n\nHigher points usually mean a more recent or larger dose. The line slopes down over time as the medication clears from your system.\n\nUse this as a trend view, not as an exact measurement or medical recommendation.';
+      'Tämä kaavio arvioi, kuinka paljon lääkettäsi saattaa olla edelleen aktiivisena kirjaamiesi annosten ja lääkkeen puoliintumisajan perusteella.\n\nKorkeammat pisteet tarkoittavat yleensä tuoreempaa tai suurempaa annosta. Viiva laskee ajan myötä, kun lääke poistuu elimistöstäsi.\n\nKäytä tätä trendinä, ei tarkkana mittauksena tai lääketieteellisenä suosituksena.';
 
   @override
-  String get homeMedicationLevelInfoDismiss => 'Got it';
+  String get homeMedicationLevelInfoDismiss => 'Selvä';
 
   @override
   String get homeMedicationLevelEmptyBody =>
-      'Log your doses so Glu can estimate how much medication is still active in your system.';
+      'Kirjaa annoksesi, jotta Glu voi arvioida, kuinka paljon lääkettä on yhä aktiivisena elimistössäsi.';
 
   @override
-  String get homeMedicationLevelOfRecentPeak => 'of recent peak';
+  String get homeMedicationLevelOfRecentPeak => 'viimeisimmästä huipusta';
 
   @override
-  String get homeMedicationLevelActiveNow => 'Active now';
+  String get homeMedicationLevelActiveNow => 'Aktiivinen nyt';
 
   @override
-  String get homeMedicationLevelHalfLife => 'Half-life';
+  String get homeMedicationLevelHalfLife => 'Puoliintumisaika';
 
   @override
-  String get homeMedicationLevelLastDose => 'Last dose';
+  String get homeMedicationLevelLastDose => 'Viimeisin annos';
 
   @override
   String get homeStartHydration => 'Aloita nesteytys';
@@ -1183,6 +1190,9 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => 'Kirjaa miltä sinusta tuntuu';
+
+  @override
+  String get homeLogACraving => 'Kirjaa himo';
 
   @override
   String get homeLogTodaysDose => 'Kirjaa tämän päivän annos';
@@ -1307,6 +1317,84 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => 'Lisätty mielialalokiisi';
+
+  @override
+  String get cravingsLogTitle => 'Himot';
+
+  @override
+  String get cravingsEditTitle => 'Muokkaa himoa';
+
+  @override
+  String get cravingsWhatsGoingOn => 'Mitä on meneillään';
+
+  @override
+  String get cravingsTypeGeneral => 'Halu syödä';
+
+  @override
+  String get cravingsTypeSweet => 'Jotain makeaa';
+
+  @override
+  String get cravingsTypeSalty => 'Jotain suolaista';
+
+  @override
+  String get cravingsIntensityLabel => 'Voimakkuus (valinnainen)';
+
+  @override
+  String get cravingsIntensityMild => 'Lievä';
+
+  @override
+  String get cravingsIntensityModerate => 'Kohtalainen';
+
+  @override
+  String get cravingsIntensityStrong => 'Voimakas';
+
+  @override
+  String get cravingsOutcomeLabel => 'Mitä tapahtui (valinnainen)';
+
+  @override
+  String get cravingsOutcomeResisted => 'Vastustin';
+
+  @override
+  String get cravingsOutcomeGaveIn => 'Annoin periksi';
+
+  @override
+  String get cravingsNotes => 'Muistiinpanot';
+
+  @override
+  String get cravingsAnythingWorthRemembering =>
+      'Onko tässä himossa jotain muistettavaa?';
+
+  @override
+  String get cravingsCouldNotSave =>
+      'Tätä himokirjausta ei voitu tallentaa vielä.';
+
+  @override
+  String get cravingsDeleteTitle => 'Poistetaanko tämä himokirjaus?';
+
+  @override
+  String get cravingsDeleteMessage => 'Tätä toimintoa ei voi perua.';
+
+  @override
+  String get cravingsDeleteLog => 'Poista kirjaus';
+
+  @override
+  String get cravingsSaving => 'Tallennetaan...';
+
+  @override
+  String get cravingsAddLog => '+ Lisää himokirjaus';
+
+  @override
+  String get cravingsLogged => 'Himo kirjattu';
+
+  @override
+  String get cravingsDeleted => 'Himo poistettu';
+
+  @override
+  String get cravingsCouldNotDelete =>
+      'Tätä himokirjausta ei voitu poistaa vielä.';
+
+  @override
+  String get cravingsAddedToLog => 'Lisätty himolokiisi';
 
   @override
   String get portionCheckTitle => 'Annoskoko';
@@ -1849,11 +1937,11 @@ class AppLocalizationsFi extends AppLocalizations {
       'Napauta tästä avataksesi kirjaukset ja seurataksesi sinulle tärkeitä asioita.';
 
   @override
-  String get logWaterShowcaseTitle => 'Aloita vedestä';
+  String get logMoodShowcaseTitle => 'Aloita mielialasta';
 
   @override
-  String get logWaterShowcaseDescription =>
-      'Kirjaa vesi nyt ja jatka muiden asioiden kirjaamista päivän mittaan, jotta Glu voi havaita tavat ja kaavat tarkemmin.';
+  String get logMoodShowcaseDescription =>
+      'Kirjaa mielialasi nyt ja jatka muiden asioiden kirjaamista päivän mittaan, jotta Glu voi havaita tavat ja kaavat tarkemmin.';
 
   @override
   String get mainShellProgressShowcaseTitle => 'Näe edistymisesi';
@@ -2100,6 +2188,16 @@ class AppLocalizationsFi extends AppLocalizations {
   String get progressMoodProgressTitle => 'Mielen edistyminen';
 
   @override
+  String get progressCravingsProgressTitle => 'Himojen edistyminen';
+
+  @override
+  String get progressResisted => 'Vastustettu';
+
+  @override
+  String get progressCravingsResistedSubtitle =>
+      'Osuus kirjatuista himoista, joita vastustit.';
+
+  @override
   String get progressWeightChangeTitle => 'Painon muutos';
 
   @override
@@ -2179,6 +2277,9 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => 'Mielialakirjauksia ei vielä ole';
+
+  @override
+  String get progressNoCravingsLoggedYet => 'Ei vielä kirjattuja himoja';
 
   @override
   String get progressFutureTrendTitle => 'Tuleva trendi';
@@ -2416,6 +2517,9 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get progressMoodTitle => 'Mieli';
+
+  @override
+  String get progressCravingsTitle => 'Himot';
 
   @override
   String get progressTrend => 'Trendi';

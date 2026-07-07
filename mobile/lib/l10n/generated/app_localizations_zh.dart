@@ -122,7 +122,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get paywallTitle => '解锁 Glu Pro';
 
   @override
-  String get paywallSubtitle => '保护你的进展，避免体重反弹。';
+  String get paywallSubtitle => '没有 Pro，你将失去：';
 
   @override
   String get paywallMonthlyTitle => '月付';
@@ -192,22 +192,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get paywallRestoreFailed => '恢复失败，请重试。';
 
   @override
-  String get paywallBenefitReminders => '剂量和补充剂提醒';
+  String get paywallBenefitReminders => '没有提醒，容易漏打剂量';
 
   @override
-  String get paywallBenefitShareProgress => '轻松分享你的进展';
+  String get paywallBenefitShareProgress => '更难分享你的进展';
 
   @override
-  String get paywallBenefitSpotRegain => '尽早发现反弹';
+  String get paywallBenefitSpotRegain => '错过体重反弹的迹象';
 
   @override
-  String get paywallBenefitInsights => '查看每日分析和模式';
+  String get paywallBenefitInsights => '错过你的每日规律';
 
   @override
-  String get paywallBenefitWeeklyGoals => '坚持简单的每周目标';
+  String get paywallBenefitWeeklyGoals => '失去每周的节奏';
 
   @override
-  String get paywallBenefitHealthyHabits => '更容易坚持健康习惯';
+  String get paywallBenefitHealthyHabits => '没有支持，习惯容易松懈';
 
   @override
   String get onboardingWelcomeTitle => '保持体重不反弹';
@@ -969,6 +969,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeGlowUpBody => '创建你的前后对比故事';
 
   @override
+  String get homeDoctorReportTitle => '医生报告';
+
+  @override
+  String get homeDoctorReportBody => '与医生分享你的进展';
+
+  @override
   String get homeGoalsStatusTitle => '今日目标';
 
   @override
@@ -1002,36 +1008,38 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeMoodTitle => '情绪';
 
   @override
+  String get homeCravingsTitle => '渴望';
+
+  @override
   String get homeDoseTitle => '剂量';
 
   @override
-  String get homeMedicationLevelTitle => 'Estimated medication level';
+  String get homeMedicationLevelTitle => '估算药物水平';
 
   @override
-  String get homeMedicationLevelInfoTitle => 'How to read this chart';
+  String get homeMedicationLevelInfoTitle => '如何解读此图表';
 
   @override
   String get homeMedicationLevelInfoBody =>
-      'This chart estimates how much of your medication may still be active based on the doses you logged and the medication\'s half-life.\n\nHigher points usually mean a more recent or larger dose. The line slopes down over time as the medication clears from your system.\n\nUse this as a trend view, not as an exact measurement or medical recommendation.';
+      '该图表根据您记录的剂量和药物的半衰期，估算您体内可能仍然有效的药物量。\n\n较高的点通常表示最近或较大剂量。随着时间推移，药物从体内清除，曲线会逐渐下降。\n\n请将此视为趋势参考，而非精确测量或医疗建议。';
 
   @override
-  String get homeMedicationLevelInfoDismiss => 'Got it';
+  String get homeMedicationLevelInfoDismiss => '知道了';
 
   @override
-  String get homeMedicationLevelEmptyBody =>
-      'Log your doses so Glu can estimate how much medication is still active in your system.';
+  String get homeMedicationLevelEmptyBody => '记录您的剂量，以便 Glu 估算您体内仍有多少药物处于活跃状态。';
 
   @override
-  String get homeMedicationLevelOfRecentPeak => 'of recent peak';
+  String get homeMedicationLevelOfRecentPeak => '为近期峰值的';
 
   @override
-  String get homeMedicationLevelActiveNow => 'Active now';
+  String get homeMedicationLevelActiveNow => '当前活跃';
 
   @override
-  String get homeMedicationLevelHalfLife => 'Half-life';
+  String get homeMedicationLevelHalfLife => '半衰期';
 
   @override
-  String get homeMedicationLevelLastDose => 'Last dose';
+  String get homeMedicationLevelLastDose => '最近一次剂量';
 
   @override
   String get homeStartHydration => '开始补水';
@@ -1077,6 +1085,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => '记录你的感受';
+
+  @override
+  String get homeLogACraving => '记录渴望';
 
   @override
   String get homeLogTodaysDose => '记录今天的剂量';
@@ -1196,6 +1207,81 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => '已添加到你的情绪记录';
+
+  @override
+  String get cravingsLogTitle => '渴望';
+
+  @override
+  String get cravingsEditTitle => '编辑渴望';
+
+  @override
+  String get cravingsWhatsGoingOn => '发生了什么';
+
+  @override
+  String get cravingsTypeGeneral => '想吃东西';
+
+  @override
+  String get cravingsTypeSweet => '想吃甜食';
+
+  @override
+  String get cravingsTypeSalty => '想吃咸食';
+
+  @override
+  String get cravingsIntensityLabel => '强度（可选）';
+
+  @override
+  String get cravingsIntensityMild => '轻微';
+
+  @override
+  String get cravingsIntensityModerate => '中等';
+
+  @override
+  String get cravingsIntensityStrong => '强烈';
+
+  @override
+  String get cravingsOutcomeLabel => '结果（可选）';
+
+  @override
+  String get cravingsOutcomeResisted => '忍住了';
+
+  @override
+  String get cravingsOutcomeGaveIn => '没忍住';
+
+  @override
+  String get cravingsNotes => '备注';
+
+  @override
+  String get cravingsAnythingWorthRemembering => '这次渴望有什么值得记住的吗？';
+
+  @override
+  String get cravingsCouldNotSave => '暂时无法保存这条渴望记录。';
+
+  @override
+  String get cravingsDeleteTitle => '删除这条渴望记录？';
+
+  @override
+  String get cravingsDeleteMessage => '此操作无法撤销。';
+
+  @override
+  String get cravingsDeleteLog => '删除记录';
+
+  @override
+  String get cravingsSaving => '保存中...';
+
+  @override
+  String get cravingsAddLog => '+ 记录渴望';
+
+  @override
+  String get cravingsLogged => '渴望已记录';
+
+  @override
+  String get cravingsDeleted => '渴望已删除';
+
+  @override
+  String get cravingsCouldNotDelete => '暂时无法删除这条渴望记录。';
+
+  @override
+  String get cravingsAddedToLog => '已添加到你的渴望记录';
 
   @override
   String get portionCheckTitle => '份量检查';
@@ -1715,11 +1801,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mainShellLogShowcaseDescription => '每天记录对你最重要的活动。';
 
   @override
-  String get logWaterShowcaseTitle => '从水开始';
+  String get logMoodShowcaseTitle => '从心情开始';
 
   @override
-  String get logWaterShowcaseDescription =>
-      '先记录喝水，再逐步记录其他内容，这样 Glu 就能更准确地发现习惯和模式。';
+  String get logMoodShowcaseDescription =>
+      '先记录心情，再逐步记录其他内容，这样 Glu 就能更准确地发现习惯和模式。';
 
   @override
   String get mainShellProgressShowcaseTitle => '查看你的进展';
@@ -1963,6 +2049,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get progressMoodProgressTitle => '情绪进展';
 
   @override
+  String get progressCravingsProgressTitle => '渴望进展';
+
+  @override
+  String get progressResisted => '已忍住';
+
+  @override
+  String get progressCravingsResistedSubtitle => '记录的渴望中你成功忍住的比例。';
+
+  @override
   String get progressWeightChangeTitle => '体重变化';
 
   @override
@@ -2033,6 +2128,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => '暂无情绪记录';
+
+  @override
+  String get progressNoCravingsLoggedYet => '暂无渴望记录';
 
   @override
   String get progressFutureTrendTitle => '未来趋势';
@@ -2266,6 +2364,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get progressMoodTitle => '情绪';
+
+  @override
+  String get progressCravingsTitle => '渴望';
 
   @override
   String get progressTrend => '趋势';

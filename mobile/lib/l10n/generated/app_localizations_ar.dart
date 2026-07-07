@@ -122,7 +122,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paywallTitle => 'افتح Glu برو';
 
   @override
-  String get paywallSubtitle => 'احمِ تقدّمك وتجنّب استعادة الوزن.';
+  String get paywallSubtitle => 'بدون Pro، إليك ما ستخسره:';
 
   @override
   String get paywallMonthlyTitle => 'شهري';
@@ -192,23 +192,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paywallRestoreFailed => 'فشلت الاستعادة. حاول مرة أخرى.';
 
   @override
-  String get paywallBenefitReminders => 'تذكيرات للجرعات والمكمّلات';
+  String get paywallBenefitReminders => 'فوات الجرعات بلا تذكيرات';
 
   @override
-  String get paywallBenefitShareProgress => 'شارك تقدّمك بسهولة';
+  String get paywallBenefitShareProgress => 'صعوبة في مشاركة تقدّمك';
 
   @override
-  String get paywallBenefitSpotRegain => 'اكتشف استعادة الوزن مبكرًا';
+  String get paywallBenefitSpotRegain => 'تفويت علامات استعادة الوزن';
 
   @override
-  String get paywallBenefitInsights => 'شاهد التحليلات والاتجاهات اليومية';
+  String get paywallBenefitInsights => 'تفويت أنماطك اليومية';
 
   @override
-  String get paywallBenefitWeeklyGoals => 'التزم بأهداف أسبوعية بسيطة';
+  String get paywallBenefitWeeklyGoals => 'فقدان تنظيمك الأسبوعي';
 
   @override
-  String get paywallBenefitHealthyHabits =>
-      'اجعل العادات الصحية أسهل للحفاظ عليها';
+  String get paywallBenefitHealthyHabits => 'تراجع عاداتك بلا دعم';
 
   @override
   String get onboardingWelcomeTitle => 'حافظ على الوزن الزائد بعيدًا';
@@ -1047,6 +1046,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeGlowUpBody => 'أنشئ قصة قبل وبعد خاصة بك';
 
   @override
+  String get homeDoctorReportTitle => 'تقرير الطبيب';
+
+  @override
+  String get homeDoctorReportBody => 'شارك تقدمك مع طبيبك';
+
+  @override
   String get homeGoalsStatusTitle => 'أهداف اليوم';
 
   @override
@@ -1080,36 +1085,39 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeMoodTitle => 'المزاج';
 
   @override
+  String get homeCravingsTitle => 'الرغبات الشديدة';
+
+  @override
   String get homeDoseTitle => 'الجرعة';
 
   @override
-  String get homeMedicationLevelTitle => 'Estimated medication level';
+  String get homeMedicationLevelTitle => 'المستوى التقديري للدواء';
 
   @override
-  String get homeMedicationLevelInfoTitle => 'How to read this chart';
+  String get homeMedicationLevelInfoTitle => 'كيفية قراءة هذا الرسم البياني';
 
   @override
   String get homeMedicationLevelInfoBody =>
-      'This chart estimates how much of your medication may still be active based on the doses you logged and the medication\'s half-life.\n\nHigher points usually mean a more recent or larger dose. The line slopes down over time as the medication clears from your system.\n\nUse this as a trend view, not as an exact measurement or medical recommendation.';
+      'يقدّر هذا الرسم البياني مقدار الدواء الذي قد يظل نشطًا بناءً على الجرعات التي سجّلتها وعمر النصف للدواء.\n\nالنقاط الأعلى تعني عادةً جرعة أحدث أو أكبر. ينخفض الخط تدريجيًا مع مرور الوقت مع تخلص جسمك من الدواء.\n\nاستخدم هذا كعرض للاتجاه العام، وليس كقياس دقيق أو توصية طبية.';
 
   @override
-  String get homeMedicationLevelInfoDismiss => 'Got it';
+  String get homeMedicationLevelInfoDismiss => 'فهمت';
 
   @override
   String get homeMedicationLevelEmptyBody =>
-      'Log your doses so Glu can estimate how much medication is still active in your system.';
+      'سجّل جرعاتك حتى يتمكن Glu من تقدير مقدار الدواء الذي لا يزال نشطًا في جسمك.';
 
   @override
-  String get homeMedicationLevelOfRecentPeak => 'of recent peak';
+  String get homeMedicationLevelOfRecentPeak => 'من الذروة الأخيرة';
 
   @override
-  String get homeMedicationLevelActiveNow => 'Active now';
+  String get homeMedicationLevelActiveNow => 'نشط الآن';
 
   @override
-  String get homeMedicationLevelHalfLife => 'Half-life';
+  String get homeMedicationLevelHalfLife => 'عمر النصف';
 
   @override
-  String get homeMedicationLevelLastDose => 'Last dose';
+  String get homeMedicationLevelLastDose => 'آخر جرعة';
 
   @override
   String get homeStartHydration => 'ابدأ ترطيب';
@@ -1155,6 +1163,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => 'سجّل شعورك';
+
+  @override
+  String get homeLogACraving => 'سجّل رغبة شديدة';
 
   @override
   String get homeLogTodaysDose => 'سجّل جرعة اليوم';
@@ -1274,6 +1285,82 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => 'تمت الإضافة إلى سجل المزاج الخاص بك';
+
+  @override
+  String get cravingsLogTitle => 'الرغبات الشديدة';
+
+  @override
+  String get cravingsEditTitle => 'تعديل الرغبة';
+
+  @override
+  String get cravingsWhatsGoingOn => 'ما الذي يحدث';
+
+  @override
+  String get cravingsTypeGeneral => 'رغبة في الأكل';
+
+  @override
+  String get cravingsTypeSweet => 'شيء حلو';
+
+  @override
+  String get cravingsTypeSalty => 'شيء مالح';
+
+  @override
+  String get cravingsIntensityLabel => 'الشدّة (اختياري)';
+
+  @override
+  String get cravingsIntensityMild => 'خفيفة';
+
+  @override
+  String get cravingsIntensityModerate => 'متوسطة';
+
+  @override
+  String get cravingsIntensityStrong => 'قوية';
+
+  @override
+  String get cravingsOutcomeLabel => 'ما حدث (اختياري)';
+
+  @override
+  String get cravingsOutcomeResisted => 'قاومتها';
+
+  @override
+  String get cravingsOutcomeGaveIn => 'استسلمت لها';
+
+  @override
+  String get cravingsNotes => 'ملاحظات';
+
+  @override
+  String get cravingsAnythingWorthRemembering =>
+      'أي شيء يستحق التذكّر عن هذه الرغبة؟';
+
+  @override
+  String get cravingsCouldNotSave => 'تعذّر حفظ سجل الرغبة هذا الآن.';
+
+  @override
+  String get cravingsDeleteTitle => 'حذف سجل الرغبة هذا؟';
+
+  @override
+  String get cravingsDeleteMessage => 'لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get cravingsDeleteLog => 'حذف سجل';
+
+  @override
+  String get cravingsSaving => 'جارٍ الحفظ...';
+
+  @override
+  String get cravingsAddLog => '+ إضافة سجل رغبة';
+
+  @override
+  String get cravingsLogged => 'تم تسجيل الرغبة';
+
+  @override
+  String get cravingsDeleted => 'تم حذف الرغبة';
+
+  @override
+  String get cravingsCouldNotDelete => 'تعذّر حذف سجل الرغبة هذا الآن.';
+
+  @override
+  String get cravingsAddedToLog => 'تمت الإضافة إلى سجل الرغبات الخاص بك';
 
   @override
   String get portionCheckTitle => 'فحص الحصص';
@@ -1806,11 +1893,11 @@ class AppLocalizationsAr extends AppLocalizations {
       'سجّل الأنشطة التي تهمك أكثر كل يوم.';
 
   @override
-  String get logWaterShowcaseTitle => 'ابدأ بالماء';
+  String get logMoodShowcaseTitle => 'ابدأ بتسجيل مزاجك';
 
   @override
-  String get logWaterShowcaseDescription =>
-      'سجّل الماء الآن، وواصل تسجيل الباقي أثناء يومك حتى يتمكن Glu من رصد العادات والأنماط بدقة أكبر.';
+  String get logMoodShowcaseDescription =>
+      'سجّل مزاجك الآن، وواصل تسجيل الباقي أثناء يومك حتى يتمكن Glu من رصد العادات والأنماط بدقة أكبر.';
 
   @override
   String get mainShellProgressShowcaseTitle => 'شاهد تقدّمك';
@@ -2056,6 +2143,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get progressMoodProgressTitle => 'تقدّم المزاج';
 
   @override
+  String get progressCravingsProgressTitle => 'تقدّم الرغبات';
+
+  @override
+  String get progressResisted => 'تمت المقاومة';
+
+  @override
+  String get progressCravingsResistedSubtitle =>
+      'نسبة الرغبات المسجَّلة التي قاومتها.';
+
+  @override
   String get progressWeightChangeTitle => 'تغيّر الوزن';
 
   @override
@@ -2133,6 +2230,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => 'لا توجد سجلات مزاج بعد';
+
+  @override
+  String get progressNoCravingsLoggedYet => 'لا توجد رغبات مسجَّلة بعد';
 
   @override
   String get progressFutureTrendTitle => 'الاتجاه المستقبلي';
@@ -2370,6 +2470,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get progressMoodTitle => 'المزاج';
+
+  @override
+  String get progressCravingsTitle => 'الرغبات الشديدة';
 
   @override
   String get progressTrend => 'الاتجاه';

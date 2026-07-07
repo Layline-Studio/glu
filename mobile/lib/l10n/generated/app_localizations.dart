@@ -337,7 +337,7 @@ abstract class AppLocalizations {
   /// No description provided for @paywallSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Protect your progress and avoid regaining weight.'**
+  /// **'Without Pro, here\'s what you lose:'**
   String get paywallSubtitle;
 
   /// No description provided for @paywallMonthlyTitle.
@@ -469,37 +469,37 @@ abstract class AppLocalizations {
   /// No description provided for @paywallBenefitReminders.
   ///
   /// In en, this message translates to:
-  /// **'Dose and supplement reminders'**
+  /// **'Miss doses without reminders'**
   String get paywallBenefitReminders;
 
   /// No description provided for @paywallBenefitShareProgress.
   ///
   /// In en, this message translates to:
-  /// **'Make your progress easy to share'**
+  /// **'Harder to share your progress'**
   String get paywallBenefitShareProgress;
 
   /// No description provided for @paywallBenefitSpotRegain.
   ///
   /// In en, this message translates to:
-  /// **'Spot regain early'**
+  /// **'Miss regain signs'**
   String get paywallBenefitSpotRegain;
 
   /// No description provided for @paywallBenefitInsights.
   ///
   /// In en, this message translates to:
-  /// **'See daily insights and patterns'**
+  /// **'Miss your daily patterns'**
   String get paywallBenefitInsights;
 
   /// No description provided for @paywallBenefitWeeklyGoals.
   ///
   /// In en, this message translates to:
-  /// **'Stick to simple weekly goals'**
+  /// **'Lose your weekly structure'**
   String get paywallBenefitWeeklyGoals;
 
   /// No description provided for @paywallBenefitHealthyHabits.
   ///
   /// In en, this message translates to:
-  /// **'Make healthy habits easier to keep'**
+  /// **'Habits slip without support'**
   String get paywallBenefitHealthyHabits;
 
   /// No description provided for @onboardingWelcomeTitle.
@@ -1972,6 +1972,18 @@ abstract class AppLocalizations {
   /// **'Create your before-and-after story'**
   String get homeGlowUpBody;
 
+  /// No description provided for @homeDoctorReportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor Report'**
+  String get homeDoctorReportTitle;
+
+  /// No description provided for @homeDoctorReportBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your progress with your doctor'**
+  String get homeDoctorReportBody;
+
   /// No description provided for @homeGoalsStatusTitle.
   ///
   /// In en, this message translates to:
@@ -2037,6 +2049,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mood'**
   String get homeMoodTitle;
+
+  /// No description provided for @homeCravingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cravings'**
+  String get homeCravingsTitle;
 
   /// No description provided for @homeDoseTitle.
   ///
@@ -2187,6 +2205,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log how you feel'**
   String get homeLogHowYouFeel;
+
+  /// No description provided for @homeLogACraving.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a craving'**
+  String get homeLogACraving;
 
   /// No description provided for @homeLogTodaysDose.
   ///
@@ -2415,6 +2439,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Added to your mood log'**
   String get moodAddedToMoodLog;
+
+  /// No description provided for @cravingsLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cravings'**
+  String get cravingsLogTitle;
+
+  /// No description provided for @cravingsEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit craving'**
+  String get cravingsEditTitle;
+
+  /// No description provided for @cravingsWhatsGoingOn.
+  ///
+  /// In en, this message translates to:
+  /// **'What\'s going on'**
+  String get cravingsWhatsGoingOn;
+
+  /// No description provided for @cravingsTypeGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'Urge to eat'**
+  String get cravingsTypeGeneral;
+
+  /// No description provided for @cravingsTypeSweet.
+  ///
+  /// In en, this message translates to:
+  /// **'Something sweet'**
+  String get cravingsTypeSweet;
+
+  /// No description provided for @cravingsTypeSalty.
+  ///
+  /// In en, this message translates to:
+  /// **'Something salty'**
+  String get cravingsTypeSalty;
+
+  /// No description provided for @cravingsIntensityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Intensity (optional)'**
+  String get cravingsIntensityLabel;
+
+  /// No description provided for @cravingsIntensityMild.
+  ///
+  /// In en, this message translates to:
+  /// **'Mild'**
+  String get cravingsIntensityMild;
+
+  /// No description provided for @cravingsIntensityModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate'**
+  String get cravingsIntensityModerate;
+
+  /// No description provided for @cravingsIntensityStrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Strong'**
+  String get cravingsIntensityStrong;
+
+  /// No description provided for @cravingsOutcomeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'What happened (optional)'**
+  String get cravingsOutcomeLabel;
+
+  /// No description provided for @cravingsOutcomeResisted.
+  ///
+  /// In en, this message translates to:
+  /// **'Resisted'**
+  String get cravingsOutcomeResisted;
+
+  /// No description provided for @cravingsOutcomeGaveIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Gave in'**
+  String get cravingsOutcomeGaveIn;
+
+  /// No description provided for @cravingsNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get cravingsNotes;
+
+  /// No description provided for @cravingsAnythingWorthRemembering.
+  ///
+  /// In en, this message translates to:
+  /// **'Anything worth remembering about this craving?'**
+  String get cravingsAnythingWorthRemembering;
+
+  /// No description provided for @cravingsCouldNotSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save this craving log yet.'**
+  String get cravingsCouldNotSave;
+
+  /// No description provided for @cravingsDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this craving log?'**
+  String get cravingsDeleteTitle;
+
+  /// No description provided for @cravingsDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This action cannot be undone.'**
+  String get cravingsDeleteMessage;
+
+  /// No description provided for @cravingsDeleteLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete log'**
+  String get cravingsDeleteLog;
+
+  /// No description provided for @cravingsSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving...'**
+  String get cravingsSaving;
+
+  /// No description provided for @cravingsAddLog.
+  ///
+  /// In en, this message translates to:
+  /// **'+ Add craving log'**
+  String get cravingsAddLog;
+
+  /// No description provided for @cravingsLogged.
+  ///
+  /// In en, this message translates to:
+  /// **'Craving logged'**
+  String get cravingsLogged;
+
+  /// No description provided for @cravingsDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Craving deleted'**
+  String get cravingsDeleted;
+
+  /// No description provided for @cravingsCouldNotDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not delete this craving log yet.'**
+  String get cravingsCouldNotDelete;
+
+  /// No description provided for @cravingsAddedToLog.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to your cravings log'**
+  String get cravingsAddedToLog;
 
   /// No description provided for @portionCheckTitle.
   ///
@@ -3400,17 +3574,17 @@ abstract class AppLocalizations {
   /// **'Log the activities that matter most to you, every day.'**
   String get mainShellLogShowcaseDescription;
 
-  /// No description provided for @logWaterShowcaseTitle.
+  /// No description provided for @logMoodShowcaseTitle.
   ///
   /// In en, this message translates to:
-  /// **'Start with water'**
-  String get logWaterShowcaseTitle;
+  /// **'Start with your mood'**
+  String get logMoodShowcaseTitle;
 
-  /// No description provided for @logWaterShowcaseDescription.
+  /// No description provided for @logMoodShowcaseDescription.
   ///
   /// In en, this message translates to:
-  /// **'Log water now, and keep logging the rest as you go so Glu can spot habits and patterns more accurately.'**
-  String get logWaterShowcaseDescription;
+  /// **'Log your mood now, and keep logging the rest as you go so Glu can spot habits and patterns more accurately.'**
+  String get logMoodShowcaseDescription;
 
   /// No description provided for @mainShellProgressShowcaseTitle.
   ///
@@ -3862,6 +4036,24 @@ abstract class AppLocalizations {
   /// **'Mood progress'**
   String get progressMoodProgressTitle;
 
+  /// No description provided for @progressCravingsProgressTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cravings progress'**
+  String get progressCravingsProgressTitle;
+
+  /// No description provided for @progressResisted.
+  ///
+  /// In en, this message translates to:
+  /// **'Resisted'**
+  String get progressResisted;
+
+  /// No description provided for @progressCravingsResistedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share of logged cravings you resisted.'**
+  String get progressCravingsResistedSubtitle;
+
   /// No description provided for @progressWeightChangeTitle.
   ///
   /// In en, this message translates to:
@@ -4005,6 +4197,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No mood logs yet'**
   String get progressNoMoodLogsYet;
+
+  /// No description provided for @progressNoCravingsLoggedYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No cravings logged yet'**
+  String get progressNoCravingsLoggedYet;
 
   /// No description provided for @progressFutureTrendTitle.
   ///
@@ -4438,6 +4636,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mood'**
   String get progressMoodTitle;
+
+  /// No description provided for @progressCravingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cravings'**
+  String get progressCravingsTitle;
 
   /// No description provided for @progressTrend.
   ///

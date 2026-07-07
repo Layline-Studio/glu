@@ -122,8 +122,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get paywallTitle => 'Unlock Glu Pro';
 
   @override
-  String get paywallSubtitle =>
-      'Protect din fremskridt og avoid regaining vægt.';
+  String get paywallSubtitle => 'Uden Pro mister du dette:';
 
   @override
   String get paywallMonthlyTitle => 'Månedlig';
@@ -194,23 +193,22 @@ class AppLocalizationsDa extends AppLocalizations {
   String get paywallRestoreFailed => 'Gendan failed. Please try again.';
 
   @override
-  String get paywallBenefitReminders => 'Dosis og kosttilskud påmindelser';
+  String get paywallBenefitReminders => 'Gå glip af doser uden påmindelser';
 
   @override
-  String get paywallBenefitShareProgress => 'Make din fremskridt easy til dele';
+  String get paywallBenefitShareProgress => 'Sværere at dele dine fremskridt';
 
   @override
-  String get paywallBenefitSpotRegain => 'Spot regain tidligt';
+  String get paywallBenefitSpotRegain => 'Overse tegn på vægtøgning';
 
   @override
-  String get paywallBenefitInsights => 'Se daglig analyser og mønstre';
+  String get paywallBenefitInsights => 'Gå glip af dine daglige mønstre';
 
   @override
-  String get paywallBenefitWeeklyGoals => 'Stick til simple ugentlig mål';
+  String get paywallBenefitWeeklyGoals => 'Mist din ugentlige struktur';
 
   @override
-  String get paywallBenefitHealthyHabits =>
-      'Make healthy vaner easier til hold';
+  String get paywallBenefitHealthyHabits => 'Vaner glider uden støtte';
 
   @override
   String get onboardingWelcomeTitle => 'Hold den vægt fra';
@@ -1075,6 +1073,12 @@ class AppLocalizationsDa extends AppLocalizations {
   String get homeGlowUpBody => 'Lav din før-og-efter-historie';
 
   @override
+  String get homeDoctorReportTitle => 'Lægerapport';
+
+  @override
+  String get homeDoctorReportBody => 'Del dine fremskridt med din læge';
+
+  @override
   String get homeGoalsStatusTitle => 'Dagens mål';
 
   @override
@@ -1108,36 +1112,39 @@ class AppLocalizationsDa extends AppLocalizations {
   String get homeMoodTitle => 'Humør';
 
   @override
+  String get homeCravingsTitle => 'Trang';
+
+  @override
   String get homeDoseTitle => 'Dosis';
 
   @override
-  String get homeMedicationLevelTitle => 'Estimated medication level';
+  String get homeMedicationLevelTitle => 'Estimeret medicinniveau';
 
   @override
-  String get homeMedicationLevelInfoTitle => 'How to read this chart';
+  String get homeMedicationLevelInfoTitle => 'Sådan læser du denne graf';
 
   @override
   String get homeMedicationLevelInfoBody =>
-      'This chart estimates how much of your medication may still be active based on the doses you logged and the medication\'s half-life.\n\nHigher points usually mean a more recent or larger dose. The line slopes down over time as the medication clears from your system.\n\nUse this as a trend view, not as an exact measurement or medical recommendation.';
+      'Denne graf estimerer, hvor meget af din medicin der stadig kan være aktivt baseret på de doser, du har registreret, og medicinens halveringstid.\n\nHøjere punkter betyder normalt en nyere eller større dosis. Linjen falder over tid, efterhånden som medicinen forsvinder fra din krop.\n\nBrug dette som en tendensvisning, ikke som en præcis måling eller medicinsk anbefaling.';
 
   @override
-  String get homeMedicationLevelInfoDismiss => 'Got it';
+  String get homeMedicationLevelInfoDismiss => 'Forstået';
 
   @override
   String get homeMedicationLevelEmptyBody =>
-      'Log your doses so Glu can estimate how much medication is still active in your system.';
+      'Registrer dine doser, så Glu kan estimere, hvor meget medicin der stadig er aktivt i din krop.';
 
   @override
-  String get homeMedicationLevelOfRecentPeak => 'of recent peak';
+  String get homeMedicationLevelOfRecentPeak => 'af seneste top';
 
   @override
-  String get homeMedicationLevelActiveNow => 'Active now';
+  String get homeMedicationLevelActiveNow => 'Aktivt nu';
 
   @override
-  String get homeMedicationLevelHalfLife => 'Half-life';
+  String get homeMedicationLevelHalfLife => 'Halveringstid';
 
   @override
-  String get homeMedicationLevelLastDose => 'Last dose';
+  String get homeMedicationLevelLastDose => 'Seneste dosis';
 
   @override
   String get homeStartHydration => 'Start hydrering';
@@ -1184,6 +1191,9 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => 'Registrer hvordan du har det';
+
+  @override
+  String get homeLogACraving => 'Registrer en trang';
 
   @override
   String get homeLogTodaysDose => 'Registrer dagens dosis';
@@ -1308,6 +1318,84 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => 'Tilføjet til din humørlog';
+
+  @override
+  String get cravingsLogTitle => 'Trang';
+
+  @override
+  String get cravingsEditTitle => 'Rediger trang';
+
+  @override
+  String get cravingsWhatsGoingOn => 'Hvad sker der';
+
+  @override
+  String get cravingsTypeGeneral => 'Lyst til at spise';
+
+  @override
+  String get cravingsTypeSweet => 'Noget sødt';
+
+  @override
+  String get cravingsTypeSalty => 'Noget salt';
+
+  @override
+  String get cravingsIntensityLabel => 'Styrke (valgfrit)';
+
+  @override
+  String get cravingsIntensityMild => 'Mild';
+
+  @override
+  String get cravingsIntensityModerate => 'Moderat';
+
+  @override
+  String get cravingsIntensityStrong => 'Stærk';
+
+  @override
+  String get cravingsOutcomeLabel => 'Hvad skete der (valgfrit)';
+
+  @override
+  String get cravingsOutcomeResisted => 'Modstod';
+
+  @override
+  String get cravingsOutcomeGaveIn => 'Gav efter';
+
+  @override
+  String get cravingsNotes => 'Noter';
+
+  @override
+  String get cravingsAnythingWorthRemembering =>
+      'Er der noget værd at huske om denne trang?';
+
+  @override
+  String get cravingsCouldNotSave =>
+      'Kunne endnu ikke gemme denne trangregistrering.';
+
+  @override
+  String get cravingsDeleteTitle => 'Slet denne trangregistrering?';
+
+  @override
+  String get cravingsDeleteMessage => 'Denne handling kan ikke fortrydes.';
+
+  @override
+  String get cravingsDeleteLog => 'Slet registrering';
+
+  @override
+  String get cravingsSaving => 'Gemmer...';
+
+  @override
+  String get cravingsAddLog => '+ Tilføj trangregistrering';
+
+  @override
+  String get cravingsLogged => 'Trang registreret';
+
+  @override
+  String get cravingsDeleted => 'Trang slettet';
+
+  @override
+  String get cravingsCouldNotDelete =>
+      'Kunne endnu ikke slette denne trangregistrering.';
+
+  @override
+  String get cravingsAddedToLog => 'Tilføjet til din trang-log';
 
   @override
   String get portionCheckTitle => 'Portionskontrol';
@@ -1851,11 +1939,11 @@ class AppLocalizationsDa extends AppLocalizations {
       'Registrer de aktiviteter, der betyder mest for dig, hver dag.';
 
   @override
-  String get logWaterShowcaseTitle => 'Start med vand';
+  String get logMoodShowcaseTitle => 'Start med dit humør';
 
   @override
-  String get logWaterShowcaseDescription =>
-      'Registrer vand nu, og fortsæt med resten undervejs, så Glu kan spotte vaner og mønstre mere præcist.';
+  String get logMoodShowcaseDescription =>
+      'Registrer dit humør nu, og fortsæt med resten undervejs, så Glu kan spotte vaner og mønstre mere præcist.';
 
   @override
   String get mainShellProgressShowcaseTitle => 'Se dine fremskridt';
@@ -2101,6 +2189,16 @@ class AppLocalizationsDa extends AppLocalizations {
   String get progressMoodProgressTitle => 'Humørfremskridt';
 
   @override
+  String get progressCravingsProgressTitle => 'Trangfremskridt';
+
+  @override
+  String get progressResisted => 'Modstod';
+
+  @override
+  String get progressCravingsResistedSubtitle =>
+      'Andel af registrerede trange, du modstod.';
+
+  @override
   String get progressWeightChangeTitle => 'Vægtændring';
 
   @override
@@ -2180,6 +2278,9 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => 'Ingen humørregistreringer endnu';
+
+  @override
+  String get progressNoCravingsLoggedYet => 'Ingen trangregistreringer endnu';
 
   @override
   String get progressFutureTrendTitle => 'Fremtidig tendens';
@@ -2417,6 +2518,9 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get progressMoodTitle => 'Humør';
+
+  @override
+  String get progressCravingsTitle => 'Trang';
 
   @override
   String get progressTrend => 'Tendens';

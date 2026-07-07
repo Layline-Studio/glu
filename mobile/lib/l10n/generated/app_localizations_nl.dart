@@ -122,8 +122,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get paywallTitle => 'Ontgrendel Glu Pro';
 
   @override
-  String get paywallSubtitle =>
-      'Bescherm je voortgang en voorkom dat je weer aankomt.';
+  String get paywallSubtitle => 'Zonder Pro verlies je dit:';
 
   @override
   String get paywallMonthlyTitle => 'Maandelijks';
@@ -193,26 +192,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get paywallRestoreFailed => 'Herstellen mislukt';
 
   @override
-  String get paywallBenefitReminders => 'Doseer- en supplementherinneringen';
+  String get paywallBenefitReminders => 'Doses gemist zonder herinneringen';
 
   @override
-  String get paywallBenefitShareProgress =>
-      'Maak je voortgang eenvoudig deelbaar';
+  String get paywallBenefitShareProgress => 'Moeilijker je voortgang te delen';
 
   @override
-  String get paywallBenefitSpotRegain => 'Zie vroegtijdig weer aankomen';
+  String get paywallBenefitSpotRegain => 'Signalen van gewichtstoename gemist';
 
   @override
-  String get paywallBenefitInsights =>
-      'Bekijk dagelijkse inzichten en patronen';
+  String get paywallBenefitInsights => 'Je dagelijkse patronen gemist';
 
   @override
-  String get paywallBenefitWeeklyGoals =>
-      'Blijf bij eenvoudige wekelijkse doelen';
+  String get paywallBenefitWeeklyGoals => 'Je wekelijkse structuur kwijt';
 
   @override
-  String get paywallBenefitHealthyHabits =>
-      'Maak gezonde gewoonten makkelijker vol te houden';
+  String get paywallBenefitHealthyHabits => 'Gewoontes verslappen zonder steun';
 
   @override
   String get onboardingWelcomeTitle => 'Beheer je gewicht op een slimme manier';
@@ -1079,6 +1074,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get homeGlowUpBody => 'Maak je voor-en-na-verhaal';
 
   @override
+  String get homeDoctorReportTitle => 'Doktersrapport';
+
+  @override
+  String get homeDoctorReportBody => 'Deel je voortgang met je arts';
+
+  @override
   String get homeGoalsStatusTitle => 'Doelen voor vandaag';
 
   @override
@@ -1112,36 +1113,39 @@ class AppLocalizationsNl extends AppLocalizations {
   String get homeMoodTitle => 'Stemming';
 
   @override
+  String get homeCravingsTitle => 'Trek';
+
+  @override
   String get homeDoseTitle => 'Dosis';
 
   @override
-  String get homeMedicationLevelTitle => 'Estimated medication level';
+  String get homeMedicationLevelTitle => 'Geschatte medicijnspiegel';
 
   @override
-  String get homeMedicationLevelInfoTitle => 'How to read this chart';
+  String get homeMedicationLevelInfoTitle => 'Hoe je deze grafiek leest';
 
   @override
   String get homeMedicationLevelInfoBody =>
-      'This chart estimates how much of your medication may still be active based on the doses you logged and the medication\'s half-life.\n\nHigher points usually mean a more recent or larger dose. The line slopes down over time as the medication clears from your system.\n\nUse this as a trend view, not as an exact measurement or medical recommendation.';
+      'Deze grafiek schat hoeveel van je medicatie nog actief kan zijn, gebaseerd op de doses die je hebt geregistreerd en de halfwaardetijd van de medicatie.\n\nHogere punten betekenen meestal een recentere of grotere dosis. De lijn daalt na verloop van tijd naarmate de medicatie uit je lichaam verdwijnt.\n\nGebruik dit als een trendweergave, niet als een exacte meting of medisch advies.';
 
   @override
-  String get homeMedicationLevelInfoDismiss => 'Got it';
+  String get homeMedicationLevelInfoDismiss => 'Begrepen';
 
   @override
   String get homeMedicationLevelEmptyBody =>
-      'Log your doses so Glu can estimate how much medication is still active in your system.';
+      'Registreer je doses zodat Glu kan inschatten hoeveel medicatie nog actief is in je lichaam.';
 
   @override
-  String get homeMedicationLevelOfRecentPeak => 'of recent peak';
+  String get homeMedicationLevelOfRecentPeak => 'van recente piek';
 
   @override
-  String get homeMedicationLevelActiveNow => 'Active now';
+  String get homeMedicationLevelActiveNow => 'Nu actief';
 
   @override
-  String get homeMedicationLevelHalfLife => 'Half-life';
+  String get homeMedicationLevelHalfLife => 'Halfwaardetijd';
 
   @override
-  String get homeMedicationLevelLastDose => 'Last dose';
+  String get homeMedicationLevelLastDose => 'Laatste dosis';
 
   @override
   String get homeStartHydration => 'Begin met hydrateren';
@@ -1188,6 +1192,9 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => 'Log hoe je je voelt';
+
+  @override
+  String get homeLogACraving => 'Log een moment van trek';
 
   @override
   String get homeLogTodaysDose => 'Log vandaag je dosis';
@@ -1314,6 +1321,84 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => 'Toegevoegd aan je stemmingslogboek';
+
+  @override
+  String get cravingsLogTitle => 'Trek';
+
+  @override
+  String get cravingsEditTitle => 'Bewerk trek';
+
+  @override
+  String get cravingsWhatsGoingOn => 'Wat is er aan de hand';
+
+  @override
+  String get cravingsTypeGeneral => 'Zin om te eten';
+
+  @override
+  String get cravingsTypeSweet => 'Iets zoets';
+
+  @override
+  String get cravingsTypeSalty => 'Iets zouts';
+
+  @override
+  String get cravingsIntensityLabel => 'Intensiteit (optioneel)';
+
+  @override
+  String get cravingsIntensityMild => 'Licht';
+
+  @override
+  String get cravingsIntensityModerate => 'Matig';
+
+  @override
+  String get cravingsIntensityStrong => 'Sterk';
+
+  @override
+  String get cravingsOutcomeLabel => 'Wat gebeurde er (optioneel)';
+
+  @override
+  String get cravingsOutcomeResisted => 'Weerstaan';
+
+  @override
+  String get cravingsOutcomeGaveIn => 'Toegegeven';
+
+  @override
+  String get cravingsNotes => 'Notities';
+
+  @override
+  String get cravingsAnythingWorthRemembering =>
+      'Iets dat het waard is om te onthouden over deze trek?';
+
+  @override
+  String get cravingsCouldNotSave => 'Kon dit trek-logboek nog niet opslaan.';
+
+  @override
+  String get cravingsDeleteTitle => 'Deze trek-log verwijderen?';
+
+  @override
+  String get cravingsDeleteMessage =>
+      'Deze actie kan niet ongedaan worden gemaakt.';
+
+  @override
+  String get cravingsDeleteLog => 'Log verwijderen';
+
+  @override
+  String get cravingsSaving => 'Aan het opslaan...';
+
+  @override
+  String get cravingsAddLog => '+ Trek toevoegen';
+
+  @override
+  String get cravingsLogged => 'Trek gelogd';
+
+  @override
+  String get cravingsDeleted => 'Trek verwijderd';
+
+  @override
+  String get cravingsCouldNotDelete =>
+      'Kon dit trek-logboek nog niet verwijderen.';
+
+  @override
+  String get cravingsAddedToLog => 'Toegevoegd aan je trek-logboek';
 
   @override
   String get portionCheckTitle => 'Portiecontrole';
@@ -1856,11 +1941,11 @@ class AppLocalizationsNl extends AppLocalizations {
       'Log elke dag de activiteiten die voor jou het belangrijkst zijn.';
 
   @override
-  String get logWaterShowcaseTitle => 'Begin met water';
+  String get logMoodShowcaseTitle => 'Begin met je stemming';
 
   @override
-  String get logWaterShowcaseDescription =>
-      'Log nu water en blijf daarna de rest loggen zodat Glu gewoonten en patronen nauwkeuriger kan herkennen.';
+  String get logMoodShowcaseDescription =>
+      'Log nu je stemming en blijf daarna de rest loggen zodat Glu gewoonten en patronen nauwkeuriger kan herkennen.';
 
   @override
   String get mainShellProgressShowcaseTitle => 'Bekijk je voortgang';
@@ -2107,6 +2192,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get progressMoodProgressTitle => 'Stemmingsvoortgang';
 
   @override
+  String get progressCravingsProgressTitle => 'Trekvoortgang';
+
+  @override
+  String get progressResisted => 'Weerstaan';
+
+  @override
+  String get progressCravingsResistedSubtitle =>
+      'Aandeel van geregistreerde trek dat je hebt weerstaan.';
+
+  @override
   String get progressWeightChangeTitle => 'Gewicht change';
 
   @override
@@ -2186,6 +2281,9 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => 'Nog geen stemmingslogs';
+
+  @override
+  String get progressNoCravingsLoggedYet => 'Nog geen trek gelogd';
 
   @override
   String get progressFutureTrendTitle => 'Toekomstige trend';
@@ -2424,6 +2522,9 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get progressMoodTitle => 'Stemming';
+
+  @override
+  String get progressCravingsTitle => 'Trek';
 
   @override
   String get progressTrend => 'Trend';

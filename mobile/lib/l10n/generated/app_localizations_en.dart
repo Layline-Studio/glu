@@ -122,8 +122,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paywallTitle => 'Unlock Glu Pro';
 
   @override
-  String get paywallSubtitle =>
-      'Protect your progress and avoid regaining weight.';
+  String get paywallSubtitle => 'Without Pro, here\'s what you lose:';
 
   @override
   String get paywallMonthlyTitle => 'Monthly';
@@ -194,23 +193,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paywallRestoreFailed => 'Restore failed. Please try again.';
 
   @override
-  String get paywallBenefitReminders => 'Dose and supplement reminders';
+  String get paywallBenefitReminders => 'Miss doses without reminders';
 
   @override
-  String get paywallBenefitShareProgress => 'Make your progress easy to share';
+  String get paywallBenefitShareProgress => 'Harder to share your progress';
 
   @override
-  String get paywallBenefitSpotRegain => 'Spot regain early';
+  String get paywallBenefitSpotRegain => 'Miss regain signs';
 
   @override
-  String get paywallBenefitInsights => 'See daily insights and patterns';
+  String get paywallBenefitInsights => 'Miss your daily patterns';
 
   @override
-  String get paywallBenefitWeeklyGoals => 'Stick to simple weekly goals';
+  String get paywallBenefitWeeklyGoals => 'Lose your weekly structure';
 
   @override
-  String get paywallBenefitHealthyHabits =>
-      'Make healthy habits easier to keep';
+  String get paywallBenefitHealthyHabits => 'Habits slip without support';
 
   @override
   String get onboardingWelcomeTitle => 'Keep the weight off';
@@ -1066,6 +1064,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeGlowUpBody => 'Create your before-and-after story';
 
   @override
+  String get homeDoctorReportTitle => 'Doctor Report';
+
+  @override
+  String get homeDoctorReportBody => 'Share your progress with your doctor';
+
+  @override
   String get homeGoalsStatusTitle => 'Goals today';
 
   @override
@@ -1097,6 +1101,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeMoodTitle => 'Mood';
+
+  @override
+  String get homeCravingsTitle => 'Cravings';
 
   @override
   String get homeDoseTitle => 'Dose';
@@ -1174,6 +1181,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => 'Log how you feel';
+
+  @override
+  String get homeLogACraving => 'Log a craving';
 
   @override
   String get homeLogTodaysDose => 'Log today’s dose';
@@ -1296,6 +1306,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => 'Added to your mood log';
+
+  @override
+  String get cravingsLogTitle => 'Cravings';
+
+  @override
+  String get cravingsEditTitle => 'Edit craving';
+
+  @override
+  String get cravingsWhatsGoingOn => 'What\'s going on';
+
+  @override
+  String get cravingsTypeGeneral => 'Urge to eat';
+
+  @override
+  String get cravingsTypeSweet => 'Something sweet';
+
+  @override
+  String get cravingsTypeSalty => 'Something salty';
+
+  @override
+  String get cravingsIntensityLabel => 'Intensity (optional)';
+
+  @override
+  String get cravingsIntensityMild => 'Mild';
+
+  @override
+  String get cravingsIntensityModerate => 'Moderate';
+
+  @override
+  String get cravingsIntensityStrong => 'Strong';
+
+  @override
+  String get cravingsOutcomeLabel => 'What happened (optional)';
+
+  @override
+  String get cravingsOutcomeResisted => 'Resisted';
+
+  @override
+  String get cravingsOutcomeGaveIn => 'Gave in';
+
+  @override
+  String get cravingsNotes => 'Notes';
+
+  @override
+  String get cravingsAnythingWorthRemembering =>
+      'Anything worth remembering about this craving?';
+
+  @override
+  String get cravingsCouldNotSave => 'Could not save this craving log yet.';
+
+  @override
+  String get cravingsDeleteTitle => 'Delete this craving log?';
+
+  @override
+  String get cravingsDeleteMessage => 'This action cannot be undone.';
+
+  @override
+  String get cravingsDeleteLog => 'Delete log';
+
+  @override
+  String get cravingsSaving => 'Saving...';
+
+  @override
+  String get cravingsAddLog => '+ Add craving log';
+
+  @override
+  String get cravingsLogged => 'Craving logged';
+
+  @override
+  String get cravingsDeleted => 'Craving deleted';
+
+  @override
+  String get cravingsCouldNotDelete => 'Could not delete this craving log yet.';
+
+  @override
+  String get cravingsAddedToLog => 'Added to your cravings log';
 
   @override
   String get portionCheckTitle => 'Portion Check';
@@ -1832,11 +1918,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Log the activities that matter most to you, every day.';
 
   @override
-  String get logWaterShowcaseTitle => 'Start with water';
+  String get logMoodShowcaseTitle => 'Start with your mood';
 
   @override
-  String get logWaterShowcaseDescription =>
-      'Log water now, and keep logging the rest as you go so Glu can spot habits and patterns more accurately.';
+  String get logMoodShowcaseDescription =>
+      'Log your mood now, and keep logging the rest as you go so Glu can spot habits and patterns more accurately.';
 
   @override
   String get mainShellProgressShowcaseTitle => 'See your progress';
@@ -2082,6 +2168,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get progressMoodProgressTitle => 'Mood progress';
 
   @override
+  String get progressCravingsProgressTitle => 'Cravings progress';
+
+  @override
+  String get progressResisted => 'Resisted';
+
+  @override
+  String get progressCravingsResistedSubtitle =>
+      'Share of logged cravings you resisted.';
+
+  @override
   String get progressWeightChangeTitle => 'Weight change';
 
   @override
@@ -2161,6 +2257,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => 'No mood logs yet';
+
+  @override
+  String get progressNoCravingsLoggedYet => 'No cravings logged yet';
 
   @override
   String get progressFutureTrendTitle => 'Future trend';
@@ -2397,6 +2496,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get progressMoodTitle => 'Mood';
+
+  @override
+  String get progressCravingsTitle => 'Cravings';
 
   @override
   String get progressTrend => 'Trend';

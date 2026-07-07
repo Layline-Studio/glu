@@ -122,8 +122,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get paywallTitle => 'Glu Pro अनलॉक करें';
 
   @override
-  String get paywallSubtitle =>
-      'अपनी प्रगति की सुरक्षा करें और वजन वापस बढ़ने से बचें।';
+  String get paywallSubtitle => 'बिना Pro के, आप यह खो देंगे:';
 
   @override
   String get paywallMonthlyTitle => 'मासिक';
@@ -195,23 +194,22 @@ class AppLocalizationsHi extends AppLocalizations {
       'पुनर्स्थापना विफल रही। कृपया फिर से कोशिश करें।';
 
   @override
-  String get paywallBenefitReminders => 'खुराक और सप्लीमेंट के लिए रिमाइंडर';
+  String get paywallBenefitReminders => 'रिमाइंडर बिना खुराकें छूटेंगी';
 
   @override
-  String get paywallBenefitShareProgress => 'अपनी प्रगति आसानी से साझा करें';
+  String get paywallBenefitShareProgress => 'प्रगति साझा करना मुश्किल होगा';
 
   @override
-  String get paywallBenefitSpotRegain => 'वजन वापस बढ़ना समय रहते पहचानें';
+  String get paywallBenefitSpotRegain => 'वजन वापसी के संकेत छूट जाएंगे';
 
   @override
-  String get paywallBenefitInsights => 'दैनिक अंतर्दृष्टि और रुझान देखें';
+  String get paywallBenefitInsights => 'आपके रोज़ के पैटर्न छूट जाएंगे';
 
   @override
-  String get paywallBenefitWeeklyGoals => 'सरल साप्ताहिक लक्ष्यों पर टिके रहें';
+  String get paywallBenefitWeeklyGoals => 'साप्ताहिक ढांचा खो देंगे';
 
   @override
-  String get paywallBenefitHealthyHabits =>
-      'स्वस्थ आदतों को बनाए रखना आसान बनाएं';
+  String get paywallBenefitHealthyHabits => 'बिना सहारे आदतें ढीली पड़ेंगी';
 
   @override
   String get onboardingWelcomeTitle => 'वजन को बनाए रखें';
@@ -1079,6 +1077,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeGlowUpBody => 'अपनी पहले और बाद की कहानी बनाएँ';
 
   @override
+  String get homeDoctorReportTitle => 'डॉक्टर रिपोर्ट';
+
+  @override
+  String get homeDoctorReportBody => 'अपनी प्रगति अपने डॉक्टर के साथ साझा करें';
+
+  @override
   String get homeGoalsStatusTitle => 'आज के लक्ष्य';
 
   @override
@@ -1112,36 +1116,39 @@ class AppLocalizationsHi extends AppLocalizations {
   String get homeMoodTitle => 'मूड';
 
   @override
+  String get homeCravingsTitle => 'क्रेविंग';
+
+  @override
   String get homeDoseTitle => 'खुराक';
 
   @override
-  String get homeMedicationLevelTitle => 'Estimated medication level';
+  String get homeMedicationLevelTitle => 'अनुमानित दवा स्तर';
 
   @override
-  String get homeMedicationLevelInfoTitle => 'How to read this chart';
+  String get homeMedicationLevelInfoTitle => 'इस चार्ट को कैसे पढ़ें';
 
   @override
   String get homeMedicationLevelInfoBody =>
-      'This chart estimates how much of your medication may still be active based on the doses you logged and the medication\'s half-life.\n\nHigher points usually mean a more recent or larger dose. The line slopes down over time as the medication clears from your system.\n\nUse this as a trend view, not as an exact measurement or medical recommendation.';
+      'यह चार्ट आपकी लॉग की गई खुराकों और दवा के हाफ-लाइफ के आधार पर अनुमान लगाता है कि आपकी कितनी दवा अभी भी सक्रिय हो सकती है।\n\nऊँचे बिंदु आमतौर पर हाल ही की या बड़ी खुराक दर्शाते हैं। समय के साथ रेखा नीचे जाती है क्योंकि दवा आपके शरीर से साफ होती जाती है।\n\nइसे एक रुझान दृश्य के रूप में उपयोग करें, न कि सटीक माप या चिकित्सीय सलाह के रूप में।';
 
   @override
-  String get homeMedicationLevelInfoDismiss => 'Got it';
+  String get homeMedicationLevelInfoDismiss => 'समझ गया';
 
   @override
   String get homeMedicationLevelEmptyBody =>
-      'Log your doses so Glu can estimate how much medication is still active in your system.';
+      'अपनी खुराकें लॉग करें ताकि Glu अनुमान लगा सके कि आपके शरीर में अभी भी कितनी दवा सक्रिय है।';
 
   @override
-  String get homeMedicationLevelOfRecentPeak => 'of recent peak';
+  String get homeMedicationLevelOfRecentPeak => 'हाल के उच्चतम स्तर का';
 
   @override
-  String get homeMedicationLevelActiveNow => 'Active now';
+  String get homeMedicationLevelActiveNow => 'अभी सक्रिय';
 
   @override
-  String get homeMedicationLevelHalfLife => 'Half-life';
+  String get homeMedicationLevelHalfLife => 'हाफ-लाइफ';
 
   @override
-  String get homeMedicationLevelLastDose => 'Last dose';
+  String get homeMedicationLevelLastDose => 'आखिरी खुराक';
 
   @override
   String get homeStartHydration => 'हाइड्रेशन शुरू करें';
@@ -1188,6 +1195,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => 'आप कैसा महसूस करते हैं, लॉग करें';
+
+  @override
+  String get homeLogACraving => 'क्रेविंग लॉग करें';
 
   @override
   String get homeLogTodaysDose => 'आज की खुराक लॉग करें';
@@ -1309,6 +1319,84 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => 'आपके मूड लॉग में जोड़ा गया';
+
+  @override
+  String get cravingsLogTitle => 'क्रेविंग';
+
+  @override
+  String get cravingsEditTitle => 'क्रेविंग संपादित करें';
+
+  @override
+  String get cravingsWhatsGoingOn => 'क्या हो रहा है';
+
+  @override
+  String get cravingsTypeGeneral => 'कुछ खाने की इच्छा';
+
+  @override
+  String get cravingsTypeSweet => 'कुछ मीठा';
+
+  @override
+  String get cravingsTypeSalty => 'कुछ नमकीन';
+
+  @override
+  String get cravingsIntensityLabel => 'तीव्रता (वैकल्पिक)';
+
+  @override
+  String get cravingsIntensityMild => 'हल्की';
+
+  @override
+  String get cravingsIntensityModerate => 'मध्यम';
+
+  @override
+  String get cravingsIntensityStrong => 'तेज़';
+
+  @override
+  String get cravingsOutcomeLabel => 'क्या हुआ (वैकल्पिक)';
+
+  @override
+  String get cravingsOutcomeResisted => 'रोका';
+
+  @override
+  String get cravingsOutcomeGaveIn => 'हार मान ली';
+
+  @override
+  String get cravingsNotes => 'नोट्स';
+
+  @override
+  String get cravingsAnythingWorthRemembering =>
+      'इस क्रेविंग के बारे में याद रखने लायक कुछ है?';
+
+  @override
+  String get cravingsCouldNotSave =>
+      'इस क्रेविंग लॉग को अभी सहेजा नहीं जा सका।';
+
+  @override
+  String get cravingsDeleteTitle => 'क्या यह क्रेविंग लॉग हटाएँ?';
+
+  @override
+  String get cravingsDeleteMessage => 'यह कार्रवाई वापस नहीं ली जा सकती।';
+
+  @override
+  String get cravingsDeleteLog => 'हटाएँ लॉग';
+
+  @override
+  String get cravingsSaving => 'सहेजा जा रहा है...';
+
+  @override
+  String get cravingsAddLog => '+ क्रेविंग लॉग जोड़ें';
+
+  @override
+  String get cravingsLogged => 'क्रेविंग लॉग हो गई';
+
+  @override
+  String get cravingsDeleted => 'क्रेविंग हटाई गई';
+
+  @override
+  String get cravingsCouldNotDelete =>
+      'इस क्रेविंग लॉग को अभी हटाया नहीं जा सका।';
+
+  @override
+  String get cravingsAddedToLog => 'आपके क्रेविंग लॉग में जोड़ा गया';
 
   @override
   String get portionCheckTitle => 'पोर्टियन चेक';
@@ -1852,11 +1940,11 @@ class AppLocalizationsHi extends AppLocalizations {
       'अपने लॉग खोलने और आपके लिए महत्वपूर्ण चीज़ों को ट्रैक करने के लिए यहाँ टैप करें।';
 
   @override
-  String get logWaterShowcaseTitle => 'पानी से शुरुआत करें';
+  String get logMoodShowcaseTitle => 'अपने मूड से शुरुआत करें';
 
   @override
-  String get logWaterShowcaseDescription =>
-      'अभी पानी लॉग करें, और बाकी चीज़ें दिन भर लॉग करते रहें ताकि Glu आदतों और पैटर्न को अधिक सटीक रूप से देख सके।';
+  String get logMoodShowcaseDescription =>
+      'अभी अपना मूड लॉग करें, और बाकी चीज़ें दिन भर लॉग करते रहें ताकि Glu आदतों और पैटर्न को अधिक सटीक रूप से देख सके।';
 
   @override
   String get mainShellProgressShowcaseTitle => 'अपनी प्रगति देखें';
@@ -2103,6 +2191,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get progressMoodProgressTitle => 'मूड प्रगति';
 
   @override
+  String get progressCravingsProgressTitle => 'क्रेविंग प्रगति';
+
+  @override
+  String get progressResisted => 'रोका गया';
+
+  @override
+  String get progressCravingsResistedSubtitle =>
+      'लॉग की गई क्रेविंग में से जितनी आपने रोकीं, उनका हिस्सा।';
+
+  @override
   String get progressWeightChangeTitle => 'वजन में बदलाव';
 
   @override
@@ -2182,6 +2280,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => 'अभी तक मूड लॉग नहीं हैं';
+
+  @override
+  String get progressNoCravingsLoggedYet => 'अभी तक कोई क्रेविंग लॉग नहीं है';
 
   @override
   String get progressFutureTrendTitle => 'भविष्य का रुझान';
@@ -2422,6 +2523,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get progressMoodTitle => 'मूड';
+
+  @override
+  String get progressCravingsTitle => 'क्रेविंग';
 
   @override
   String get progressTrend => 'रुझान';

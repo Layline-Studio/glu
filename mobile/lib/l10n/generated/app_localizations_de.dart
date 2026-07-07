@@ -122,8 +122,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get paywallTitle => 'Glu Pro freischalten';
 
   @override
-  String get paywallSubtitle =>
-      'Schütze deinen Fortschritt und vermeide die erneute Gewichtszunahme.';
+  String get paywallSubtitle => 'Ohne Pro verlierst du das:';
 
   @override
   String get paywallMonthlyTitle => 'Monatlich';
@@ -197,25 +196,26 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wiederherstellung fehlgeschlagen. Bitte versuche es erneut.';
 
   @override
-  String get paywallBenefitReminders =>
-      'Erinnerungen für Dosis und Nahrungsergänzung';
+  String get paywallBenefitReminders => 'Dosen ohne Erinnerungen verpassen';
 
   @override
   String get paywallBenefitShareProgress =>
-      'Teile deinen Fortschritt ganz einfach';
+      'Schwerer, deinen Fortschritt zu teilen';
 
   @override
-  String get paywallBenefitSpotRegain => 'Gewichtszunahme früh erkennen';
+  String get paywallBenefitSpotRegain =>
+      'Anzeichen für Gewichtszunahme verpassen';
 
   @override
-  String get paywallBenefitInsights => 'Tägliche Analysen und Muster sehen';
+  String get paywallBenefitInsights => 'Deine täglichen Muster verpassen';
 
   @override
-  String get paywallBenefitWeeklyGoals => 'Stick zu simple wöchentlich Ziele';
+  String get paywallBenefitWeeklyGoals =>
+      'Deine wöchentliche Struktur verlieren';
 
   @override
   String get paywallBenefitHealthyHabits =>
-      'Make healthy Gewohnheiten easier zu behalten';
+      'Gewohnheiten schwinden ohne Unterstützung';
 
   @override
   String get onboardingWelcomeTitle => 'Behalten der Gewicht aus';
@@ -1088,6 +1088,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeGlowUpBody => 'Gestalte deine Vorher-Nachher-Geschichte';
 
   @override
+  String get homeDoctorReportTitle => 'Arztbericht';
+
+  @override
+  String get homeDoctorReportBody => 'Teile deinen Fortschritt mit deinem Arzt';
+
+  @override
   String get homeGoalsStatusTitle => 'Heutige Ziele';
 
   @override
@@ -1121,36 +1127,39 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeMoodTitle => 'Stimmung';
 
   @override
+  String get homeCravingsTitle => 'Heißhunger';
+
+  @override
   String get homeDoseTitle => 'Dosis';
 
   @override
-  String get homeMedicationLevelTitle => 'Estimated medication level';
+  String get homeMedicationLevelTitle => 'Geschätzter Medikamentenspiegel';
 
   @override
-  String get homeMedicationLevelInfoTitle => 'How to read this chart';
+  String get homeMedicationLevelInfoTitle => 'So liest du dieses Diagramm';
 
   @override
   String get homeMedicationLevelInfoBody =>
-      'This chart estimates how much of your medication may still be active based on the doses you logged and the medication\'s half-life.\n\nHigher points usually mean a more recent or larger dose. The line slopes down over time as the medication clears from your system.\n\nUse this as a trend view, not as an exact measurement or medical recommendation.';
+      'Dieses Diagramm schätzt, wie viel von deinem Medikament basierend auf den erfassten Dosen und der Halbwertszeit des Medikaments noch aktiv sein könnte.\n\nHöhere Punkte bedeuten meist eine kürzlich erfolgte oder größere Dosis. Die Linie sinkt mit der Zeit, während das Medikament aus deinem Körper abgebaut wird.\n\nBetrachte dies als Trendansicht, nicht als exakte Messung oder medizinische Empfehlung.';
 
   @override
-  String get homeMedicationLevelInfoDismiss => 'Got it';
+  String get homeMedicationLevelInfoDismiss => 'Verstanden';
 
   @override
   String get homeMedicationLevelEmptyBody =>
-      'Log your doses so Glu can estimate how much medication is still active in your system.';
+      'Erfasse deine Dosen, damit Glu schätzen kann, wie viel Medikament noch in deinem Körper aktiv ist.';
 
   @override
-  String get homeMedicationLevelOfRecentPeak => 'of recent peak';
+  String get homeMedicationLevelOfRecentPeak => 'des letzten Höchstwerts';
 
   @override
-  String get homeMedicationLevelActiveNow => 'Active now';
+  String get homeMedicationLevelActiveNow => 'Aktuell aktiv';
 
   @override
-  String get homeMedicationLevelHalfLife => 'Half-life';
+  String get homeMedicationLevelHalfLife => 'Halbwertszeit';
 
   @override
-  String get homeMedicationLevelLastDose => 'Last dose';
+  String get homeMedicationLevelLastDose => 'Letzte Dosis';
 
   @override
   String get homeStartHydration => 'Mit dem Trinken beginnen';
@@ -1198,6 +1207,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get homeLogHowYouFeel => 'Protokolliere, wie du dich fühlst';
+
+  @override
+  String get homeLogACraving => 'Heißhunger protokollieren';
 
   @override
   String get homeLogTodaysDose => 'Heutige Dosis protokollieren';
@@ -1325,6 +1337,85 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get moodAddedToMoodLog => 'Zu deinem Stimmungsprotokoll hinzugefügt';
+
+  @override
+  String get cravingsLogTitle => 'Heißhunger';
+
+  @override
+  String get cravingsEditTitle => 'Heißhunger bearbeiten';
+
+  @override
+  String get cravingsWhatsGoingOn => 'Was ist los';
+
+  @override
+  String get cravingsTypeGeneral => 'Lust zu essen';
+
+  @override
+  String get cravingsTypeSweet => 'Etwas Süßes';
+
+  @override
+  String get cravingsTypeSalty => 'Etwas Salziges';
+
+  @override
+  String get cravingsIntensityLabel => 'Intensität (optional)';
+
+  @override
+  String get cravingsIntensityMild => 'Leicht';
+
+  @override
+  String get cravingsIntensityModerate => 'Mittel';
+
+  @override
+  String get cravingsIntensityStrong => 'Stark';
+
+  @override
+  String get cravingsOutcomeLabel => 'Was ist passiert (optional)';
+
+  @override
+  String get cravingsOutcomeResisted => 'Widerstanden';
+
+  @override
+  String get cravingsOutcomeGaveIn => 'Nachgegeben';
+
+  @override
+  String get cravingsNotes => 'Notizen';
+
+  @override
+  String get cravingsAnythingWorthRemembering =>
+      'Gibt es etwas, das du dir zu diesem Heißhunger merken möchtest?';
+
+  @override
+  String get cravingsCouldNotSave =>
+      'Dieser Heißhunger-Eintrag konnte noch nicht gespeichert werden.';
+
+  @override
+  String get cravingsDeleteTitle => 'Diesen Heißhunger-Eintrag löschen?';
+
+  @override
+  String get cravingsDeleteMessage =>
+      'Diese Aktion kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get cravingsDeleteLog => 'Eintrag löschen';
+
+  @override
+  String get cravingsSaving => 'Speichert...';
+
+  @override
+  String get cravingsAddLog => '+ Heißhunger protokollieren';
+
+  @override
+  String get cravingsLogged => 'Heißhunger protokolliert';
+
+  @override
+  String get cravingsDeleted => 'Heißhunger gelöscht';
+
+  @override
+  String get cravingsCouldNotDelete =>
+      'Dieser Heißhunger-Eintrag konnte noch nicht gelöscht werden.';
+
+  @override
+  String get cravingsAddedToLog => 'Zu deinem Heißhunger-Protokoll hinzugefügt';
 
   @override
   String get portionCheckTitle => 'Portionskontrolle';
@@ -1875,11 +1966,11 @@ class AppLocalizationsDe extends AppLocalizations {
       'Nutze Protokoll, um die Dinge festzuhalten, die dir im Alltag wichtig sind.';
 
   @override
-  String get logWaterShowcaseTitle => 'Starte mit Wasser';
+  String get logMoodShowcaseTitle => 'Starte mit deiner Stimmung';
 
   @override
-  String get logWaterShowcaseDescription =>
-      'Protokolliere jetzt Wasser und den Rest Schritt für Schritt, damit Glu Gewohnheiten und Muster genauer erkennen kann.';
+  String get logMoodShowcaseDescription =>
+      'Protokolliere jetzt deine Stimmung und den Rest Schritt für Schritt, damit Glu Gewohnheiten und Muster genauer erkennen kann.';
 
   @override
   String get mainShellProgressShowcaseTitle => 'Sieh deinen Fortschritt';
@@ -2127,6 +2218,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get progressMoodProgressTitle => 'Stimmungsfortschritt';
 
   @override
+  String get progressCravingsProgressTitle => 'Heißhunger-Fortschritt';
+
+  @override
+  String get progressResisted => 'Widerstanden';
+
+  @override
+  String get progressCravingsResistedSubtitle =>
+      'Anteil der protokollierten Heißhunger-Momente, denen du widerstanden hast.';
+
+  @override
   String get progressWeightChangeTitle => 'Gewichtsveränderung';
 
   @override
@@ -2206,6 +2307,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get progressNoMoodLogsYet => 'Noch keine Stimmungsprotokolle';
+
+  @override
+  String get progressNoCravingsLoggedYet =>
+      'Noch kein Heißhunger protokolliert';
 
   @override
   String get progressFutureTrendTitle => 'Zukünftiger Trend';
@@ -2445,6 +2550,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get progressMoodTitle => 'Stimmung';
+
+  @override
+  String get progressCravingsTitle => 'Heißhunger';
 
   @override
   String get progressTrend => 'Trend';
