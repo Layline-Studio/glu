@@ -22,12 +22,13 @@ export const itIT = {
       { alt: 'Schermata di controllo porzioni in Glu' },
       { alt: 'Schermata panoramica dei progressi in Glu' },
       { alt: 'Schermata del progresso peso in Glu' },
+      { alt: 'Schermata del referto medico di Glu' },
       { alt: 'Schermata glow up in Glu' },
     ],
   },
   showcase: {
     title: 'Progettato attorno al trattamento, non solo alla registrazione.',
-    intro: 'Quattro momenti dell’app e ciò che ciascuno fa silenziosamente per te.',
+    intro: 'Cinque momenti dell’app e ciò che ciascuno fa silenziosamente per te.',
     chapters: [
       {
         alt: 'Schermata iniziale di Glu con tracker di terapia, pasti, movimento, sintomi e umore',
@@ -52,6 +53,12 @@ export const itIT = {
         title: 'Controlla le porzioni in pochi secondi',
         copy:
           'L’appetito cambia con GLP-1. Un rapido controllo delle porzioni ti aiuta a mangiare abbastanza per sentirti bene e a fermarti quando basta.',
+      },
+      {
+        alt: 'Referto medico di Glu con 90 giorni di livelli del farmaco, storico delle dosi e sintomi',
+        title: 'Pronto prima ancora di entrare',
+        copy:
+          'Novanta giorni di dosi, livelli del farmaco e sintomi diventano un referto da condividere con il tuo medico prima della visita, così il colloquio parte già con il quadro completo.',
       },
     ],
     glow: {
@@ -87,6 +94,7 @@ export const itIT = {
       'Promemoria terapeutici e storico delle dosi',
       'Monitoraggio di peso, pasti, acqua, umore e sintomi',
       'Un’unica timeline pensata per le routine GLP-1',
+      'Referti pronti per il medico con livelli del farmaco e aderenza',
       'Accesso al supporto per domande su account e abbonamento',
     ],
     note:
@@ -108,6 +116,7 @@ export const itIT = {
       { label: 'Pasti, acqua, umore e sintomi insieme', glu: 'Integrato', notes: 'Sparsi', habits: 'Parziale' },
       { label: 'Trend del peso nello stesso flusso', glu: 'Integrato', notes: 'Manuale', habits: 'Di solito separato' },
       { label: 'Progettato specificamente per routine GLP-1', glu: 'Sì', notes: 'No', habits: 'No' },
+      { label: 'Referto pronto per il medico con livelli del farmaco e aderenza', glu: 'Integrato', notes: 'No', habits: 'No' },
     ],
   },
   testimonials: {
@@ -201,7 +210,7 @@ export const itIT = {
       { question: 'Come monitoro il mio peso mentre assumo farmaci GLP-1?', answer: 'Glu rende semplice registrare il peso nel tempo così puoi guardare la tendenza complessiva invece di reagire a un singolo giorno isolato. Questo aiuta a mettere in contesto dosi, pasti, umore e sintomi.' },
       { question: 'Posso monitorare la nutrizione con Glu?', answer: 'Sì. Glu supporta il monitoraggio dei pasti e dei dati legati alla nutrizione, così da tenere le scelte alimentari accanto a promemoria, storico delle dosi, umore, sintomi e trend del peso.' },
       { question: 'Glu può monitorare effetti collaterali e umore?', answer: 'Sì. Glu supporta sia il monitoraggio dell’umore sia quello dei sintomi, così che effetti collaterali, pattern emotivi, tempistiche e altri dettagli della routine restino nello stesso posto della terapia e dei tuoi progressi.' },
-      { question: 'Come può aiutare Glu nelle visite mediche?', answer: 'Glu può generare un report per il medico basato su ciò che registri, aiutandoti a portare promemoria, dosi, peso, pasti, umore, sintomi e progressi in un formato più facile da rivedere durante le visite.' },
+      { question: 'Come può aiutare Glu nelle visite mediche?', answer: 'Glu può generare un report per il medico relativo agli ultimi 90 giorni, con livelli stimati del farmaco, aderenza alle dosi, rotazione dei siti di iniezione, andamento del peso, sintomi e umore, così la visita parte con il quadro completo invece che a memoria.' },
       { question: 'I miei dati sanitari sono privati e sicuri in Glu?', answer: 'Glu tratta i dati sanitari e di monitoraggio come sensibili. Il sito collega direttamente anche l’informativa sulla privacy e le istruzioni per l’eliminazione dell’account, così puoi verificare come le tue informazioni vengono raccolte, usate, conservate ed eliminate.' },
       { question: 'Glu funziona con Apple Health o Google Fit?', answer: 'Le integrazioni con le piattaforme possono cambiare nel tempo. Se la sincronizzazione con Apple Health o Google Fit è importante per il tuo flusso, contatta l’assistenza per confermare lo stato attuale prima di farvi affidamento.' },
       { question: 'Glu sostituisce un consiglio medico?', answer: 'No. Glu è destinata al monitoraggio personale e all’educazione. Non diagnostica, non tratta e non sostituisce l’indicazione di un professionista sanitario autorizzato.' },

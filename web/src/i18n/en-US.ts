@@ -22,12 +22,13 @@ export const enUS = {
       { alt: 'Glu portion check screen' },
       { alt: 'Glu progress overview screen' },
       { alt: 'Glu progress weight screen' },
+      { alt: 'Glu doctor report screen' },
       { alt: 'Glu glow up screen' },
     ],
   },
   showcase: {
     title: 'Built around treatment, not around logging.',
-    intro: 'Four moments from the app, and what each one quietly does for you.',
+    intro: 'Five moments from the app, and what each one quietly does for you.',
     chapters: [
       {
         alt: 'Glu home screen with medication, meal, movement, symptom, and mood trackers',
@@ -52,6 +53,12 @@ export const enUS = {
         title: 'Portion check in seconds',
         copy:
           'Appetite changes on GLP-1. A quick portion check helps you eat enough to feel good, and stop when you are done.',
+      },
+      {
+        alt: 'Glu doctor report page showing 90 days of medication levels, dose history, and symptoms',
+        title: 'Ready before you walk in',
+        copy:
+          'Ninety days of doses, medication levels, and symptoms turn into a doctor report you can share before your appointment, so the conversation starts with the full picture.',
       },
     ],
     glow: {
@@ -87,6 +94,7 @@ export const enUS = {
       'Medication reminders and dose history',
       'Weight, meal, water, mood, and symptom tracking',
       'A single timeline built for GLP-1 routines',
+      'Doctor-ready reports with medication levels and adherence',
       'Support access for account and subscription questions',
     ],
     note:
@@ -108,6 +116,7 @@ export const enUS = {
       { label: 'Meals, water, mood, and symptom logging together', glu: 'Built in', notes: 'Scattered', habits: 'Partial' },
       { label: 'Weight trends in the same workflow', glu: 'Built in', notes: 'Manual', habits: 'Usually separate' },
       { label: 'Designed specifically for GLP-1 routines', glu: 'Yes', notes: 'No', habits: 'No' },
+      { label: 'Doctor-ready report with medication levels and adherence', glu: 'Built in', notes: 'No', habits: 'No' },
     ],
   },
   testimonials: {
@@ -250,7 +259,7 @@ export const enUS = {
       {
         question: 'How can Glu help with medical appointments?',
         answer:
-          'Glu can generate a doctor report based on what you log, helping you bring reminders, doses, weight, meals, mood, symptoms, and progress into a format that is easier to review during appointments.',
+          'Glu can generate a doctor report covering the last 90 days, including estimated medication levels, dose adherence, injection-site rotation, weight trends, symptoms, and mood, so appointments start with the full picture instead of a memory check.',
       },
       {
         question: 'Are my health data private and secure in Glu?',

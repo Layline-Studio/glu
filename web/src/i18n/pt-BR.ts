@@ -22,12 +22,13 @@ export const ptBR = {
       { alt: 'Tela de verificação de porção no Glu' },
       { alt: 'Tela de visão geral do progresso no Glu' },
       { alt: 'Tela de progresso de peso no Glu' },
+      { alt: 'Tela de relatório médico do Glu' },
       { alt: 'Tela de glow up no Glu' },
     ],
   },
   showcase: {
     title: 'Feito para o tratamento, não só para registrar.',
-    intro: 'Quatro momentos do app e o que cada um deles faz discretamente por você.',
+    intro: 'Cinco momentos do app e o que cada um deles faz discretamente por você.',
     chapters: [
       {
         alt: 'Tela inicial do Glu com rastreadores de medicação, refeições, movimento, sintomas e humor',
@@ -52,6 +53,12 @@ export const ptBR = {
         title: 'Verifique porções em segundos',
         copy:
           'O apetite muda com GLP-1. Uma verificação rápida de porção ajuda você a comer o suficiente para se sentir bem e parar quando já estiver satisfeito.',
+      },
+      {
+        alt: 'Relatório médico do Glu mostrando 90 dias de níveis de medicação, histórico de doses e sintomas',
+        title: 'Pronto antes mesmo de entrar',
+        copy:
+          'Noventa dias de doses, níveis de medicação e sintomas viram um relatório para compartilhar com seu médico antes da consulta, para que a conversa já comece com o quadro completo.',
       },
     ],
     glow: {
@@ -87,6 +94,7 @@ export const ptBR = {
       'Lembretes de medicação e histórico de doses',
       'Acompanhamento de peso, refeições, água, humor e sintomas',
       'Uma linha do tempo única pensada para rotinas com GLP-1',
+      'Relatórios prontos para o médico com níveis de medicação e adesão',
       'Suporte para dúvidas de conta e assinatura',
     ],
     note:
@@ -108,6 +116,7 @@ export const ptBR = {
       { label: 'Refeições, água, humor e sintomas juntos', glu: 'Integrado', notes: 'Espalhado', habits: 'Parcial' },
       { label: 'Tendências de peso no mesmo fluxo', glu: 'Integrado', notes: 'Manual', habits: 'Geralmente separado' },
       { label: 'Pensado especificamente para rotinas com GLP-1', glu: 'Sim', notes: 'Não', habits: 'Não' },
+      { label: 'Relatório pronto para o médico com níveis de medicação e adesão', glu: 'Integrado', notes: 'Não', habits: 'Não' },
     ],
   },
   testimonials: {
@@ -250,7 +259,7 @@ export const ptBR = {
       {
         question: 'Como o Glu pode ajudar nas minhas consultas médicas?',
         answer:
-          'O Glu pode gerar um relatório médico com base no que você registra, ajudando a levar lembretes, doses, peso, refeições, humor, sintomas e progresso em um formato mais fácil de revisar durante consultas.',
+          'O Glu pode gerar um relatório médico com os últimos 90 dias, incluindo níveis estimados de medicação, adesão às doses, rotação dos locais de aplicação, tendências de peso, sintomas e humor, para que a consulta comece com o quadro completo em vez de depender da memória.',
       },
       {
         question: 'Meus dados de saúde estão privados e seguros no Glu?',
