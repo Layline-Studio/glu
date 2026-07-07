@@ -861,6 +861,14 @@ List<ChartAxisLabel> buildSeverityYAxisLabels(AppLocalizations l10n) {
   ];
 }
 
+List<ChartAxisLabel> buildPercentageYAxisLabels() {
+  return const [
+    ChartAxisLabel(position: 0, label: '0%'),
+    ChartAxisLabel(position: 0.5, label: '50%'),
+    ChartAxisLabel(position: 1, label: '100%'),
+  ];
+}
+
 List<ChartAxisLabel> buildMoodYAxisLabels(AppLocalizations l10n) {
   return [
     ChartAxisLabel(position: 0, label: l10n.progressBad),

@@ -40,7 +40,7 @@ class ProfileService {
   static const _showcaseSettingKeys = <String>{
     'showcase_reminders_seen',
     'showcase_log_seen',
-    'showcase_water_seen',
+    'showcase_mood_seen',
     'showcase_progress_seen',
   };
 

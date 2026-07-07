@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
+import '../models/craving_catalog.dart';
 import '../models/injection_site_catalog.dart';
 import '../models/symptom_catalog.dart';
 import '../utils/datetime_utils.dart';
@@ -24,6 +25,7 @@ class RecordService {
   static const symptomsColumn = 'symptoms';
   static const moodColumn = 'mood';
   static const glowUpColumn = 'glowup';
+  static const cravingsColumn = 'cravings';
   static const supplementsColumn = 'supplements';
   static const dosesColumn = 'doses';
 
@@ -35,6 +37,7 @@ class RecordService {
     symptomsColumn,
     moodColumn,
     glowUpColumn,
+    cravingsColumn,
     supplementsColumn,
     dosesColumn,
   };
@@ -74,6 +77,7 @@ class RecordService {
       symptomsColumn: [],
       moodColumn: [],
       glowUpColumn: [],
+      cravingsColumn: [],
       supplementsColumn: [],
       dosesColumn: [],
     }).eq('user_id', user.id);
@@ -398,6 +402,7 @@ class RecordService {
       symptomsColumn => _validateSymptomsRecord(record),
       moodColumn => _validateMoodRecord(record),
       glowUpColumn => _validateGlowUpRecord(record),
+      cravingsColumn => _validateCravingRecord(record),
       supplementsColumn => _validateGenericTimedRecord(columnName, record),
       _ => throw ArgumentError('Unsupported record column: $columnName'),
     };
@@ -703,6 +708,54 @@ class RecordService {
       'id': id,
       'logged_at': loggedAt,
       'feeling': feeling,
+      'notes': (notes as String?)?.trim().isEmpty ?? true
+          ? null
+          : (notes as String).trim(),
+    };
+  }
+
+  Map<String, dynamic> _validateCravingRecord(Map<String, dynamic> record) {
+    final id = record['id'] as String? ?? _uuid.v4();
+    final loggedAt = record['logged_at'];
+    final type = record['type'];
+    final intensity = record['intensity'];
+    final outcome = record['outcome'];
+    final notes = record['notes'];
+
+    if (loggedAt is! String || !isIsoWithTimezone(loggedAt)) {
+      throw ArgumentError(
+        'Craving records require a valid ISO-8601 logged_at string with timezone.',
+      );
+    }
+    if (type is! String || !CravingCatalog.values.contains(type)) {
+      throw ArgumentError(
+        'Craving records require type to be general, sweet_sugary, or salty_savory.',
+      );
+    }
+    if (intensity != null &&
+        (intensity is! String ||
+            !const {'mild', 'moderate', 'strong'}.contains(intensity))) {
+      throw ArgumentError(
+        'Craving records require intensity to be mild, moderate, or strong when present.',
+      );
+    }
+    if (outcome != null &&
+        (outcome is! String ||
+            !const {'resisted', 'gave_in'}.contains(outcome))) {
+      throw ArgumentError(
+        'Craving records require outcome to be resisted or gave_in when present.',
+      );
+    }
+    if (notes != null && notes is! String) {
+      throw ArgumentError('Craving notes must be a string when provided.');
+    }
+
+    return {
+      'id': id,
+      'logged_at': loggedAt,
+      'type': type,
+      'intensity': intensity,
+      'outcome': outcome,
       'notes': (notes as String?)?.trim().isEmpty ?? true
           ? null
           : (notes as String).trim(),

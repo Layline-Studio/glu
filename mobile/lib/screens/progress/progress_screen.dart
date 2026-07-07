@@ -2,20 +2,17 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/app_profile.dart';
 import '../../l10n/l10n.dart';
-import '../../providers/analytics_provider.dart';
 import '../../providers/profile_provider.dart';
 import '../../providers/record_service_provider.dart';
-import '../../providers/subscription_provider.dart';
+import '../../services/doctor_report_flow.dart';
 import '../../services/record_service.dart';
-import '../../widgets/pro_gate.dart';
 import '../../theme/app_colors.dart';
 import '../log/weight_log_screen.dart';
 import 'empty/progress_weight_empty_state.dart';
+import 'cravings_progress_screen.dart';
 import 'dose_progress_screen.dart';
 import 'exercise_progress_screen.dart';
 import 'meals_progress_screen.dart';
@@ -26,8 +23,6 @@ import 'water_progress_screen.dart';
 import 'weight_progress_screen.dart';
 import 'insights_progress_screen.dart';
 import 'widgets/progress_charts.dart';
-import 'package:share_plus/share_plus.dart';
-import '../../services/create_report_service.dart';
 
 class _AnimationTriggerNotifier extends Notifier<int> {
   @override
@@ -74,6 +69,7 @@ final progressOverviewProvider = FutureProvider<_ProgressOverviewSnapshot>(
       service.loadTimeseries(RecordService.mealsColumn, start, end),
       service.loadTimeseries(RecordService.moodColumn, start, end),
       service.loadTimeseries(RecordService.symptomsColumn, start, end),
+      service.loadTimeseries(RecordService.cravingsColumn, start, end),
     ]);
 
     return _ProgressOverviewSnapshot(
@@ -85,6 +81,7 @@ final progressOverviewProvider = FutureProvider<_ProgressOverviewSnapshot>(
       meals: _recordsList(results[4]),
       mood: _recordsList(results[5]),
       symptoms: _recordsList(results[6]),
+      cravings: _recordsList(results[7]),
     );
   },
 );
@@ -731,6 +728,50 @@ abstract class _BaseProgressScreenState<T extends ConsumerStatefulWidget>
     );
   }
 
+  Widget _buildCravingsCard(
+    BuildContext context,
+    _ProgressOverviewSnapshot snapshot,
+    ProgressRange range,
+  ) {
+    final tint = const Color(0xFFE96FA0);
+    final chartHeight = _overviewGridChartHeight(context);
+    final buckets = dailyBuckets(
+      ProgressRange.oneYear,
+      records: snapshot.cravings,
+    );
+    final values = sumByDayWithinDisplayRange(
+      snapshot.cravings,
+      displayRange: ProgressRange.oneYear,
+      activeRange: range,
+      valueOf: (_) => 1,
+    );
+
+    return ProgressCard(
+      title: context.l10n.progressCravingsTitle,
+      tint: tint,
+      chartHeight: chartHeight,
+      chart: MiniFrequencyGridChart(
+        dates: buckets,
+        values: values,
+        tint: tint,
+        xAxisLabels: buildTimeXAxisLabels(
+          ProgressRange.oneYear,
+          records: snapshot.cravings,
+          l10n: context.l10n,
+        ),
+        emptyLabel: context.l10n.progressNoCravingsLoggedYet,
+        binary: true,
+      ),
+      onSeeMore: () {
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => const CravingsProgressScreen(),
+          ),
+        );
+      },
+    );
+  }
+
   String _latestWeightUnit(List<Map<String, dynamic>> records) {
     if (records.isEmpty) return 'kg';
     return recordWeightUnit(records.last);
@@ -748,120 +789,12 @@ class _ProgressScreenState extends _BaseProgressScreenState<ProgressScreen> {
   }
 
   Future<void> _createDoctorReport() async {
-    final messenger = ScaffoldMessenger.of(context);
-    final l10n = context.l10n;
-
-    final status = await ref.read(subscriptionProvider.future).catchError(
-          (_) => SubscriptionStatus.free,
-        );
-    if (!mounted) return;
-    if (status != SubscriptionStatus.pro) {
-      ref.read(analyticsServiceProvider).capture(
-        eventName: 'progress_doctor_report_requested',
-        properties: {
-          'source': 'progress',
-          'subscription_status': status.name,
-          'gated': true,
-        },
-      );
-      await openProAccessScreen(
-        context,
-        ref,
-        source: 'progress_doctor_report',
-      );
-      return;
-    }
-
-    final snackBar = SnackBar(
-      content: Text(l10n.progressReportGenerating),
-      duration: const Duration(minutes: 5),
+    await requestDoctorReport(
+      context: context,
+      ref: ref,
+      analyticsSource: 'progress',
+      proAccessSource: 'progress_doctor_report',
     );
-    messenger.showSnackBar(snackBar);
-
-    try {
-      final url = await CreateReportService().createTodayReport();
-      if (!mounted) return;
-      messenger.hideCurrentSnackBar();
-      await _shareReportUrl(url);
-    } on CreateReportException catch (error) {
-      if (!mounted) return;
-      messenger.hideCurrentSnackBar();
-      messenger.showSnackBar(
-        SnackBar(content: Text(_messageForReportError(error, l10n))),
-      );
-      debugPrint('Create doctor report failed at ${error.stage}: ${error.message}');
-    } catch (error) {
-      if (!mounted) return;
-      messenger.hideCurrentSnackBar();
-      messenger.showSnackBar(
-        SnackBar(content: Text(l10n.progressReportError)),
-      );
-      debugPrint('Create doctor report failed: $error');
-    }
-  }
-
-  Future<void> _shareReportUrl(String url) async {
-    final messenger = ScaffoldMessenger.of(context);
-    final l10n = context.l10n;
-    final uri = Uri.parse(url);
-
-    try {
-      final result = await Share.shareUri(uri);
-      if (result.status != ShareResultStatus.unavailable) {
-        return;
-      }
-    } catch (error) {
-      debugPrint('Share.shareUri failed for report URL: $error');
-    }
-
-    try {
-      final result = await Share.share(url);
-      if (result.status != ShareResultStatus.unavailable) {
-        return;
-      }
-    } catch (error) {
-      debugPrint('Share.share failed for report URL: $error');
-    }
-
-    try {
-      final opened = await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication,
-      );
-      if (opened) {
-        if (!mounted) return;
-        messenger.showSnackBar(
-          SnackBar(
-            content: Text(l10n.progressReportOpenedInBrowser),
-          ),
-        );
-        return;
-      }
-    } catch (error) {
-      debugPrint('launchUrl failed for report URL: $error');
-    }
-
-    await Clipboard.setData(ClipboardData(text: url));
-    if (!mounted) return;
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(l10n.progressReportCopiedLink),
-      ),
-    );
-  }
-
-  String _messageForReportError(
-    CreateReportException error,
-    AppLocalizations l10n,
-  ) {
-    switch (error.stage) {
-      case CreateReportFailureStage.request:
-        return l10n.progressReportError;
-      case CreateReportFailureStage.polling:
-        return l10n.progressReportPendingRetry;
-      case CreateReportFailureStage.signing:
-        return l10n.progressReportOpenError;
-    }
   }
 
   @override
@@ -1002,6 +935,7 @@ class _AllProgressScreenState
               ...snapshot.meals,
               ...snapshot.mood,
               ...snapshot.symptoms,
+              ...snapshot.cravings,
             ];
             final availableRanges = availableProgressRanges(records);
             final allRanges = _weightHeroRanges;
@@ -1061,6 +995,8 @@ class _AllProgressScreenState
                 _buildMoodCard(context, snapshot, effectiveRange),
                 const SizedBox(height: 12),
                 _buildSymptomsCard(context, snapshot, effectiveRange),
+                const SizedBox(height: 12),
+                _buildCravingsCard(context, snapshot, effectiveRange),
               ],
             );
           },
@@ -1456,6 +1392,7 @@ class _ProgressOverviewSnapshot {
     required this.meals,
     required this.mood,
     required this.symptoms,
+    required this.cravings,
   });
 
   final AppProfile? profile;
@@ -1466,4 +1403,5 @@ class _ProgressOverviewSnapshot {
   final List<Map<String, dynamic>> meals;
   final List<Map<String, dynamic>> mood;
   final List<Map<String, dynamic>> symptoms;
+  final List<Map<String, dynamic>> cravings;
 }

@@ -59,12 +59,12 @@ class _MainShellState extends ConsumerState<MainShell> {
   static const _chain = <_ShowcaseEntry>[
     (seenKey: 'showcase_reminders_seen', requiredTab: 0),
     (seenKey: 'showcase_log_seen',       requiredTab: -1),
-    (seenKey: 'showcase_water_seen',     requiredTab: 1),
+    (seenKey: 'showcase_mood_seen',      requiredTab: 1),
     (seenKey: 'showcase_progress_seen',  requiredTab: -1),
   ];
 
   final GlobalKey _logShowcaseKey = GlobalKey();
-  final GlobalKey _waterShowcaseKey = GlobalKey();
+  final GlobalKey _moodShowcaseKey = GlobalKey();
   final GlobalKey _progressShowcaseKey = GlobalKey();
 
   // Tracks which showcases have been triggered this session to avoid re-firing.
@@ -225,10 +225,10 @@ class _MainShellState extends ConsumerState<MainShell> {
             isActive: _index == 0,
           ),
           LogScreen(
-            waterShowcaseKey: _waterShowcaseKey,
-            showWaterShowcase: _seen(profile, 'showcase_water_seen') == false,
-            onWaterShowcaseInteracted: () =>
-                _markShellShowcaseSeen('showcase_water_seen'),
+            moodShowcaseKey: _moodShowcaseKey,
+            showMoodShowcase: _seen(profile, 'showcase_mood_seen') == false,
+            onMoodShowcaseInteracted: () =>
+                _markShellShowcaseSeen('showcase_mood_seen'),
             isActive: _index == 1,
           ),
           const ProgressScreen(),

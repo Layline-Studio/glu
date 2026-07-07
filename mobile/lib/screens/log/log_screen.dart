@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:showcaseview/showcaseview.dart';
 
@@ -16,7 +16,8 @@ import '../../providers/subscription_provider.dart';
 import '../../providers/today_meals_provider.dart';
 import '../../services/record_service.dart';
 import '../../theme/app_colors.dart';
-import '../home_screen.dart';
+import '../../widgets/pro_gate.dart';
+import 'cravings_log_screen.dart';
 import 'dose_log_screen.dart';
 import 'exercise_log_screen.dart';
 import 'meals_log_screen.dart';
@@ -44,6 +45,7 @@ final logStatsProvider = FutureProvider<_LogStatsSnapshot>((ref) async {
     service.loadTimeseries(RecordService.mealsColumn, weekStart, end),
     service.loadLatestRecord(RecordService.weightColumn),
     service.loadTimeseries(RecordService.dosesColumn, start, end),
+    service.loadTimeseries(RecordService.cravingsColumn, start, end),
   ]);
 
   return _LogStatsSnapshot(
@@ -58,21 +60,22 @@ final logStatsProvider = FutureProvider<_LogStatsSnapshot>((ref) async {
     mealsWeek: List<Map<String, dynamic>>.from(results[8] as List),
     latestWeight: results[9] as Map<String, dynamic>?,
     doses: List<Map<String, dynamic>>.from(results[10] as List),
+    cravings: List<Map<String, dynamic>>.from(results[11] as List),
   );
 });
 
 class LogScreen extends ConsumerStatefulWidget {
   const LogScreen({
     super.key,
-    this.waterShowcaseKey,
-    this.showWaterShowcase = false,
-    this.onWaterShowcaseInteracted,
+    this.moodShowcaseKey,
+    this.showMoodShowcase = false,
+    this.onMoodShowcaseInteracted,
     this.isActive = true,
   });
 
-  final GlobalKey? waterShowcaseKey;
-  final bool showWaterShowcase;
-  final VoidCallback? onWaterShowcaseInteracted;
+  final GlobalKey? moodShowcaseKey;
+  final bool showMoodShowcase;
+  final VoidCallback? onMoodShowcaseInteracted;
   final bool isActive;
 
   @override
@@ -82,13 +85,11 @@ class LogScreen extends ConsumerStatefulWidget {
 class _LogScreenState extends ConsumerState<LogScreen> {
   int _nutritionTileRotationIndex = 0;
   Timer? _nutritionTileRotationTimer;
-  bool _didAttemptWaterShowcase = false;
-  late final int _todayInsightVariantIndex;
+  bool _didAttemptMoodShowcase = false;
 
   @override
   void initState() {
     super.initState();
-    _todayInsightVariantIndex = math.Random().nextInt(3);
     _nutritionTileRotationTimer =
         Timer.periodic(const Duration(seconds: 4), (_) {
       if (!mounted) return;
@@ -99,9 +100,9 @@ class _LogScreenState extends ConsumerState<LogScreen> {
   @override
   void didUpdateWidget(covariant LogScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if ((!oldWidget.showWaterShowcase && widget.showWaterShowcase) ||
+    if ((!oldWidget.showMoodShowcase && widget.showMoodShowcase) ||
         (!oldWidget.isActive && widget.isActive)) {
-      _didAttemptWaterShowcase = false;
+      _didAttemptMoodShowcase = false;
     }
   }
 
@@ -111,19 +112,19 @@ class _LogScreenState extends ConsumerState<LogScreen> {
     super.dispose();
   }
 
-  void _maybeStartWaterShowcase(AppProfile? profile) {
-    if (_didAttemptWaterShowcase ||
+  void _maybeStartMoodShowcase(AppProfile? profile) {
+    if (_didAttemptMoodShowcase ||
         profile == null ||
-        !widget.showWaterShowcase ||
+        !widget.showMoodShowcase ||
         !widget.isActive ||
-        widget.waterShowcaseKey == null) {
+        widget.moodShowcaseKey == null) {
       return;
     }
 
-    _didAttemptWaterShowcase = true;
+    _didAttemptMoodShowcase = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      ShowcaseView.get().startShowCase([widget.waterShowcaseKey!]);
+      ShowcaseView.get().startShowCase([widget.moodShowcaseKey!]);
     });
   }
 
@@ -197,45 +198,18 @@ class _LogScreenState extends ConsumerState<LogScreen> {
     _invalidateLogData();
   }
 
+  Future<void> _openCravingsLog() async {
+    HapticFeedback.selectionClick();
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const CravingsLogScreen(),
+      ),
+    );
+    _invalidateLogData();
+  }
+
   void _invalidateLogData() {
     ref.invalidate(logStatsProvider);
-  }
-
-  bool _hasLogsToday(_LogStatsSnapshot? stats) {
-    if (stats == null) {
-      return false;
-    }
-    return [
-      stats.water,
-      stats.exercise,
-      stats.weight,
-      stats.meals,
-      stats.mood,
-      stats.symptoms,
-      stats.doses,
-    ].any((entries) => entries.isNotEmpty);
-  }
-
-  String _todayInsightCardTitle(bool hasLogsToday, AppLocalizations l10n) {
-    if (hasLogsToday) {
-      return switch (_todayInsightVariantIndex) {
-        0 => l10n.homeInsightMoreLogsVariant1Title,
-        1 => l10n.homeInsightMoreLogsVariant2Title,
-        _ => l10n.homeInsightMoreLogsVariant3Title,
-      };
-    }
-    return l10n.homeInsightLogTodayTitle;
-  }
-
-  String _todayInsightCardCopy(bool hasLogsToday, AppLocalizations l10n) {
-    if (hasLogsToday) {
-      return switch (_todayInsightVariantIndex) {
-        0 => l10n.homeInsightMoreLogsVariant1Body,
-        1 => l10n.homeInsightMoreLogsVariant2Body,
-        _ => l10n.homeInsightMoreLogsVariant3Body,
-      };
-    }
-    return l10n.homeInsightLogTodayBodyNoLogs;
   }
 
   void _trackLogTileOpened({
@@ -260,20 +234,16 @@ class _LogScreenState extends ConsumerState<LogScreen> {
     final stats = ref.watch(logStatsProvider).asData?.value;
     final profile = ref.watch(profileBootstrapProvider).asData?.value;
     final isPro = ref.watch(isProProvider);
-    _maybeStartWaterShowcase(profile);
-    final hasLogsToday = _hasLogsToday(stats);
-    final insightCardMode =
-        (profile?.settings['debug_insight_card_mode'] as String?)
-            ?.trim()
-            .toLowerCase();
+    _maybeStartMoodShowcase(profile);
 
     final tiles = <_LogMetricTileData>[
       _buildNutritionTile(colors, stats, profile, l10n),
-      _buildWaterTile(colors, stats, profile, l10n),
+      _buildWaterTile(colors, stats, profile, l10n, isPro),
       _buildExerciseTile(colors, stats, profile, l10n),
       _buildWeightTile(colors, stats, profile, l10n),
       _buildMoodTile(colors, stats, l10n),
       _buildSymptomsTile(colors, stats, l10n),
+      _buildCravingsTile(colors, stats, l10n, isPro),
       _buildDoseTile(colors, stats, profile, l10n),
     ];
 
@@ -293,25 +263,27 @@ class _LogScreenState extends ConsumerState<LogScreen> {
                 ),
               ),
               const SizedBox(height: 18),
-              TodayInsightCard(
-                hasLogsToday: hasLogsToday,
-                title: _todayInsightCardTitle(hasLogsToday, l10n),
-                copy: _todayInsightCardCopy(hasLogsToday, l10n),
-                insightCardMode: insightCardMode,
-                isPro: isPro,
-                analyticsSource: 'log',
-                proAccessSource: 'log_daily_insight',
-              ),
-              const SizedBox(height: 18),
               _LogTrackingSection(
                 tiles: tiles,
-                waterShowcaseKey: widget.waterShowcaseKey,
-                showWaterShowcase: widget.showWaterShowcase,
-                waterShowcaseTitle: l10n.logWaterShowcaseTitle,
-                waterShowcaseDescription: l10n.logWaterShowcaseDescription,
-                onWaterShowcaseInteracted: widget.onWaterShowcaseInteracted,
+                moodShowcaseKey: widget.moodShowcaseKey,
+                showMoodShowcase: widget.showMoodShowcase,
+                moodShowcaseTitle: l10n.logMoodShowcaseTitle,
+                moodShowcaseDescription: l10n.logMoodShowcaseDescription,
+                onMoodShowcaseInteracted: widget.onMoodShowcaseInteracted,
                 onTileTap: (tile) {
                   if (tile.title == l10n.homeWaterTitle) {
+                    if (tile.isLocked) {
+                      _trackLogTileOpened(
+                        tile: 'water',
+                        destination: 'pro_paywall',
+                      );
+                      openProAccessScreen(
+                        context,
+                        ref,
+                        source: 'log_water',
+                      );
+                      return;
+                    }
                     _trackLogTileOpened(
                       tile: 'water',
                       destination: 'water_log',
@@ -383,6 +355,26 @@ class _LogScreenState extends ConsumerState<LogScreen> {
                     _openMoodLog();
                     return;
                   }
+                  if (tile.title == l10n.homeCravingsTitle) {
+                    if (tile.isLocked) {
+                      _trackLogTileOpened(
+                        tile: 'cravings',
+                        destination: 'pro_paywall',
+                      );
+                      openProAccessScreen(
+                        context,
+                        ref,
+                        source: 'log_cravings',
+                      );
+                      return;
+                    }
+                    _trackLogTileOpened(
+                      tile: 'cravings',
+                      destination: 'cravings_log',
+                    );
+                    _openCravingsLog();
+                    return;
+                  }
                   if (tile.title == l10n.homeDoseTitle) {
                     _trackLogTileOpened(
                       tile: 'dose',
@@ -405,6 +397,7 @@ class _LogScreenState extends ConsumerState<LogScreen> {
     _LogStatsSnapshot? stats,
     AppProfile? profile,
     AppLocalizations l10n,
+    bool isPro,
   ) {
     final waterTint = Color.lerp(colors.accentSky, colors.heroEnd, 0.58)!;
     final goal = profile?.goals.water;
@@ -446,6 +439,7 @@ class _LogScreenState extends ConsumerState<LogScreen> {
             : overallProgress >= 1
                 ? _LogTileState.complete
                 : _LogTileState.partial,
+        isLocked: !isPro,
       );
     }
 
@@ -466,6 +460,7 @@ class _LogScreenState extends ConsumerState<LogScreen> {
       isDailyGoalReached: waterEntries.isNotEmpty,
       state:
           waterEntries.isEmpty ? _LogTileState.empty : _LogTileState.complete,
+      isLocked: !isPro,
     );
   }
 
@@ -859,6 +854,27 @@ class _LogScreenState extends ConsumerState<LogScreen> {
     );
   }
 
+  _LogMetricTileData _buildCravingsTile(
+    AppColors colors,
+    _LogStatsSnapshot? stats,
+    AppLocalizations l10n,
+    bool isPro,
+  ) {
+    final cravingEntries = stats?.cravings ?? const <Map<String, dynamic>>[];
+    return _LogMetricTileData(
+      title: l10n.homeCravingsTitle,
+      value: cravingEntries.isEmpty ? '' : '${cravingEntries.length} logged',
+      caption: cravingEntries.isEmpty ? l10n.homeLogACraving : '',
+      icon: LucideIcons.donut,
+      tint: const Color(0xFFE96FA0),
+      isDailyGoalReached: cravingEntries.isNotEmpty,
+      state: cravingEntries.isEmpty
+          ? _LogTileState.empty
+          : _LogTileState.complete,
+      isLocked: !isPro,
+    );
+  }
+
   _LogMetricTileData _buildMoodTile(
     AppColors colors,
     _LogStatsSnapshot? stats,
@@ -970,20 +986,20 @@ class _LogTrackingSection extends StatelessWidget {
   const _LogTrackingSection({
     required this.tiles,
     required this.onTileTap,
-    this.waterShowcaseKey,
-    this.showWaterShowcase = false,
-    this.waterShowcaseTitle,
-    this.waterShowcaseDescription,
-    this.onWaterShowcaseInteracted,
+    this.moodShowcaseKey,
+    this.showMoodShowcase = false,
+    this.moodShowcaseTitle,
+    this.moodShowcaseDescription,
+    this.onMoodShowcaseInteracted,
   });
 
   final List<_LogMetricTileData> tiles;
   final ValueChanged<_LogMetricTileData> onTileTap;
-  final GlobalKey? waterShowcaseKey;
-  final bool showWaterShowcase;
-  final String? waterShowcaseTitle;
-  final String? waterShowcaseDescription;
-  final VoidCallback? onWaterShowcaseInteracted;
+  final GlobalKey? moodShowcaseKey;
+  final bool showMoodShowcase;
+  final String? moodShowcaseTitle;
+  final String? moodShowcaseDescription;
+  final VoidCallback? onMoodShowcaseInteracted;
 
   @override
   Widget build(BuildContext context) {
@@ -999,13 +1015,13 @@ class _LogTrackingSection extends StatelessWidget {
           SizedBox(
             width: isOdd && index == tiles.length - 1 ? gridWidth : halfWidth,
             height: 160,
-            child: tiles[index].title == context.l10n.homeWaterTitle &&
-                    showWaterShowcase &&
-                    waterShowcaseKey != null
+            child: tiles[index].title == context.l10n.homeMoodTitle &&
+                    showMoodShowcase &&
+                    moodShowcaseKey != null
                 ? Showcase(
-                    key: waterShowcaseKey!,
-                    title: waterShowcaseTitle ?? '',
-                    description: waterShowcaseDescription ?? '',
+                    key: moodShowcaseKey!,
+                    title: moodShowcaseTitle ?? '',
+                    description: moodShowcaseDescription ?? '',
                     tooltipBackgroundColor: context.appColors.surface,
                     tooltipBorderRadius: BorderRadius.circular(24),
                     tooltipPadding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
@@ -1033,9 +1049,9 @@ class _LogTrackingSection extends StatelessWidget {
                     toolTipMargin: 10,
                     targetPadding: const EdgeInsets.all(4),
                     targetBorderRadius: BorderRadius.circular(24),
-                    onBarrierClick: onWaterShowcaseInteracted,
-                    onToolTipClick: onWaterShowcaseInteracted,
-                    onTargetClick: onWaterShowcaseInteracted,
+                    onBarrierClick: onMoodShowcaseInteracted,
+                    onToolTipClick: onMoodShowcaseInteracted,
+                    onTargetClick: onMoodShowcaseInteracted,
                     disposeOnTap: true,
                     child: _LogMetricTile(
                       tile: tiles[index],
@@ -1093,20 +1109,41 @@ class _LogMetricTile extends StatelessWidget {
                       state: tile.state,
                     ),
                     const Spacer(),
-                    Container(
-                      width: 28,
-                      height: 28,
-                      decoration: BoxDecoration(
-                        color: colors.surface.withValues(alpha: 0.7),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: colors.lineSubtle),
+                    if (tile.isLocked)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 7,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFD4A853).withValues(
+                            alpha: 0.14,
+                          ),
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Text(
+                          context.l10n.manageSubscriptionProBadge,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: const Color(0xFF9C7720),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      )
+                    else
+                      Container(
+                        width: 28,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color: colors.surface.withValues(alpha: 0.7),
+                          shape: BoxShape.circle,
+                          border: Border.all(color: colors.lineSubtle),
+                        ),
+                        child: Icon(
+                          Icons.add_rounded,
+                          size: 18,
+                          color: colors.textSecondary,
+                        ),
                       ),
-                      child: Icon(
-                        Icons.add_rounded,
-                        size: 18,
-                        color: colors.textSecondary,
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -1307,6 +1344,7 @@ class _LogStatsSnapshot {
     required this.mealsWeek,
     required this.latestWeight,
     required this.doses,
+    required this.cravings,
   });
 
   final List<Map<String, dynamic>> water;
@@ -1320,6 +1358,7 @@ class _LogStatsSnapshot {
   final List<Map<String, dynamic>> mealsWeek;
   final Map<String, dynamic>? latestWeight;
   final List<Map<String, dynamic>> doses;
+  final List<Map<String, dynamic>> cravings;
 }
 
 class _LogMetricTileData {
@@ -1335,6 +1374,7 @@ class _LogMetricTileData {
     this.isOverDailyGoal = false,
     this.carouselIndex = 0,
     this.carouselCount = 1,
+    this.isLocked = false,
   });
 
   final String title;
@@ -1348,6 +1388,7 @@ class _LogMetricTileData {
   final bool isOverDailyGoal;
   final int carouselIndex;
   final int carouselCount;
+  final bool isLocked;
 }
 
 enum _LogTileState {
