@@ -3,7 +3,7 @@ import { corsHeaders } from "../_shared/cors.ts";
 import { errorResponse, jsonResponse } from "../_shared/response.ts";
 import { getServiceClient } from "../_shared/supabase.ts";
 import { createPendingAiRequest, finalizeAiRequest } from "../_shared/usage.ts";
-import { generateReportPdf } from "./core.ts";
+import { generateReportPdf } from "./render.ts";
 
 declare const EdgeRuntime: {
   waitUntil(promise: Promise<unknown>): void;
@@ -102,12 +102,12 @@ async function processReport(requestId: string, userId: string): Promise<void> {
     const [profileResult, recordsResult] = await Promise.all([
       client
         .from("profiles")
-        .select("settings, goals")
+        .select("settings, goals, timezone")
         .eq("id", userId)
         .maybeSingle(),
       client
         .from("records")
-        .select("weight, doses")
+        .select("water, exercise, weight, meals, symptoms, mood, doses, cravings")
         .eq("user_id", userId)
         .maybeSingle(),
     ]);
@@ -119,13 +119,11 @@ async function processReport(requestId: string, userId: string): Promise<void> {
     const profile = profileResult.data as {
       settings: Record<string, unknown>;
       goals: Record<string, unknown> | null;
+      timezone: string | null;
     };
-    const records = (recordsResult.data ?? {}) as {
-      weight: Array<Record<string, unknown>> | null;
-      doses: Array<Record<string, unknown>> | null;
-    };
+    const records = (recordsResult.data ?? {}) as Record<string, unknown>;
 
-    const pdfBytes = await generateReportPdf(profile, records);
+    const pdfBytes = await generateReportPdf({ profile, records });
 
     const now = new Date();
     const yyyymmdd = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`;

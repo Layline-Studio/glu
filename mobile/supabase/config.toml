@@ -40,3 +40,7 @@ skip_nonce_check = true
 enabled = true
 client_id = "env(SUPABASE_AUTH_EXTERNAL_APPLE_CLIENT_ID)"
 secret = "env(SUPABASE_AUTH_EXTERNAL_APPLE_SECRET)"
+
+[functions.create-report]
+entrypoint = "./functions/create-report/index.ts"
+static_files = ["./functions/create-report/fonts/*"]
