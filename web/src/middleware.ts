@@ -9,8 +9,8 @@ const defaultCsp = [
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
-  "connect-src 'self' https://www.google-analytics.com https://formfy.layline.ventures",
-  "form-action 'self' https://formfy.layline.ventures",
+  "connect-src 'self' https://www.google-analytics.com https://formfy.layline.software",
+  "form-action 'self' https://formfy.layline.software",
   'upgrade-insecure-requests',
 ].join('; ');
 

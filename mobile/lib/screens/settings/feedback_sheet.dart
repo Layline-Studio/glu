@@ -38,7 +38,7 @@ class _FeedbackSheetState extends State<FeedbackSheet> {
     try {
       final name = widget.name ?? widget.email ?? 'User';
       final response = await http.post(
-        Uri.parse('https://formfy.layline.ventures/contact@layline.ventures'),
+        Uri.parse('https://formfy.layline.software/hello@myglu.health'),
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: {
           'name': name,
