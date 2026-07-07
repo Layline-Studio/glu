@@ -48,6 +48,7 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
+    <meta name="yandex-verification" content="3dbb20f1b1657ca2" />
     <link rel="canonical" href={canonicalUrl.href} />
     {alternateLocales?.map((entry) => (
       <link rel="alternate" hreflang={entry.locale} href={new URL(entry.path, Astro.site).href} />
