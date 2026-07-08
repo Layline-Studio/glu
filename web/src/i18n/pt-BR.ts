@@ -12,7 +12,7 @@ export const ptBR = {
   hero: {
     title: 'Glu, o rastreador de GLP-1 para o progresso diário',
     body:
-      'Um lugar claro para acompanhar medicação, refeições, movimento, sintomas, lembretes e progresso: antes, durante e depois do tratamento.',
+      'Um lugar claro para acompanhar medicação, refeições, movimento, sintomas, desejos, lembretes e progresso: antes, durante e depois do tratamento.',
     rating: 'Avaliado com 5 estrelas na App Store e no Google Play',
     compatibility:
       'Funciona com injeções e comprimidos de GLP-1: Zepbound, Mounjaro, Ozempic, Wegovy, Rybelsus e mais.',
@@ -95,6 +95,7 @@ export const ptBR = {
       'Acompanhamento de peso, refeições, água, humor e sintomas',
       'Uma linha do tempo única pensada para rotinas com GLP-1',
       'Relatórios prontos para o médico com níveis de medicação e adesão',
+      'Rastreamento de desejos para identificar padrões conforme o efeito da dose diminui',
       'Suporte para dúvidas de conta e assinatura',
     ],
     note:
@@ -117,6 +118,7 @@ export const ptBR = {
       { label: 'Tendências de peso no mesmo fluxo', glu: 'Integrado', notes: 'Manual', habits: 'Geralmente separado' },
       { label: 'Pensado especificamente para rotinas com GLP-1', glu: 'Sim', notes: 'Não', habits: 'Não' },
       { label: 'Relatório pronto para o médico com níveis de medicação e adesão', glu: 'Integrado', notes: 'Não', habits: 'Não' },
+      { label: 'Rastreamento de desejos ligado ao seu calendário de doses', glu: 'Integrado', notes: 'Não', habits: 'Não' },
     ],
   },
   testimonials: {
@@ -255,6 +257,11 @@ export const ptBR = {
         question: 'O Glu pode rastrear efeitos colaterais e humor?',
         answer:
           'Sim. O Glu suporta tanto o acompanhamento de humor quanto de sintomas, para que efeitos colaterais, padrões emocionais, timing e outros detalhes da rotina fiquem no mesmo lugar que sua medicação e seus registros de progresso.',
+      },
+      {
+        question: 'O Glu rastreia desejos por comida?',
+        answer:
+          'Sim. O Glu inclui um rastreador de desejos dedicado para registrar o que você desejou, a intensidade e se resistiu ou cedeu, útil para identificar padrões conforme o efeito da dose diminui entre as aplicações.',
       },
       {
         question: 'Como o Glu pode ajudar nas minhas consultas médicas?',

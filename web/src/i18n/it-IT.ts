@@ -12,7 +12,7 @@ export const itIT = {
   hero: {
     title: 'Glu, il tracker GLP-1 per i progressi quotidiani',
     body:
-      'Un posto chiaro in cui seguire terapia, pasti, movimento, sintomi, promemoria e progressi: prima, durante e dopo il trattamento.',
+      'Un posto chiaro in cui seguire terapia, pasti, movimento, sintomi, voglie, promemoria e progressi: prima, durante e dopo il trattamento.',
     rating: 'Valutato 5 stelle su App Store e Google Play',
     compatibility:
       'Funziona con iniezioni e compresse GLP-1: Zepbound, Mounjaro, Ozempic, Wegovy, Rybelsus e altro.',
@@ -95,6 +95,7 @@ export const itIT = {
       'Monitoraggio di peso, pasti, acqua, umore e sintomi',
       'Un’unica timeline pensata per le routine GLP-1',
       'Referti pronti per il medico con livelli del farmaco e aderenza',
+      'Monitoraggio delle voglie per individuare schemi quando l’effetto della dose cala',
       'Accesso al supporto per domande su account e abbonamento',
     ],
     note:
@@ -117,6 +118,7 @@ export const itIT = {
       { label: 'Trend del peso nello stesso flusso', glu: 'Integrato', notes: 'Manuale', habits: 'Di solito separato' },
       { label: 'Progettato specificamente per routine GLP-1', glu: 'Sì', notes: 'No', habits: 'No' },
       { label: 'Referto pronto per il medico con livelli del farmaco e aderenza', glu: 'Integrato', notes: 'No', habits: 'No' },
+      { label: 'Monitoraggio delle voglie legato al calendario delle dosi', glu: 'Integrato', notes: 'No', habits: 'No' },
     ],
   },
   testimonials: {
@@ -210,6 +212,7 @@ export const itIT = {
       { question: 'Come monitoro il mio peso mentre assumo farmaci GLP-1?', answer: 'Glu rende semplice registrare il peso nel tempo così puoi guardare la tendenza complessiva invece di reagire a un singolo giorno isolato. Questo aiuta a mettere in contesto dosi, pasti, umore e sintomi.' },
       { question: 'Posso monitorare la nutrizione con Glu?', answer: 'Sì. Glu supporta il monitoraggio dei pasti e dei dati legati alla nutrizione, così da tenere le scelte alimentari accanto a promemoria, storico delle dosi, umore, sintomi e trend del peso.' },
       { question: 'Glu può monitorare effetti collaterali e umore?', answer: 'Sì. Glu supporta sia il monitoraggio dell’umore sia quello dei sintomi, così che effetti collaterali, pattern emotivi, tempistiche e altri dettagli della routine restino nello stesso posto della terapia e dei tuoi progressi.' },
+      { question: 'Glu monitora le voglie di cibo?', answer: 'Sì. Glu include un monitoraggio delle voglie dedicato per registrare cosa hai desiderato, quanto era intensa e se hai resistito o ceduto, utile per individuare schemi quando l’effetto della dose cala tra un’iniezione e l’altra.' },
       { question: 'Come può aiutare Glu nelle visite mediche?', answer: 'Glu può generare un report per il medico relativo agli ultimi 90 giorni, con livelli stimati del farmaco, aderenza alle dosi, rotazione dei siti di iniezione, andamento del peso, sintomi e umore, così la visita parte con il quadro completo invece che a memoria.' },
       { question: 'I miei dati sanitari sono privati e sicuri in Glu?', answer: 'Glu tratta i dati sanitari e di monitoraggio come sensibili. Il sito collega direttamente anche l’informativa sulla privacy e le istruzioni per l’eliminazione dell’account, così puoi verificare come le tue informazioni vengono raccolte, usate, conservate ed eliminate.' },
       { question: 'Glu funziona con Apple Health o Google Fit?', answer: 'Le integrazioni con le piattaforme possono cambiare nel tempo. Se la sincronizzazione con Apple Health o Google Fit è importante per il tuo flusso, contatta l’assistenza per confermare lo stato attuale prima di farvi affidamento.' },

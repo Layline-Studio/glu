@@ -12,7 +12,7 @@ export const esES = {
   hero: {
     title: 'Glu, el rastreador GLP-1 para el progreso diario',
     body:
-      'Un lugar claro para seguir la medicación, las comidas, el movimiento, los síntomas, los recordatorios y el progreso: antes, durante y después del tratamiento.',
+      'Un lugar claro para seguir la medicación, las comidas, el movimiento, los síntomas, los antojos, los recordatorios y el progreso: antes, durante y después del tratamiento.',
     rating: 'Calificado con 5 estrellas en App Store y Google Play',
     compatibility:
       'Funciona con inyecciones y pastillas GLP-1: Zepbound, Mounjaro, Ozempic, Wegovy, Rybelsus y más.',
@@ -95,6 +95,7 @@ export const esES = {
       'Seguimiento de peso, comidas, agua, estado de ánimo y síntomas',
       'Una línea de tiempo única pensada para rutinas con GLP-1',
       'Informes listos para el médico con niveles de medicación y adherencia',
+      'Seguimiento de antojos para detectar patrones a medida que baja el efecto de la dosis',
       'Acceso a soporte para dudas sobre cuenta y suscripción',
     ],
     note:
@@ -117,6 +118,7 @@ export const esES = {
       { label: 'Tendencias de peso en el mismo flujo', glu: 'Integrado', notes: 'Manual', habits: 'Normalmente separado' },
       { label: 'Diseñado específicamente para rutinas GLP-1', glu: 'Sí', notes: 'No', habits: 'No' },
       { label: 'Informe listo para el médico con niveles de medicación y adherencia', glu: 'Integrado', notes: 'No', habits: 'No' },
+      { label: 'Seguimiento de antojos ligado a tu calendario de dosis', glu: 'Integrado', notes: 'No', habits: 'No' },
     ],
   },
   testimonials: {
@@ -210,6 +212,7 @@ export const esES = {
       { question: '¿Cómo sigo mi peso mientras tomo medicamentos GLP-1?', answer: 'Glu facilita registrar el peso a lo largo del tiempo para que veas la tendencia general en lugar de reaccionar a un solo día aislado. Eso ayuda a poner en contexto dosis, comidas, estado de ánimo y síntomas.' },
       { question: '¿Puedo seguir la nutrición con Glu?', answer: 'Sí. Glu ofrece seguimiento de comidas y registros relacionados con la nutrición para que tus elecciones alimentarias queden junto a tus recordatorios, historial de dosis, estado de ánimo, síntomas y tendencias de peso.' },
       { question: '¿Glu puede seguir efectos secundarios y estado de ánimo?', answer: 'Sí. Glu admite tanto el seguimiento del estado de ánimo como de los síntomas, para que efectos secundarios, patrones emocionales, timing y otros detalles de la rutina queden en el mismo lugar que tu medicación y tu progreso.' },
+      { question: '¿Glu registra los antojos de comida?', answer: 'Sí. Glu incluye un seguimiento de antojos dedicado para registrar qué se te antojó, con qué intensidad y si lo resististe o cediste, útil para detectar patrones a medida que baja el efecto de la dosis entre inyecciones.' },
       { question: '¿Cómo puede ayudar Glu en mis consultas médicas?', answer: 'Glu puede generar un informe médico de los últimos 90 días, con niveles estimados de medicación, adherencia a las dosis, rotación de zonas de inyección, tendencias de peso, síntomas y estado de ánimo, para que las consultas empiecen con el panorama completo en vez de depender de la memoria.' },
       { question: '¿Mis datos de salud están privados y seguros en Glu?', answer: 'Glu trata los datos de salud y seguimiento como sensibles. El sitio también enlaza directamente a la Política de Privacidad y a las instrucciones de eliminación de cuenta para que puedas revisar cómo se recopila, usa, almacena y elimina tu información.' },
       { question: '¿Glu funciona con Apple Health o Google Fit?', answer: 'Las integraciones con plataformas pueden cambiar con el tiempo. Si la sincronización con Apple Health o Google Fit es importante para tu flujo, contacta con soporte para confirmar el estado actual antes de depender de ello.' },

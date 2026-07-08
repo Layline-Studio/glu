@@ -12,7 +12,7 @@ export const enUS = {
   hero: {
     title: 'Glu, the GLP-1 tracker for daily progress',
     body:
-      'One clear place to track medication, meals, movement, symptoms, reminders, and progress: before, during, and after treatment.',
+      'One clear place to track medication, meals, movement, symptoms, cravings, reminders, and progress: before, during, and after treatment.',
     rating: 'Rated 5 stars on the App Store and Google Play',
     compatibility:
       'Works with all GLP-1 shots and pills: Zepbound, Mounjaro, Ozempic, Wegovy, Rybelsus, and more.',
@@ -95,6 +95,7 @@ export const enUS = {
       'Weight, meal, water, mood, and symptom tracking',
       'A single timeline built for GLP-1 routines',
       'Doctor-ready reports with medication levels and adherence',
+      'Craving tracking to catch patterns as your dose wears off',
       'Support access for account and subscription questions',
     ],
     note:
@@ -117,6 +118,7 @@ export const enUS = {
       { label: 'Weight trends in the same workflow', glu: 'Built in', notes: 'Manual', habits: 'Usually separate' },
       { label: 'Designed specifically for GLP-1 routines', glu: 'Yes', notes: 'No', habits: 'No' },
       { label: 'Doctor-ready report with medication levels and adherence', glu: 'Built in', notes: 'No', habits: 'No' },
+      { label: 'Craving tracking tied to your dose timeline', glu: 'Built in', notes: 'No', habits: 'No' },
     ],
   },
   testimonials: {
@@ -255,6 +257,11 @@ export const enUS = {
         question: 'Can Glu track side effects and mood?',
         answer:
           'Yes. Glu supports both mood tracking and symptom tracking so you can keep side effects, emotional patterns, timing, and other routine details in the same place as your medication and progress logs.',
+      },
+      {
+        question: 'Does Glu track food cravings?',
+        answer:
+          'Yes. Glu includes a dedicated cravings tracker so you can log what you craved, how strong it felt, and whether you resisted or gave in, useful for spotting patterns as a dose wears off between injections.',
       },
       {
         question: 'How can Glu help with medical appointments?',
