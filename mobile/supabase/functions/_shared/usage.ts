@@ -11,6 +11,10 @@ const MODEL_PRICING: Record<
     input: 0.1 / 1_000_000,
     output: 0.4 / 1_000_000,
   },
+  "gemini-3.1-flash-lite": {
+    input: 0.25 / 1_000_000,
+    output: 1.5 / 1_000_000,
+  },
 };
 
 export function calculateCost(
@@ -64,12 +68,16 @@ export async function createPendingAiRequest(
     request: Record<string, unknown>;
   },
 ): Promise<string> {
-  const { data, error } = await client.from("ai_requests").insert({
-    user_id: params.userId,
-    feature_name: params.featureName,
-    status: "pending",
-    request: params.request,
-  }).select("id").single();
+  const { data, error } = await client
+    .from("ai_requests")
+    .insert({
+      user_id: params.userId,
+      feature_name: params.featureName,
+      status: "pending",
+      request: params.request,
+    })
+    .select("id")
+    .single();
 
   if (error) {
     throw new Error(error.message);
@@ -115,10 +123,10 @@ export async function finalizeAiRequest(
     );
   }
 
-  const { error } = await client.from("ai_requests").update(updates).eq(
-    "id",
-    params.requestId,
-  );
+  const { error } = await client
+    .from("ai_requests")
+    .update(updates)
+    .eq("id", params.requestId);
 
   if (error) {
     throw new Error(error.message);

@@ -40,7 +40,7 @@ async function withRetry(
 
   throw (
     lastError ??
-      new AiRetryableProviderError("google", "Google max retries exceeded", 429)
+    new AiRetryableProviderError("google", "Google max retries exceeded", 429)
   );
 }
 
@@ -62,8 +62,8 @@ export async function callGoogleWithUsage<T>(
     schema: Record<string, unknown>;
   },
 ): Promise<GoogleResult<T>> {
-  const apiKey = Deno.env.get("GOOGLE_API_KEY") ??
-    Deno.env.get("GEMINI_API_KEY");
+  const apiKey =
+    Deno.env.get("GOOGLE_API_KEY") ?? Deno.env.get("GEMINI_API_KEY");
   if (!apiKey) {
     throw new AiProviderError(
       "google",
@@ -72,7 +72,7 @@ export async function callGoogleWithUsage<T>(
   }
 
   const REQUEST_TIMEOUT_MS = 300_000;
-  const model = "gemini-2.5-flash-lite";
+  const model = "gemini-3.1-flash-lite";
   // const model = "gemini-3-flash-preview";
   const thinkingConfig = { thinkingBudget: 0 };
   const attachments = options.attachments?.filter(Boolean) ?? [];
@@ -110,15 +110,16 @@ export async function callGoogleWithUsage<T>(
   }
 
   const validationFeedback = options.validationFeedback ?? [];
-  const validationBlock = validationFeedback.length > 0
-    ? [
-      "CRITICAL VALIDATION FAILURES FROM YOUR PREVIOUS INVALID RESPONSE:",
-      ...validationFeedback.map(
-        (message, index) => `${index + 1}. ${message}`,
-      ),
-      "Return valid JSON that fixes every listed issue.",
-    ].join("\n")
-    : "";
+  const validationBlock =
+    validationFeedback.length > 0
+      ? [
+          "CRITICAL VALIDATION FAILURES FROM YOUR PREVIOUS INVALID RESPONSE:",
+          ...validationFeedback.map(
+            (message, index) => `${index + 1}. ${message}`,
+          ),
+          "Return valid JSON that fixes every listed issue.",
+        ].join("\n")
+      : "";
   const promptText = [options.userPrompt ?? "", validationBlock]
     .filter((part) => part.trim().length > 0)
     .join("\n\n");
@@ -146,11 +147,12 @@ export async function callGoogleWithUsage<T>(
                 })),
                 ...(attachments.length > 0
                   ? [
-                    {
-                      text: options.attachmentInstructionText?.trim() ||
-                        "Analyze each attachment in full before answering.",
-                    },
-                  ]
+                      {
+                        text:
+                          options.attachmentInstructionText?.trim() ||
+                          "Analyze each attachment in full before answering.",
+                      },
+                    ]
                   : []),
                 { text: promptText },
               ],
@@ -167,7 +169,8 @@ export async function callGoogleWithUsage<T>(
 
     if (!response.ok) {
       const text = await response.text();
-      const retryable = response.status === 429 ||
+      const retryable =
+        response.status === 429 ||
         response.status === 503 ||
         response.status >= 500;
       if (retryable) {
