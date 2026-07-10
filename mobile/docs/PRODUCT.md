@@ -277,102 +277,17 @@ Glu is built around three principles:
 
 ---
 
-## Planned Features
-
-### Pro Tier
-
-#### Supplements Tracking
-**Problem it solves:** Many users on GLP-1s are advised to take supplements to counteract nutrient depletion (iron, B12, magnesium, vitamin D, etc.) but have no way to manage them alongside their medication routine.
-
-**What it does:**
-- Log daily supplement intake (type, dose, timing)
-- Set individual reminders per supplement
-- Maintain a supplement history alongside medication logs
-
-**Benefit:** Never forget your supplements. Keep your full daily health routine in one place — medication, supplements, and lifestyle — without switching apps.
-
-**Why it's Pro:** Supplements sit alongside the medication routine and reminder system, both of which are Pro. Keeping them together makes the Pro tier more coherent and compelling.
-
----
-
-#### AI Health Insights
-**Problem it solves:** Users log consistently but can't spot the patterns hidden in their own data.
-
-**What it does:**
-- Surface correlations the user can't see themselves. Examples:
-  - "Your nausea logs cluster within 6 hours of eating high-fat meals."
-  - "Your average weight drops 0.4 kg in weeks where you exercise 3+ times."
-  - "You tend to miss doses on weekends — want to adjust your reminder?"
-
-**Benefit:** Converts logging into learning. Makes the data users are already collecting genuinely actionable.
-
-**Why it's Pro:** This is the intelligence layer that makes all the data logged in the free tier genuinely valuable.
-
----
-
-#### Body Scan — AI Body Composition Estimator
-**Problem it solves:** Weight alone is a poor proxy for body composition changes, especially on GLP-1s where muscle mass preservation matters.
-
-**What it does:**
-- Snap a photo and Glu estimates body fat percentage range using AI
-- Tracks changes over time alongside weight for a more complete picture of body composition
-
-**Benefit:** A richer health signal without expensive equipment.
-
-**Why it's Pro:** Weight alone is a poor proxy for body composition changes — especially on GLP-1s, where muscle mass preservation matters. This gives users a richer signal without expensive equipment.
-
----
-
-#### Glow Up — Before & After Progress Visuals
-**Problem it solves:** Months of quiet consistency are invisible without a way to make them tangible.
-
-**What it does:**
-- Generate before-and-after images or videos of the user's physical journey using logged data, photos, and milestones
-- Shareable to social media or kept privately
-
-**Benefit:** Turns months of quiet consistency into a visible, celebratable moment.
-
-**Why it's Pro:** The most emotionally powerful feature in the app. Also the highest-potential organic marketing asset — user-generated Glow Up content is shareable, relatable, and drives installs naturally.
-
----
-
 #### Doctor Report Export
-**Problem it solves:** Doctors currently have no structured visibility into the day-to-day experience of their GLP-1 patients.
+**Problem it solves:** Users need a structured way to share their treatment history with a doctor or specialist instead of trying to summarize weeks of notes from memory.
 
 **What it does:**
-- Generate a structured PDF summary of health data for a given time period — doses, weight trend, symptoms, side effects, exercise
-- Ready to bring to an appointment or share with a specialist
+- Generates a structured report for a selected time period
+- Includes doses, weight progress, symptoms, side effects, exercise, and related history
+- Gives users a shareable summary for appointments or care coordination
 
-**Benefit:** Walk into any appointment with a real record. Give your doctor actual context instead of trying to remember weeks of data on the spot.
+**Benefit:** Walk into an appointment with a clearer record and a better conversation starter.
 
-**Why it's Pro:** Solves a real unmet need. Addresses the disconnect between patients and care teams that generic apps don't serve.
-
----
-
-#### Extended History & Data Export
-**Problem it solves:** Power users and people tracking long-term journeys need more than a rolling window of history.
-
-**What it does:**
-- Unlimited data history (free tier has a rolling window)
-- CSV or PDF export of all raw data
-
-**Benefit:** Your full journey, always accessible and portable.
-
-**Why it's Pro:** High value for serious long-term users without adding cost to the free tier.
-
----
-
-#### Advanced Analytics
-**Problem it solves:** The overview charts are useful but don't answer deeper questions about what's driving progress.
-
-**What it does:**
-- Correlation views (e.g., sleep vs. symptoms, exercise vs. weight)
-- Custom date range analysis
-- Streak tracking and consistency scores
-
-**Benefit:** Goes beyond what's useful for casual trackers into territory that serious users find genuinely motivating.
-
-**Why it's Pro:** Goes beyond what's useful for casual trackers into territory that serious users find genuinely motivating.
+**Why it's Pro:** It makes the data users are already collecting more useful outside the app, especially for follow-up care.
 
 ---
 
