@@ -17,7 +17,7 @@
 ### Entity rules (apply everywhere, always)
 - On third-party surfaces write **"Glu app"** or **"Glu (the GLP-1 tracking app)"**, never bare "Glu".
 - One canonical sentence, verbatim across app stores, directories, socials, llms.txt, and schema:
-  > *"Glu is a GLP-1 tracking app for shot reminders, dose history, injection sites, meals, side effects, and weight trends."*
+  > *"Glu is a GLP-1 tracking app for shot reminders, dose history, injection sites, water, cravings, symptoms, mood, exercise, meals, side effects, and weight trends. It can be useful before, during, and after treatment."*
 - `Organization.sameAs` links Instagram + both store listings (implemented).
 - Own distinctive concept names and repeat them: **shot day**, **the 5-minute shot-day routine**, **"hunger back by day…" tracking**, **weigh weekly, judge monthly**. When a phrase is only findable on myglu.health, every AI answer using it cites us.
 

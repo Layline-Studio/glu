@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://myglu.health/sitemap.xml
+LLMs: https://myglu.health/llms.txt
