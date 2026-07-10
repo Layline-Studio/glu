@@ -18,13 +18,18 @@ export function fullFixture(
   records: Record<string, unknown>;
 } {
   const iso = (daysAgo: number, hour = 12) => isoDaysAgo(now, daysAgo, hour);
+  const weightGapDays = new Set([68, 67, 66, 51, 50, 36, 35, 34, 18, 17, 16, 2, 1, 0]);
+  const moodGapDays = new Set([72, 71, 70, 54, 53, 52, 28, 27, 26, 25, 10, 9, 3, 2, 1, 0]);
 
-  const weight = Array.from({ length: 80 }, (_, i) => ({
-    id: `w${i}`,
-    logged_at: iso(89 - i, 8),
-    quantity: Number((92 - i * 0.09 + Math.sin(i / 3) * 0.6).toFixed(1)),
-    unit: "kg",
-  }));
+  const weight = Array.from({ length: 80 }, (_, i) => {
+    const daysAgo = 89 - i;
+    return {
+      id: `w${i}`,
+      logged_at: iso(daysAgo, 8),
+      quantity: Number((92 - i * 0.09 + Math.sin(i / 3) * 0.6).toFixed(1)),
+      unit: "kg",
+    };
+  }).filter((entry) => !weightGapDays.has(Math.round((now.getTime() - new Date(entry.logged_at).getTime()) / DAY_MS)));
   const doses = Array.from({ length: 14 }, (_, i) => ({
     id: `d${i}`,
     logged_at: iso(91 - i * 7, 9),
@@ -83,7 +88,10 @@ export function fullFixture(
     logged_at: iso(Math.floor(i * 1.5), 21),
     feeling: ["good", "great", "okay", "good", "bad"][i % 5],
     notes: i % 15 === 0 ? "Energy coming back 🎉" : null,
-  }));
+  })).filter((entry) => {
+    const daysAgo = Math.round((now.getTime() - new Date(entry.logged_at).getTime()) / DAY_MS);
+    return !moodGapDays.has(daysAgo);
+  });
   const cravings = Array.from({ length: 25 }, (_, i) => ({
     id: `cr${i}`,
     logged_at: iso(i * 3 + 1, 16),

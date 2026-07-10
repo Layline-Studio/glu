@@ -16,13 +16,12 @@ import {
 } from "./data.ts";
 import {
   averageOf,
-  averagePerDay,
   bmiSeries,
   buildMedicationLevelSeries,
   computeAdherence,
-  cravingIntensityStackPerDay,
   cravingOutcomeDistribution,
   cravingTypeFrequency,
+  cravingWeeklyHeatmap,
   daysMeetingGoal,
   effectiveCalories,
   effectiveFiber,
@@ -34,9 +33,12 @@ import {
   moodDistribution,
   moodScore,
   movingAverageSparse,
-  severityStackPerDay,
   sumPerDay,
   symptomFrequency,
+  symptomWeeklyHeatmap,
+  weeklyMoodDistribution,
+  weeklyCravingTrend,
+  weeklyExerciseStack,
   weightSummary,
 } from "./aggregate.ts";
 import {
@@ -56,12 +58,15 @@ import {
   CHART,
   COLORS,
   barChart,
+  divergingStackChart,
   dotGridCalendar,
   hBarList,
+  heatmapChart,
   lineChart,
-  severityStackChart,
   sparkline,
   statTiles,
+  weeklyBarLineChart,
+  weeklyStackedBarChart,
 } from "./charts.ts";
 import type { StatTile } from "./charts.ts";
 
@@ -351,7 +356,7 @@ function renderSummaryPage(ctx: Ctx, untrackedFeatures: string[]): void {
   // Logging calendar.
   doc.gap(10);
   doc.text(t("summary.activityCalendar"), { size: 9, bold: true, color: INK.muted });
-  const calendarRect = doc.reserve(7 * 11.6 + 18);
+  const calendarRect = doc.reserve(126);
   dotGridCalendar(doc, calendarRect, {
     dayKeys: ctx.window.dayKeys,
     marked: consistency.loggedDayIndexes,
@@ -372,6 +377,22 @@ function symptomLabel(ctx: Ctx, symptom: string): string {
   const label = ctx.t(key);
   // Unknown symptom values fall through as the raw slug.
   return label === key ? symptom.replaceAll("_", " ") : label;
+}
+
+function heatmapWeekHeaders(ctx: Ctx): { columnLabels: string[]; columnGroups: string[] } {
+  const columnLabels: string[] = [];
+  const columnGroups: string[] = [];
+  for (let start = 0; start < ctx.window.dayKeys.length; start += 7) {
+    const end = Math.min(start + 7, ctx.window.dayKeys.length);
+    const firstDay = ctx.window.dayKeys[start];
+    const month = ctx.monthLabelFor(firstDay);
+    const monthStart = new Date(`${firstDay}T12:00:00Z`);
+    const weekOfMonth = Math.floor((monthStart.getUTCDate() - 1) / 7) + 1;
+    columnLabels.push(ctx.t("common.weekLabel", { n: weekOfMonth }));
+    columnGroups.push(month);
+    void end;
+  }
+  return { columnLabels, columnGroups };
 }
 
 function moodLabelForScore(ctx: Ctx, score: number): string {
@@ -539,7 +560,7 @@ function renderMedicationPage(ctx: Ctx): void {
   // Dose-day calendar.
   doc.gap(6);
   doc.text(t("med.doseDays"), { size: 9, bold: true, color: INK.muted });
-  const calendarRect = doc.reserve(7 * 11.6 + 18);
+  const calendarRect = doc.reserve(126);
   const doseDayIndexes = new Set<number>(
     level ? [...level.doseDayIndexes.keys()] : [],
   );
@@ -645,19 +666,28 @@ function doseNotes(ctx: Ctx): NoteItem[] {
 function renderSymptomsPage(ctx: Ctx): void {
   const { doc, t, records } = ctx;
 
-  doc.text(t("symptoms.dailyChart"), { size: 9.5, bold: true, color: INK.muted });
-  const rect = doc.reserve(CHART.height);
-  severityStackChart(doc, rect, {
-    perDay: severityStackPerDay(records.symptoms, ctx.window),
-    dayKeys: ctx.window.dayKeys,
-    monthLabelFor: ctx.monthLabelFor,
-    todayLabel: t("common.today"),
-    legend: {
-      mild: t("severity.mild"),
-      moderate: t("severity.moderate"),
-      severe: t("severity.severe"),
-    },
-  });
+  const heatmapRows = symptomWeeklyHeatmap(records.symptoms, ctx.window)
+    .map((row) => ({
+      label: symptomLabel(ctx, row.symptom),
+      values: row.weekly,
+    }));
+  if (heatmapRows.length > 0) {
+    const headers = heatmapWeekHeaders(ctx);
+    doc.gap(10);
+    doc.text(t("symptoms.heatmapTitle"), { size: 9.5, bold: true, color: INK.muted });
+    const heatmapRect = doc.reserve(164);
+    heatmapChart(doc, heatmapRect, {
+      rows: heatmapRows,
+      columnLabels: headers.columnLabels,
+      columnGroups: headers.columnGroups,
+      lowLabel: t("symptoms.heatmapLessBurden"),
+      highLabel: t("symptoms.heatmapMoreBurden"),
+    });
+    doc.text(t("symptoms.heatmapCaption"), {
+      size: 7.5,
+      color: INK.faint,
+    });
+  }
 
   doc.gap(10);
   doc.sectionTitle(
@@ -694,20 +724,49 @@ function cravingTypeLabel(ctx: Ctx, type: string): string {
 }
 
 function renderCravingsPage(ctx: Ctx): void {
-  const { doc, t, records } = ctx;
+  const { doc, t, records, num } = ctx;
 
-  doc.text(t("cravings.dailyChart"), { size: 9.5, bold: true, color: INK.muted });
-  const rect = doc.reserve(CHART.height);
-  severityStackChart(doc, rect, {
-    perDay: cravingIntensityStackPerDay(records.cravings, ctx.window),
-    dayKeys: ctx.window.dayKeys,
-    monthLabelFor: ctx.monthLabelFor,
-    todayLabel: t("common.today"),
-    legend: {
-      mild: t("cravingIntensity.mild"),
-      moderate: t("cravingIntensity.moderate"),
-      severe: t("cravingIntensity.strong"),
-    },
+  const headers = heatmapWeekHeaders(ctx);
+  const heatmapRows = cravingWeeklyHeatmap(records.cravings, ctx.window)
+    .map((row) => ({
+      label: cravingTypeLabel(ctx, row.type),
+      values: row.weekly,
+    }));
+  if (heatmapRows.length > 0) {
+    doc.text(t("cravings.heatmapTitle"), { size: 9.5, bold: true, color: INK.muted });
+    const heatmapRect = doc.reserve(136);
+    heatmapChart(doc, heatmapRect, {
+      rows: heatmapRows,
+      columnLabels: headers.columnLabels,
+      columnGroups: headers.columnGroups,
+      lowLabel: t("cravings.heatmapLessBurden"),
+      highLabel: t("cravings.heatmapMoreBurden"),
+      highColor: COLORS.series1,
+    });
+    doc.text(t("cravings.heatmapCaption"), {
+      size: 7.5,
+      color: INK.faint,
+    });
+  }
+
+  const weeklyTrend = weeklyCravingTrend(records.cravings, ctx.window);
+  doc.gap(10);
+  doc.text(t("cravings.weeklyTrendTitle"), { size: 9.5, bold: true, color: INK.muted });
+  const trendRect = doc.reserve(158);
+  weeklyBarLineChart(doc, trendRect, {
+    barValues: weeklyTrend.counts,
+    lineValues: weeklyTrend.resistedRatePct,
+    columnLabels: headers.columnLabels,
+    columnGroups: headers.columnGroups,
+    leftFormat: (v) => num.n0(v),
+    rightFormat: (v) => `${num.n0(v)}%`,
+    barColor: COLORS.series1,
+    lineColor: COLORS.sevSevere,
+    showBarLabels: false,
+  });
+  doc.text(t("cravings.weeklyTrendCaption"), {
+    size: 7.5,
+    color: INK.faint,
   });
 
   doc.gap(10);
@@ -720,10 +779,27 @@ function renderCravingsPage(ctx: Ctx): void {
 
   doc.gap(10);
   const outcome = cravingOutcomeDistribution(records.cravings);
+  const totalCravings = records.cravings.length;
+  const outcomeShare = (count: number) =>
+    totalCravings > 0
+      ? t("cravings.ofTotal", { pct: Math.round((count / totalCravings) * 100) })
+      : undefined;
   statTiles(doc, [
-    { caption: t("cravings.resisted"), value: String(outcome.resisted) },
-    { caption: t("cravings.gaveIn"), value: String(outcome.gaveIn) },
-    { caption: t("cravings.unspecified"), value: String(outcome.unspecified) },
+    {
+      caption: t("cravings.resisted"),
+      value: String(outcome.resisted),
+      subCaption: outcomeShare(outcome.resisted),
+    },
+    {
+      caption: t("cravings.gaveIn"),
+      value: String(outcome.gaveIn),
+      subCaption: outcomeShare(outcome.gaveIn),
+    },
+    {
+      caption: t("cravings.unspecified"),
+      value: String(outcome.unspecified),
+      subCaption: outcomeShare(outcome.unspecified),
+    },
   ], 3);
 
   renderNotes(
@@ -744,35 +820,62 @@ function renderCravingsPage(ctx: Ctx): void {
 // --- Mood page ---
 
 function renderMoodPage(ctx: Ctx): void {
-  const { doc, t, records, num } = ctx;
+  const { doc, t, records } = ctx;
 
-  const series = averagePerDay(records.mood, ctx.window, (e) => moodScore(e.feeling));
-  doc.text(t("mood.dailyAvg"), { size: 9.5, bold: true, color: INK.muted });
-  const rect = doc.reserve(CHART.height);
-  const moodTickLabels: Record<number, string> = {
-    1: t("mood.bad"),
-    2: t("mood.okay"),
-    3: t("mood.good"),
-    4: t("mood.great"),
-  };
-  lineChart(doc, rect, {
-    values: series,
-    trend: movingAverageSparse(series, 7),
-    dayKeys: ctx.window.dayKeys,
-    yFormat: (v) => moodTickLabels[Math.round(v)] ?? num.n0(v),
-    monthLabelFor: ctx.monthLabelFor,
-    todayLabel: t("common.today"),
-    domain: { min: 1, max: 4 },
-    pointsOnly: true,
+  const headers = heatmapWeekHeaders(ctx);
+  const weekly = weeklyMoodDistribution(records.mood, ctx.window);
+  doc.text(t("mood.weeklyBalance"), { size: 9.5, bold: true, color: INK.muted });
+  const rect = doc.reserve(170);
+  divergingStackChart(doc, rect, {
+    bars: weekly.map((entry) => ({
+      negativeFar: entry.bad,
+      negativeNear: entry.okay,
+      positiveNear: entry.good,
+      positiveFar: entry.great,
+      total: entry.total,
+    })),
+    columnLabels: headers.columnLabels,
+    columnGroups: headers.columnGroups,
+    legend: {
+      negativeFar: t("mood.bad"),
+      negativeNear: t("mood.okay"),
+      positiveNear: t("mood.good"),
+      positiveFar: t("mood.great"),
+    },
+  });
+  doc.text(t("mood.weeklyBalanceCaption"), {
+    size: 7.5,
+    color: INK.faint,
   });
 
   doc.gap(10);
   const distribution = moodDistribution(records.mood);
+  const totalMoodEntries = records.mood.length;
+  const moodShare = (count: number) =>
+    totalMoodEntries > 0
+      ? t("mood.ofTotal", { pct: Math.round((count / totalMoodEntries) * 100) })
+      : undefined;
   statTiles(doc, [
-    { caption: t("mood.great"), value: String(distribution.great) },
-    { caption: t("mood.good"), value: String(distribution.good) },
-    { caption: t("mood.okay"), value: String(distribution.okay) },
-    { caption: t("mood.bad"), value: String(distribution.bad) },
+    {
+      caption: t("mood.great"),
+      value: String(distribution.great),
+      subCaption: moodShare(distribution.great),
+    },
+    {
+      caption: t("mood.good"),
+      value: String(distribution.good),
+      subCaption: moodShare(distribution.good),
+    },
+    {
+      caption: t("mood.okay"),
+      value: String(distribution.okay),
+      subCaption: moodShare(distribution.okay),
+    },
+    {
+      caption: t("mood.bad"),
+      value: String(distribution.bad),
+      subCaption: moodShare(distribution.bad),
+    },
   ], 4);
 
   renderNotes(
@@ -849,19 +952,30 @@ function renderNutritionPage(ctx: Ctx): void {
   const avgCalories = averageOf(calories);
   const avgProtein = averageOf(protein);
   const avgFiber = averageOf(fiber);
+  const goalDeltaCaption = (average: number | null, target: number | null) => {
+    if (average == null || target == null || target <= 0) return undefined;
+    const pct = Math.round((Math.abs(average - target) / target) * 100);
+    if (pct === 0) return t("nutrition.onTarget");
+    return average > target
+      ? t("nutrition.aboveTarget", { pct })
+      : t("nutrition.belowTarget", { pct });
+  };
   statTiles(doc, [
     {
       caption: t("nutrition.avgCalories"),
       value: avgCalories != null ? num.n0(avgCalories) : ctx.na,
-      subCaption: t("nutrition.mealsLogged") + `: ${records.meals.length}`,
+      subCaption: goalDeltaCaption(avgCalories, caloriesGoal) ??
+        (t("nutrition.mealsLogged") + `: ${records.meals.length}`),
     },
     {
       caption: t("nutrition.avgProtein"),
       value: avgProtein != null ? `${num.n0(avgProtein)} g` : ctx.na,
+      subCaption: goalDeltaCaption(avgProtein, profile.goals.proteinTargetGramsDaily),
     },
     {
       caption: t("nutrition.avgFiber"),
       value: avgFiber != null ? `${num.n0(avgFiber)} g` : ctx.na,
+      subCaption: goalDeltaCaption(avgFiber, profile.goals.fiberTargetGramsDaily),
     },
   ]);
 
@@ -900,10 +1014,18 @@ function renderHydrationPage(ctx: Ctx): void {
   doc.gap(10);
   const average = averageOf(water);
   const goalDays = daysMeetingGoal(water, goal);
+  const averageGoalCaption = average != null && goal != null && goal > 0
+    ? average === goal
+      ? t("nutrition.onTarget")
+      : average > goal
+      ? t("nutrition.aboveTarget", { pct: Math.round((Math.abs(average - goal) / goal) * 100) })
+      : t("nutrition.belowTarget", { pct: Math.round((Math.abs(average - goal) / goal) * 100) })
+    : undefined;
   statTiles(doc, [
     {
       caption: t("hydration.avgDaily"),
       value: average != null ? formatMl(num, average) : ctx.na,
+      subCaption: averageGoalCaption,
     },
     {
       caption: t("hydration.goalMet"),
@@ -923,18 +1045,27 @@ function formatMl(num: NumberFormatters, ml: number): string {
 function renderExercisePage(ctx: Ctx): void {
   const { doc, t, records, profile, num } = ctx;
 
-  const minutes = sumPerDay(records.exercise, ctx.window, (e) => e.durationMinutes);
-  const goal = profile.goals.exerciseTargetMinutesDaily;
-  doc.text(t("exercise.chart"), { size: 9.5, bold: true, color: INK.muted });
-  const rect = doc.reserve(CHART.height);
-  barChart(doc, rect, {
-    values: minutes,
-    goal,
-    goalLabel: goal != null ? `${t("common.goal")} ${num.n0(goal)}` : undefined,
-    dayKeys: ctx.window.dayKeys,
+  const weekly = weeklyExerciseStack(records.exercise, ctx.window);
+  const headers = heatmapWeekHeaders(ctx);
+  const weeklyGoal = profile.goals.exerciseTargetMinutesDaily != null
+    ? profile.goals.exerciseTargetMinutesDaily * 7
+    : null;
+  doc.text(t("exercise.weeklyChart"), { size: 9.5, bold: true, color: INK.muted });
+  const rect = doc.reserve(174);
+  weeklyStackedBarChart(doc, rect, {
+    seriesLabels: weekly.labels.map((label) =>
+      label === "Other" ? t("exercise.otherActivity") : label
+    ),
+    seriesValues: weekly.values,
+    columnLabels: headers.columnLabels,
+    columnGroups: headers.columnGroups,
+    goal: weeklyGoal,
+    goalLabel: weeklyGoal != null ? `${t("common.goal")} ${num.n0(weeklyGoal)}` : undefined,
     yFormat: (v) => num.n0(v),
-    monthLabelFor: ctx.monthLabelFor,
-    todayLabel: t("common.today"),
+  });
+  doc.text(t("exercise.weeklyChartCaption"), {
+    size: 7.5,
+    color: INK.faint,
   });
 
   doc.gap(10);

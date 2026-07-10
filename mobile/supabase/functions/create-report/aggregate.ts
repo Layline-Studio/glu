@@ -391,6 +391,12 @@ export function injectionSiteUsage(doses: DoseEntry[]): InjectionSiteUsage[] {
 // --- Symptoms ---
 
 export type SymptomFrequency = { symptom: string; count: number };
+export type SymptomWeeklyHeatmapRow = { symptom: string; weekly: number[] };
+const SYMPTOM_SEVERITY_WEIGHT: Record<SymptomEntry["severity"], number> = {
+  mild: 1,
+  moderate: 2,
+  severe: 3,
+};
 
 export function symptomFrequency(entries: SymptomEntry[]): SymptomFrequency[] {
   const counts = new Map<string, number>();
@@ -426,6 +432,38 @@ export function severityStackPerDay(
   return result;
 }
 
+export function symptomWeeklyHeatmap(
+  entries: SymptomEntry[],
+  window: ReportWindow,
+  maxSymptoms = 8,
+): SymptomWeeklyHeatmapRow[] {
+  const topSymptoms = symptomFrequency(entries)
+    .filter((entry) => entry.symptom !== "no_symptoms")
+    .slice(0, maxSymptoms)
+    .map((entry) => entry.symptom);
+  const included = new Set(topSymptoms);
+  const rows = new Map<string, number[]>(
+    topSymptoms.map((symptom) => [symptom, new Array(Math.ceil(window.dayKeys.length / 7)).fill(0)]),
+  );
+  const indexByKey = buildDayIndex(window);
+
+  for (const entry of entries) {
+    const dayIndex = indexByKey.get(dayKey(entry.loggedAt, window.timeZone));
+    if (dayIndex === undefined) continue;
+    const weekIndex = Math.floor(dayIndex / 7);
+    const weight = SYMPTOM_SEVERITY_WEIGHT[entry.severity];
+    for (const symptom of entry.symptoms) {
+      if (!included.has(symptom)) continue;
+      rows.get(symptom)![weekIndex] += weight;
+    }
+  }
+
+  return topSymptoms.map((symptom) => ({
+    symptom,
+    weekly: rows.get(symptom)!,
+  }));
+}
+
 // --- Mood ---
 
 const MOOD_SCORES: Record<MoodEntry["feeling"], number> = {
@@ -447,9 +485,50 @@ export function moodDistribution(
   return distribution;
 }
 
+export type WeeklyMoodDistribution = {
+  bad: number;
+  okay: number;
+  good: number;
+  great: number;
+  total: number;
+};
+
+export function weeklyMoodDistribution(
+  entries: MoodEntry[],
+  window: ReportWindow,
+): WeeklyMoodDistribution[] {
+  const weekCount = Math.ceil(window.dayKeys.length / 7);
+  const result: WeeklyMoodDistribution[] = Array.from({ length: weekCount }, () => ({
+    bad: 0,
+    okay: 0,
+    good: 0,
+    great: 0,
+    total: 0,
+  }));
+  const indexByKey = buildDayIndex(window);
+  for (const entry of entries) {
+    const dayIndex = indexByKey.get(dayKey(entry.loggedAt, window.timeZone));
+    if (dayIndex === undefined) continue;
+    const weekIndex = Math.floor(dayIndex / 7);
+    result[weekIndex][entry.feeling] += 1;
+    result[weekIndex].total += 1;
+  }
+  return result;
+}
+
 // --- Cravings ---
 
 export type CravingTypeFrequency = { type: string; count: number };
+export type CravingWeeklyHeatmapRow = { type: string; weekly: number[] };
+export type WeeklyCravingTrend = {
+  counts: number[];
+  resistedRatePct: (number | null)[];
+};
+const CRAVING_INTENSITY_WEIGHT: Record<NonNullable<CravingEntry["intensity"]>, number> = {
+  mild: 1,
+  moderate: 2,
+  strong: 3,
+};
 
 export function cravingTypeFrequency(
   entries: CravingEntry[],
@@ -461,6 +540,59 @@ export function cravingTypeFrequency(
   return [...counts.entries()]
     .map(([type, count]) => ({ type, count }))
     .sort((a, b) => b.count - a.count || a.type.localeCompare(b.type));
+}
+
+export function cravingWeeklyHeatmap(
+  entries: CravingEntry[],
+  window: ReportWindow,
+  maxTypes = 6,
+): CravingWeeklyHeatmapRow[] {
+  const topTypes = cravingTypeFrequency(entries)
+    .slice(0, maxTypes)
+    .map((entry) => entry.type);
+  const included = new Set(topTypes);
+  const weekCount = Math.ceil(window.dayKeys.length / 7);
+  const rows = new Map<string, number[]>(
+    topTypes.map((type) => [type, new Array(weekCount).fill(0)]),
+  );
+  const indexByKey = buildDayIndex(window);
+
+  for (const entry of entries) {
+    if (!included.has(entry.type)) continue;
+    const dayIndex = indexByKey.get(dayKey(entry.loggedAt, window.timeZone));
+    if (dayIndex === undefined) continue;
+    const weekIndex = Math.floor(dayIndex / 7);
+    const weight = entry.intensity == null ? 1 : CRAVING_INTENSITY_WEIGHT[entry.intensity];
+    rows.get(entry.type)![weekIndex] += weight;
+  }
+
+  return topTypes.map((type) => ({ type, weekly: rows.get(type)! }));
+}
+
+export function weeklyCravingTrend(
+  entries: CravingEntry[],
+  window: ReportWindow,
+): WeeklyCravingTrend {
+  const weekCount = Math.ceil(window.dayKeys.length / 7);
+  const counts = new Array<number>(weekCount).fill(0);
+  const resisted = new Array<number>(weekCount).fill(0);
+  const indexByKey = buildDayIndex(window);
+
+  for (const entry of entries) {
+    const dayIndex = indexByKey.get(dayKey(entry.loggedAt, window.timeZone));
+    if (dayIndex === undefined) continue;
+    const weekIndex = Math.floor(dayIndex / 7);
+    const weight = entry.intensity == null ? 1 : CRAVING_INTENSITY_WEIGHT[entry.intensity];
+    counts[weekIndex] += weight;
+    if (entry.outcome === "resisted") resisted[weekIndex] += weight;
+  }
+
+  return {
+    counts,
+    resistedRatePct: counts.map((count, index) =>
+      count > 0 ? Math.round((resisted[index] / count) * 100) : null
+    ),
+  };
 }
 
 export function cravingIntensityStackPerDay(
@@ -598,6 +730,11 @@ export type ExerciseByActivity = {
   dominantIntensity: "light" | "moderate" | "intense";
 };
 
+export type WeeklyExerciseStack = {
+  labels: string[];
+  values: number[][];
+};
+
 export function exerciseByActivity(entries: ExerciseEntry[]): ExerciseByActivity[] {
   const byActivity = new Map<
     string,
@@ -625,6 +762,39 @@ export function exerciseByActivity(entries: ExerciseEntry[]): ExerciseByActivity
       };
     })
     .sort((a, b) => b.totalMinutes - a.totalMinutes);
+}
+
+export function weeklyExerciseStack(
+  entries: ExerciseEntry[],
+  window: ReportWindow,
+  maxActivities = 4,
+): WeeklyExerciseStack {
+  const ranked = exerciseByActivity(entries).slice(0, maxActivities).map((entry) => entry.activityType);
+  const included = new Set(ranked);
+  const weekCount = Math.ceil(window.dayKeys.length / 7);
+  const indexByKey = buildDayIndex(window);
+  const rows = new Map<string, number[]>(
+    ranked.map((label) => [label, new Array(weekCount).fill(0)]),
+  );
+  let hasOther = false;
+
+  for (const entry of entries) {
+    const dayIndex = indexByKey.get(dayKey(entry.loggedAt, window.timeZone));
+    if (dayIndex === undefined) continue;
+    const weekIndex = Math.floor(dayIndex / 7);
+    const label = included.has(entry.activityType) ? entry.activityType : "Other";
+    if (!rows.has(label)) {
+      rows.set(label, new Array(weekCount).fill(0));
+      hasOther = true;
+    }
+    rows.get(label)![weekIndex] += entry.durationMinutes;
+  }
+
+  const labels = hasOther ? [...ranked, "Other"] : ranked;
+  return {
+    labels,
+    values: labels.map((label) => rows.get(label) ?? new Array(weekCount).fill(0)),
+  };
 }
 
 export function effectiveCalories(meal: MealEntry): number {

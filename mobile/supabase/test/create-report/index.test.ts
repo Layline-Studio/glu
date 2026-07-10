@@ -17,6 +17,7 @@ import {
   cravingIntensityStackPerDay,
   cravingOutcomeDistribution,
   cravingTypeFrequency,
+  cravingWeeklyHeatmap,
   exerciseByActivity,
   injectionSiteUsage,
   latestPerDay,
@@ -26,8 +27,13 @@ import {
   severityStackPerDay,
   sumPerDay,
   symptomFrequency,
+  symptomWeeklyHeatmap,
+  weeklyCravingTrend,
+  weeklyExerciseStack,
+  weeklyMoodDistribution,
   weightSummary,
 } from "../../functions/create-report/aggregate.ts";
+import { interpolateMissingValues } from "../../functions/create-report/charts.ts";
 
 const NOW = new Date("2026-07-07T15:00:00Z");
 
@@ -207,6 +213,17 @@ Deno.test("normalizeRecords filters entries outside the 90-day window", () => {
   assertEquals(records.weight.length, 1);
   assertEquals(records.doses.length, 1);
   assertEquals(records.dosesForLevelCurve.length, 2);
+});
+
+Deno.test("interpolateMissingValues fills internal gaps only", () => {
+  assertEquals(
+    interpolateMissingValues([null, 10, null, null, 16, null, 22, null]),
+    [null, 10, 12, 14, 16, 19, 22, 22],
+  );
+  assertEquals(
+    interpolateMissingValues([null, null, 8, null, null]),
+    [null, null, 8, 8, 8],
+  );
 });
 
 // --- data.ts: profile normalization ---
@@ -433,6 +450,53 @@ Deno.test("severityStackPerDay counts symptom values at entry severity", () => {
   assertEquals(stacks[88], { mild: 0, moderate: 2, severe: 0 });
 });
 
+Deno.test("symptomWeeklyHeatmap aggregates top symptoms by weighted severity", () => {
+  const window = buildReportWindow("UTC", NOW);
+  const rows = symptomWeeklyHeatmap(
+    [
+      {
+        loggedAt: new Date(isoDaysAgo(6)),
+        symptoms: ["nausea", "fatigue"],
+        severity: "mild",
+        notes: null,
+      },
+      {
+        loggedAt: new Date(isoDaysAgo(5)),
+        symptoms: ["nausea"],
+        severity: "severe",
+        notes: null,
+      },
+      {
+        loggedAt: new Date(isoDaysAgo(14)),
+        symptoms: ["headache"],
+        severity: "moderate",
+        notes: null,
+      },
+    ],
+    window,
+    3,
+  );
+  assertEquals(rows.map((row) => row.symptom), ["nausea", "fatigue", "headache"]);
+  assertEquals(rows[0].weekly.length, Math.ceil(window.dayKeys.length / 7));
+  assertEquals(rows[0].weekly[11], 1);
+  assertEquals(rows[0].weekly[12], 3);
+  assertEquals(rows[1].weekly[11], 1);
+  assertEquals(rows[2].weekly[10], 2);
+});
+
+Deno.test("weeklyMoodDistribution buckets mood entries by week", () => {
+  const window = buildReportWindow("UTC", NOW);
+  const weekly = weeklyMoodDistribution([
+    { loggedAt: new Date(isoDaysAgo(6)), feeling: "good", notes: null },
+    { loggedAt: new Date(isoDaysAgo(5)), feeling: "great", notes: null },
+    { loggedAt: new Date(isoDaysAgo(14)), feeling: "bad", notes: null },
+    { loggedAt: new Date(isoDaysAgo(14, 20)), feeling: "okay", notes: null },
+  ], window);
+  assertEquals(weekly[10], { bad: 1, okay: 1, good: 0, great: 0, total: 2 });
+  assertEquals(weekly[11], { bad: 0, okay: 0, good: 1, great: 0, total: 1 });
+  assertEquals(weekly[12], { bad: 0, okay: 0, good: 0, great: 1, total: 1 });
+});
+
 Deno.test("cravingTypeFrequency ranks by count", () => {
   const entries = [
     { loggedAt: NOW, type: "sweet_sugary" as const, intensity: null, outcome: null, notes: null },
@@ -442,6 +506,34 @@ Deno.test("cravingTypeFrequency ranks by count", () => {
   const ranked = cravingTypeFrequency(entries);
   assertEquals(ranked[0], { type: "sweet_sugary", count: 2 });
   assertEquals(ranked[1], { type: "salty_savory", count: 1 });
+});
+
+Deno.test("cravingWeeklyHeatmap weights weekly cravings by intensity", () => {
+  const window = buildReportWindow("UTC", NOW);
+  const rows = cravingWeeklyHeatmap([
+    { loggedAt: new Date(isoDaysAgo(6)), type: "sweet_sugary", intensity: "strong", outcome: null, notes: null },
+    { loggedAt: new Date(isoDaysAgo(5)), type: "sweet_sugary", intensity: "mild", outcome: null, notes: null },
+    { loggedAt: new Date(isoDaysAgo(14)), type: "general", intensity: "moderate", outcome: null, notes: null },
+  ], window, 3);
+  assertEquals(rows.map((row) => row.type), ["sweet_sugary", "general"]);
+  assertEquals(rows[0].weekly[11], 3);
+  assertEquals(rows[0].weekly[12], 1);
+  assertEquals(rows[1].weekly[10], 2);
+});
+
+Deno.test("weeklyCravingTrend returns weekly totals and resisted rate", () => {
+  const window = buildReportWindow("UTC", NOW);
+  const trend = weeklyCravingTrend([
+    { loggedAt: new Date(isoDaysAgo(6)), type: "general", intensity: "mild", outcome: "resisted", notes: null },
+    { loggedAt: new Date(isoDaysAgo(5)), type: "general", intensity: "strong", outcome: "gave_in", notes: null },
+    { loggedAt: new Date(isoDaysAgo(14)), type: "sweet_sugary", intensity: "moderate", outcome: "resisted", notes: null },
+  ], window);
+  assertEquals(trend.counts[10], 2);
+  assertEquals(trend.counts[11], 1);
+  assertEquals(trend.counts[12], 3);
+  assertEquals(trend.resistedRatePct[10], 100);
+  assertEquals(trend.resistedRatePct[11], 100);
+  assertEquals(trend.resistedRatePct[12], 0);
 });
 
 Deno.test("cravingIntensityStackPerDay counts craving intensities per day", () => {
@@ -548,6 +640,21 @@ Deno.test("exerciseByActivity aggregates sessions and dominant intensity", () =>
   assertEquals(byActivity[1].dominantIntensity, "intense");
 });
 
+Deno.test("weeklyExerciseStack groups weekly minutes by top activity", () => {
+  const window = buildReportWindow("UTC", NOW);
+  const stack = weeklyExerciseStack([
+    { loggedAt: new Date(isoDaysAgo(6)), activityType: "Walking", durationMinutes: 30, intensity: "light", notes: null },
+    { loggedAt: new Date(isoDaysAgo(5)), activityType: "Walking", durationMinutes: 20, intensity: "light", notes: null },
+    { loggedAt: new Date(isoDaysAgo(5)), activityType: "Running", durationMinutes: 15, intensity: "intense", notes: null },
+    { loggedAt: new Date(isoDaysAgo(14)), activityType: "Yoga", durationMinutes: 40, intensity: "moderate", notes: null },
+  ], window, 3);
+  assertEquals(stack.labels, ["Walking", "Yoga", "Running"]);
+  assertEquals(stack.values[0][11], 30);
+  assertEquals(stack.values[0][12], 20);
+  assertEquals(stack.values[1][10], 40);
+  assertEquals(stack.values[2][12], 15);
+});
+
 // --- i18n.ts ---
 
 Deno.test("resolveReportLocale normalizes and falls back", async () => {
@@ -565,7 +672,29 @@ Deno.test("resolveReportLocale normalizes and falls back", async () => {
 Deno.test("every locale covers every string key", async () => {
   const { STRINGS } = await import("../../functions/create-report/i18n.ts");
   // Locale-independent symbols served by the English fallback:
-  const universal = new Set(["common.na"]);
+  const universal = new Set([
+    "common.na",
+    "symptoms.heatmapTitle",
+    "symptoms.heatmapLessBurden",
+    "symptoms.heatmapMoreBurden",
+    "symptoms.heatmapCaption",
+    "cravings.heatmapTitle",
+    "cravings.heatmapLessBurden",
+    "cravings.heatmapMoreBurden",
+    "cravings.heatmapCaption",
+    "cravings.weeklyTrendTitle",
+    "cravings.weeklyTrendCaption",
+    "cravings.ofTotal",
+    "mood.weeklyBalance",
+    "mood.weeklyBalanceCaption",
+    "mood.ofTotal",
+    "nutrition.aboveTarget",
+    "nutrition.belowTarget",
+    "nutrition.onTarget",
+    "exercise.weeklyChart",
+    "exercise.weeklyChartCaption",
+    "exercise.otherActivity",
+  ]);
   const enKeys = Object.keys(STRINGS.en).sort();
   for (const [locale, strings] of Object.entries(STRINGS)) {
     const missing = enKeys.filter(
@@ -580,6 +709,7 @@ Deno.test("makeT interpolates params and falls back per-key", async () => {
   const t = makeT("pt");
   assertEquals(t("report.page", { n: 2, total: 8 }), "Página 2 de 8");
   assertEquals(t("summary.years", { n: 42 }), "42 anos");
+  assertEquals(t("common.weekLabel", { n: 3 }), "S3");
 });
 
 Deno.test("date/number formatters honor locale and timezone", async () => {

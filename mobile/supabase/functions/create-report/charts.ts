@@ -13,6 +13,10 @@ export const COLORS = {
   bmi: rgb(0.29, 0.227, 0.655), // #4a3aa7 violet
   trend: rgb(0.55, 0.55, 0.55),
   goal: rgb(0.35, 0.35, 0.35),
+  moodBad: rgb(0.75, 0.8, 0.88),
+  moodOkay: rgb(0.52, 0.68, 0.88),
+  moodGood: rgb(0.33, 0.56, 0.84),
+  moodGreat: rgb(0.12, 0.33, 0.67),
   sevMild: rgb(0.804, 0.886, 0.984),
   sevModerate: rgb(0.353, 0.596, 0.898),
   sevSevere: rgb(0.078, 0.322, 0.671),
@@ -195,6 +199,46 @@ function polylineSegments(
   return segments;
 }
 
+export function interpolateMissingValues(
+  values: (number | null)[],
+): (number | null)[] {
+  if (values.length === 0) return [];
+
+  const interpolated = [...values];
+  let previousIndex: number | null = null;
+
+  for (let index = 0; index < values.length; index++) {
+    const value = values[index];
+    if (value == null) continue;
+
+    if (previousIndex != null && index - previousIndex > 1) {
+      const start = values[previousIndex];
+      const end = value;
+      if (start != null) {
+        const gap = index - previousIndex;
+        for (let offset = 1; offset < gap; offset++) {
+          const progress = offset / gap;
+          interpolated[previousIndex + offset] =
+            start + (end - start) * progress;
+        }
+      }
+    }
+
+    previousIndex = index;
+  }
+
+  if (previousIndex != null) {
+    const lastValue = values[previousIndex];
+    if (lastValue != null) {
+      for (let index = previousIndex + 1; index < interpolated.length; index++) {
+        interpolated[index] = lastValue;
+      }
+    }
+  }
+
+  return interpolated;
+}
+
 function drawPolyline(
   doc: Doc,
   values: (number | null)[],
@@ -204,7 +248,11 @@ function drawPolyline(
   thickness: number,
   fillTo?: number,
 ): void {
-  const segments = polylineSegments(values, scaleX, scaleY);
+  const segments = polylineSegments(
+    interpolateMissingValues(values),
+    scaleX,
+    scaleY,
+  );
   for (const points of segments) {
     if (points.length === 1) {
       doc.page.drawCircle({
@@ -398,6 +446,7 @@ export function barChart(doc: Doc, rect: Rect, opts: BarChartOptions): void {
 }
 
 export type SeverityStack = { mild: number; moderate: number; severe: number };
+export type HeatmapRow = { label: string; values: number[] };
 
 export type SeverityChartOptions = {
   perDay: SeverityStack[];
@@ -477,6 +526,692 @@ export function severityStackChart(
   }
 }
 
+function blendColor(low: Color, high: Color, t: number): Color {
+  const mix = Math.max(0, Math.min(1, t));
+  return rgb(
+    low.red + (high.red - low.red) * mix,
+    low.green + (high.green - low.green) * mix,
+    low.blue + (high.blue - low.blue) * mix,
+  );
+}
+
+export type HeatmapChartOptions = {
+  rows: HeatmapRow[];
+  columnLabels: string[];
+  columnGroups?: string[];
+  lowLabel?: string;
+  highLabel?: string;
+  lowColor?: Color;
+  highColor?: Color;
+};
+
+export function heatmapChart(
+  doc: Doc,
+  rect: Rect,
+  opts: HeatmapChartOptions,
+): void {
+  if (opts.rows.length === 0 || opts.columnLabels.length === 0) return;
+
+  const labelWidth = 120;
+  const headerHeight = 24;
+  const legendHeight = 18;
+  const gridX = rect.x + labelWidth;
+  const gridWidth = rect.width - labelWidth;
+  const gridBottom = rect.y + legendHeight;
+  const gridTop = rect.y + rect.height - headerHeight;
+  const gridHeight = gridTop - gridBottom;
+  const rowGap = 2;
+  const colGap = 2;
+  const monthGap = 6;
+  const groupBreaks = opts.columnGroups?.map((group, index, groups) =>
+    index > 0 && group !== groups[index - 1]
+  ) ?? new Array(opts.columnLabels.length).fill(false);
+  const extraGapCount = groupBreaks.filter(Boolean).length;
+  const rowHeight = Math.max(
+    (gridHeight - rowGap * (opts.rows.length - 1)) / opts.rows.length,
+    10,
+  );
+  const cellWidth = Math.max(
+    (gridWidth - colGap * (opts.columnLabels.length - 1) - monthGap * extraGapCount) /
+      opts.columnLabels.length,
+    10,
+  );
+  const maxValue = Math.max(
+    1,
+    ...opts.rows.flatMap((row) => row.values),
+  );
+  const lowColor = opts.lowColor ?? rgb(0.92, 0.96, 0.99);
+  const highColor = opts.highColor ?? COLORS.sevSevere;
+
+  const columnX = (index: number) => {
+    let extra = 0;
+    for (let i = 1; i <= index; i++) {
+      if (groupBreaks[i]) extra += monthGap;
+    }
+    return gridX + index * (cellWidth + colGap) + extra;
+  };
+
+  const groupTopY = rect.y + rect.height - 9;
+  const labelTopY = rect.y + rect.height - 20;
+
+  if (opts.columnGroups && opts.columnGroups.length === opts.columnLabels.length) {
+    let start = 0;
+    while (start < opts.columnGroups.length) {
+      const group = opts.columnGroups[start];
+      let end = start;
+      while (end + 1 < opts.columnGroups.length && opts.columnGroups[end + 1] === group) {
+        end += 1;
+      }
+      const startX = columnX(start);
+      const endX = columnX(end) + cellWidth;
+      const width = doc.widthOf(group, 7, true);
+      doc.textAt(group, startX + (endX - startX - width) / 2, groupTopY, {
+        size: 7,
+        bold: true,
+        color: INK.muted,
+      });
+      doc.page.drawLine({
+        start: { x: startX, y: labelTopY + 10 },
+        end: { x: endX, y: labelTopY + 10 },
+        thickness: 0.5,
+        color: INK.line,
+      });
+      start = end + 1;
+    }
+  }
+
+  opts.columnLabels.forEach((label, index) => {
+    const x = columnX(index);
+    doc.textAt(label, x + 1, labelTopY, {
+      size: 7,
+      color: INK.muted,
+    });
+  });
+
+  opts.rows.forEach((row, rowIndex) => {
+    const y = gridTop - rowHeight - rowIndex * (rowHeight + rowGap);
+    const labelY = y + rowHeight / 2 - 3;
+    const fitted = row.label.length > 24 ? `${row.label.slice(0, 23)}…` : row.label;
+    doc.textAt(fitted, rect.x, labelY, {
+      size: 8,
+      color: INK.text,
+    });
+    row.values.forEach((value, columnIndex) => {
+      const x = columnX(columnIndex);
+      const tone = value <= 0 ? 0 : Math.min(1, value / maxValue);
+      doc.page.drawRectangle({
+        x,
+        y,
+        width: cellWidth,
+        height: rowHeight,
+        color: blendColor(lowColor, highColor, tone),
+        borderColor: INK.white,
+        borderWidth: 0.4,
+      });
+      if (value > 0) {
+        const text = String(value);
+        const size = 6;
+        const textWidth = doc.widthOf(text, size, true);
+        doc.textAt(text, x + (cellWidth - textWidth) / 2, y + rowHeight / 2 - 2, {
+          size,
+          bold: true,
+          color: INK.white,
+        });
+      }
+    });
+  });
+
+  const legendWidth = 104;
+  const legendX = rect.x + rect.width - legendWidth;
+  const legendY = rect.y + 1;
+  const steps = 7;
+  for (let index = 0; index < steps; index++) {
+    doc.page.drawRectangle({
+      x: legendX + index * 10,
+      y: legendY,
+      width: 9,
+      height: 8,
+      color: blendColor(lowColor, highColor, steps <= 1 ? 0 : index / (steps - 1)),
+    });
+  }
+  doc.textAt(opts.lowLabel ?? "Low", legendX, legendY + 10, {
+    size: 7,
+    color: INK.muted,
+  });
+  const high = opts.highLabel ?? "High";
+  const highWidth = doc.widthOf(high, 7);
+  doc.textAt(high, legendX + legendWidth - highWidth, legendY + 10, {
+    size: 7,
+    color: INK.muted,
+  });
+}
+
+export type WeeklyBarLineChartOptions = {
+  barValues: number[];
+  lineValues: (number | null)[];
+  columnLabels: string[];
+  columnGroups?: string[];
+  leftFormat: (v: number) => string;
+  rightFormat: (v: number) => string;
+  barColor?: Color;
+  lineColor?: Color;
+  showBarLabels?: boolean;
+};
+
+export function weeklyBarLineChart(
+  doc: Doc,
+  rect: Rect,
+  opts: WeeklyBarLineChartOptions,
+): void {
+  if (opts.barValues.length === 0 || opts.columnLabels.length === 0) return;
+
+  const leftPad = 28;
+  const rightPad = 34;
+  const topPad = 24;
+  const bottomPad = 16;
+  const monthGap = 6;
+  const colGap = 2;
+  const groupBreaks = opts.columnGroups?.map((group, index, groups) =>
+    index > 0 && group !== groups[index - 1]
+  ) ?? new Array(opts.columnLabels.length).fill(false);
+  const extraGapCount = groupBreaks.filter(Boolean).length;
+  const plot = {
+    x: rect.x + leftPad,
+    y: rect.y + bottomPad,
+    width: rect.width - leftPad - rightPad,
+    height: rect.height - topPad - bottomPad,
+  };
+  const cellWidth = Math.max(
+    (plot.width - colGap * (opts.columnLabels.length - 1) - monthGap * extraGapCount) /
+      opts.columnLabels.length,
+    10,
+  );
+  const maxBar = Math.max(1, ...opts.barValues);
+  const barTicks = buildTicks(0, maxBar, 3).filter((t) => t >= 0 && t <= maxBar + 1e-9);
+  const scaleBarY = (v: number) => plot.y + (v / maxBar) * plot.height;
+  const scaleRateY = (v: number) => plot.y + (v / 100) * plot.height;
+  const columnX = (index: number) => {
+    let extra = 0;
+    for (let i = 1; i <= index; i++) {
+      if (groupBreaks[i]) extra += monthGap;
+    }
+    return plot.x + index * (cellWidth + colGap) + extra;
+  };
+
+  for (const tick of barTicks) {
+    const y = scaleBarY(tick);
+    doc.page.drawLine({
+      start: { x: plot.x, y },
+      end: { x: plot.x + plot.width, y },
+      thickness: 0.4,
+      color: INK.line,
+    });
+    const label = opts.leftFormat(tick);
+    const width = doc.widthOf(label, 7);
+    doc.textAt(label, plot.x - width - 4, y - 2.5, {
+      size: 7,
+      color: INK.muted,
+    });
+  }
+
+  for (const tick of [0, 50, 100]) {
+    const y = scaleRateY(tick);
+    const label = opts.rightFormat(tick);
+    doc.textAt(label, plot.x + plot.width + 4, y - 2.5, {
+      size: 7,
+      color: INK.muted,
+    });
+  }
+
+  const groupTopY = rect.y + rect.height - 9;
+  const labelTopY = rect.y + rect.height - 20;
+  if (opts.columnGroups && opts.columnGroups.length === opts.columnLabels.length) {
+    let start = 0;
+    while (start < opts.columnGroups.length) {
+      const group = opts.columnGroups[start];
+      let end = start;
+      while (end + 1 < opts.columnGroups.length && opts.columnGroups[end + 1] === group) {
+        end += 1;
+      }
+      const startX = columnX(start);
+      const endX = columnX(end) + cellWidth;
+      const width = doc.widthOf(group, 7, true);
+      doc.textAt(group, startX + (endX - startX - width) / 2, groupTopY, {
+        size: 7,
+        bold: true,
+        color: INK.muted,
+      });
+      doc.page.drawLine({
+        start: { x: startX, y: labelTopY + 10 },
+        end: { x: endX, y: labelTopY + 10 },
+        thickness: 0.5,
+        color: INK.line,
+      });
+      start = end + 1;
+    }
+  }
+
+  opts.columnLabels.forEach((label, index) => {
+    const x = columnX(index);
+    doc.textAt(label, x + 1, labelTopY, {
+      size: 7,
+      color: INK.muted,
+    });
+  });
+
+  opts.barValues.forEach((value, index) => {
+    if (value <= 0) return;
+    const x = columnX(index);
+    const y = scaleBarY(value);
+    doc.page.drawRectangle({
+      x,
+      y: plot.y,
+      width: cellWidth,
+      height: Math.max(y - plot.y, 0.8),
+      color: opts.barColor ?? COLORS.series3,
+    });
+    if (opts.showBarLabels ?? true) {
+      const label = String(value);
+      const labelWidth = doc.widthOf(label, 6, true);
+      doc.textAt(label, x + (cellWidth - labelWidth) / 2, y + 2, {
+        size: 6,
+        bold: true,
+        color: INK.text,
+      });
+    }
+  });
+
+  const points = opts.lineValues
+    .map((value, index) => (value == null ? null : { x: columnX(index) + cellWidth / 2, y: scaleRateY(value) }))
+    .filter((point): point is { x: number; y: number } => point != null);
+  if (points.length >= 2) {
+    const path = [
+      `M ${points[0].x.toFixed(2)} ${(-points[0].y).toFixed(2)}`,
+      ...points.slice(1).map((p) => `L ${p.x.toFixed(2)} ${(-p.y).toFixed(2)}`),
+    ].join(" ");
+    doc.page.drawSvgPath(path, {
+      x: 0,
+      y: 0,
+      borderColor: opts.lineColor ?? COLORS.series1,
+      borderWidth: 1.2,
+    });
+  }
+  for (const [index, value] of opts.lineValues.entries()) {
+    if (value == null) continue;
+    const x = columnX(index) + cellWidth / 2;
+    const y = scaleRateY(value);
+    doc.page.drawCircle({
+      x,
+      y,
+      size: 2.2,
+      color: opts.lineColor ?? COLORS.series1,
+      borderColor: INK.white,
+      borderWidth: 0.5,
+    });
+  }
+}
+
+export type DivergingStackBar = {
+  negativeNear: number;
+  negativeFar: number;
+  positiveNear: number;
+  positiveFar: number;
+  total: number;
+};
+
+export type DivergingStackChartOptions = {
+  bars: DivergingStackBar[];
+  columnLabels: string[];
+  columnGroups?: string[];
+  legend: {
+    negativeFar: string;
+    negativeNear: string;
+    positiveNear: string;
+    positiveFar: string;
+  };
+};
+
+export function divergingStackChart(
+  doc: Doc,
+  rect: Rect,
+  opts: DivergingStackChartOptions,
+): void {
+  if (opts.bars.length === 0 || opts.columnLabels.length === 0) return;
+
+  const leftPad = 28;
+  const rightPad = 4;
+  const topPad = 24;
+  const bottomPad = 28;
+  const monthGap = 6;
+  const colGap = 2;
+  const groupBreaks = opts.columnGroups?.map((group, index, groups) =>
+    index > 0 && group !== groups[index - 1]
+  ) ?? new Array(opts.columnLabels.length).fill(false);
+  const extraGapCount = groupBreaks.filter(Boolean).length;
+  const plot = {
+    x: rect.x + leftPad,
+    y: rect.y + bottomPad,
+    width: rect.width - leftPad - rightPad,
+    height: rect.height - topPad - bottomPad,
+  };
+  const centerY = plot.y + plot.height / 2;
+  const halfHeight = plot.height / 2;
+  const cellWidth = Math.max(
+    (plot.width - colGap * (opts.columnLabels.length - 1) - monthGap * extraGapCount) /
+      opts.columnLabels.length,
+    10,
+  );
+  const columnX = (index: number) => {
+    let extra = 0;
+    for (let i = 1; i <= index; i++) {
+      if (groupBreaks[i]) extra += monthGap;
+    }
+    return plot.x + index * (cellWidth + colGap) + extra;
+  };
+  const scale = (share: number) => halfHeight * Math.max(0, Math.min(1, share));
+
+  for (const tick of [0, 50, 100]) {
+    const offset = halfHeight * (tick / 100);
+    for (const y of [centerY + offset, centerY - offset]) {
+      if (tick === 0 && y !== centerY) continue;
+      doc.page.drawLine({
+        start: { x: plot.x, y },
+        end: { x: plot.x + plot.width, y },
+        thickness: tick === 0 ? 0.7 : 0.35,
+        color: tick === 0 ? INK.muted : INK.line,
+      });
+    }
+    if (tick > 0) {
+      const label = `${tick}%`;
+      const width = doc.widthOf(label, 7);
+      doc.textAt(label, plot.x - width - 4, centerY + offset - 2.5, {
+        size: 7,
+        color: INK.muted,
+      });
+      doc.textAt(label, plot.x - width - 4, centerY - offset - 2.5, {
+        size: 7,
+        color: INK.muted,
+      });
+    }
+  }
+
+  const groupTopY = rect.y + rect.height - 9;
+  const labelTopY = rect.y + rect.height - 20;
+  if (opts.columnGroups && opts.columnGroups.length === opts.columnLabels.length) {
+    let start = 0;
+    while (start < opts.columnGroups.length) {
+      const group = opts.columnGroups[start];
+      let end = start;
+      while (end + 1 < opts.columnGroups.length && opts.columnGroups[end + 1] === group) {
+        end += 1;
+      }
+      const startX = columnX(start);
+      const endX = columnX(end) + cellWidth;
+      const width = doc.widthOf(group, 7, true);
+      doc.textAt(group, startX + (endX - startX - width) / 2, groupTopY, {
+        size: 7,
+        bold: true,
+        color: INK.muted,
+      });
+      doc.page.drawLine({
+        start: { x: startX, y: labelTopY + 10 },
+        end: { x: endX, y: labelTopY + 10 },
+        thickness: 0.5,
+        color: INK.line,
+      });
+      start = end + 1;
+    }
+  }
+  opts.columnLabels.forEach((label, index) => {
+    const x = columnX(index);
+    doc.textAt(label, x + 1, labelTopY, {
+      size: 7,
+      color: INK.muted,
+    });
+  });
+
+  opts.bars.forEach((bar, index) => {
+    if (bar.total <= 0) return;
+    const x = columnX(index);
+    const negFar = scale(bar.negativeFar / bar.total);
+    const negNear = scale(bar.negativeNear / bar.total);
+    const posNear = scale(bar.positiveNear / bar.total);
+    const posFar = scale(bar.positiveFar / bar.total);
+
+    let y = centerY - negNear;
+    if (negNear > 0) {
+      doc.page.drawRectangle({
+        x,
+        y,
+        width: cellWidth,
+        height: negNear,
+        color: COLORS.moodOkay,
+      });
+    }
+    if (negFar > 0) {
+      doc.page.drawRectangle({
+        x,
+        y: y - negFar,
+        width: cellWidth,
+        height: negFar,
+        color: COLORS.moodBad,
+      });
+    }
+    let positiveBase = centerY;
+    if (posNear > 0) {
+      doc.page.drawRectangle({
+        x,
+        y: positiveBase,
+        width: cellWidth,
+        height: posNear,
+        color: COLORS.moodGood,
+      });
+      positiveBase += posNear;
+    }
+    if (posFar > 0) {
+      doc.page.drawRectangle({
+        x,
+        y: positiveBase,
+        width: cellWidth,
+        height: posFar,
+        color: COLORS.moodGreat,
+      });
+    }
+  });
+
+  const legendItems = [
+    [opts.legend.negativeFar, COLORS.moodBad],
+    [opts.legend.negativeNear, COLORS.moodOkay],
+    [opts.legend.positiveNear, COLORS.moodGood],
+    [opts.legend.positiveFar, COLORS.moodGreat],
+  ] as const;
+  const legendWidth = legendItems.reduce(
+    (sum, [label]) => sum + 10 + doc.widthOf(label, 7) + 12,
+    -12,
+  );
+  let legendX = plot.x + plot.width - legendWidth;
+  const legendY = rect.y + 10;
+  for (const [label, color] of legendItems) {
+    doc.page.drawRectangle({
+      x: legendX,
+      y: legendY,
+      width: 7,
+      height: 7,
+      color,
+    });
+    doc.textAt(label, legendX + 10, legendY + 1, {
+      size: 7,
+      color: INK.muted,
+    });
+    legendX += 10 + doc.widthOf(label, 7) + 12;
+  }
+}
+
+export type WeeklyStackedBarChartOptions = {
+  seriesLabels: string[];
+  seriesValues: number[][];
+  columnLabels: string[];
+  columnGroups?: string[];
+  goal?: number | null;
+  goalLabel?: string;
+  yFormat: (v: number) => string;
+  colors?: Color[];
+};
+
+export function weeklyStackedBarChart(
+  doc: Doc,
+  rect: Rect,
+  opts: WeeklyStackedBarChartOptions,
+): void {
+  if (opts.seriesLabels.length === 0 || opts.columnLabels.length === 0) return;
+  const leftPad = 28;
+  const rightPad = 4;
+  const topPad = 34;
+  const bottomPad = 26;
+  const monthGap = 6;
+  const colGap = 2;
+  const groupBreaks = opts.columnGroups?.map((group, index, groups) =>
+    index > 0 && group !== groups[index - 1]
+  ) ?? new Array(opts.columnLabels.length).fill(false);
+  const extraGapCount = groupBreaks.filter(Boolean).length;
+  const plot = {
+    x: rect.x + leftPad,
+    y: rect.y + bottomPad,
+    width: rect.width - leftPad - rightPad,
+    height: rect.height - topPad - bottomPad,
+  };
+  const totals = opts.columnLabels.map((_, index) =>
+    opts.seriesValues.reduce((sum, series) => sum + (series[index] ?? 0), 0)
+  );
+  const maxValue = Math.max(1, ...totals, opts.goal ?? 0);
+  const cellWidth = Math.max(
+    (plot.width - colGap * (opts.columnLabels.length - 1) - monthGap * extraGapCount) /
+      opts.columnLabels.length,
+    10,
+  );
+  const columnX = (index: number) => {
+    let extra = 0;
+    for (let i = 1; i <= index; i++) {
+      if (groupBreaks[i]) extra += monthGap;
+    }
+    return plot.x + index * (cellWidth + colGap) + extra;
+  };
+  const scaleY = (v: number) => plot.y + (v / maxValue) * plot.height;
+  const ticks = buildTicks(0, maxValue, 3).filter((t) => t >= 0 && t <= maxValue + 1e-9);
+
+  for (const tick of ticks) {
+    const y = scaleY(tick);
+    doc.page.drawLine({
+      start: { x: plot.x, y },
+      end: { x: plot.x + plot.width, y },
+      thickness: 0.4,
+      color: INK.line,
+    });
+    const label = opts.yFormat(tick);
+    const width = doc.widthOf(label, 7);
+    doc.textAt(label, plot.x - width - 4, y - 2.5, {
+      size: 7,
+      color: INK.muted,
+    });
+  }
+
+  const colors = opts.colors ?? [
+    COLORS.series1,
+    COLORS.series2,
+    COLORS.series3,
+    COLORS.bmi,
+    rgb(0.42, 0.42, 0.42),
+  ];
+  opts.columnLabels.forEach((_, index) => {
+    let cumulative = 0;
+    opts.seriesValues.forEach((series, seriesIndex) => {
+      const value = series[index] ?? 0;
+      if (value <= 0) return;
+      const y = scaleY(cumulative);
+      const top = scaleY(cumulative + value);
+      doc.page.drawRectangle({
+        x: columnX(index),
+        y,
+        width: cellWidth,
+        height: Math.max(top - y, 0.8),
+        color: colors[seriesIndex % colors.length],
+      });
+      cumulative += value;
+    });
+  });
+
+  if (opts.goal != null && opts.goal > 0) {
+    const y = scaleY(opts.goal);
+    doc.page.drawLine({
+      start: { x: plot.x, y },
+      end: { x: plot.x + plot.width, y },
+      thickness: 0.9,
+      color: COLORS.goal,
+      dashArray: [4, 3],
+    });
+    if (opts.goalLabel) {
+      const width = doc.widthOf(opts.goalLabel, 7, true);
+      doc.textAt(opts.goalLabel, plot.x + plot.width - width, y + 2.5, {
+        size: 7,
+        bold: true,
+        color: COLORS.goal,
+      });
+    }
+  }
+
+  const groupTopY = rect.y + rect.height - 9;
+  const labelTopY = rect.y + rect.height - 20;
+  if (opts.columnGroups && opts.columnGroups.length === opts.columnLabels.length) {
+    let start = 0;
+    while (start < opts.columnGroups.length) {
+      const group = opts.columnGroups[start];
+      let end = start;
+      while (end + 1 < opts.columnGroups.length && opts.columnGroups[end + 1] === group) {
+        end += 1;
+      }
+      const startX = columnX(start);
+      const endX = columnX(end) + cellWidth;
+      const width = doc.widthOf(group, 7, true);
+      doc.textAt(group, startX + (endX - startX - width) / 2, groupTopY, {
+        size: 7,
+        bold: true,
+        color: INK.muted,
+      });
+      doc.page.drawLine({
+        start: { x: startX, y: labelTopY + 10 },
+        end: { x: endX, y: labelTopY + 10 },
+        thickness: 0.5,
+        color: INK.line,
+      });
+      start = end + 1;
+    }
+  }
+  opts.columnLabels.forEach((label, index) => {
+    doc.textAt(label, columnX(index) + 1, labelTopY, {
+      size: 7,
+      color: INK.muted,
+    });
+  });
+
+  let legendX = plot.x;
+  const legendY = rect.y + 2;
+  opts.seriesLabels.forEach((label, index) => {
+    const color = colors[index % colors.length];
+    doc.page.drawRectangle({
+      x: legendX,
+      y: legendY,
+      width: 7,
+      height: 7,
+      color,
+    });
+    doc.textAt(label, legendX + 10, legendY + 1, {
+      size: 7,
+      color: INK.muted,
+    });
+    legendX += 10 + doc.widthOf(label, 7) + 12;
+  });
+}
+
 export type DotGridOptions = {
   dayKeys: string[];
   /** Marked day indexes; value can carry an intensity (unused -> single tone). */
@@ -485,44 +1220,102 @@ export type DotGridOptions = {
   monthLabelFor: (dayKey: string) => string;
 };
 
-/** 13-week × 7-day dot calendar (GitHub-style), oldest week first. */
-export function dotGridCalendar(doc: Doc, rect: Rect, opts: DotGridOptions): void {
-  const weeks = Math.ceil(opts.dayKeys.length / 7);
-  const cell = 9;
-  const gapPx = 2.6;
-  const gridWidth = weeks * (cell + gapPx);
-  const x0 = rect.x;
-  const y0 = rect.y + rect.height - cell - 12;
+function parseDayKeyUtc(dayKey: string): Date {
+  return new Date(`${dayKey}T12:00:00Z`);
+}
 
-  let lastMonth = "";
-  for (let index = 0; index < opts.dayKeys.length; index++) {
-    const week = Math.floor(index / 7);
-    const day = index % 7;
-    const x = x0 + week * (cell + gapPx);
-    const y = y0 - day * (cell + gapPx);
-    doc.page.drawRectangle({
-      x,
-      y,
-      width: cell,
-      height: cell,
-      color: opts.marked.has(index)
-        ? opts.markedColor ?? COLORS.series1
-        : COLORS.dotEmpty,
+function monthKeyFor(dayKey: string): string {
+  return dayKey.slice(0, 7);
+}
+
+function daysInMonthUtc(year: number, monthIndex: number): number {
+  return new Date(Date.UTC(year, monthIndex + 1, 0)).getUTCDate();
+}
+
+function monthWeekdayOffsetMonday(day: Date): number {
+  return (day.getUTCDay() + 6) % 7;
+}
+
+/** Month-grouped calendar with day numbers and real week columns. */
+export function dotGridCalendar(doc: Doc, rect: Rect, opts: DotGridOptions): void {
+  if (opts.dayKeys.length === 0) return;
+
+  const monthGap = 10;
+  const titleHeight = 14;
+  const weekdayLabelWidth = 0;
+  const verticalGap = 4;
+  const presentKeys = new Set(opts.dayKeys);
+  const indexByKey = new Map(opts.dayKeys.map((key, index) => [key, index]));
+  const monthKeys = [...new Set(opts.dayKeys.map(monthKeyFor))];
+  const months = monthKeys.map((monthKey) => {
+    const [year, month] = monthKey.split("-").map(Number);
+    const firstDay = new Date(Date.UTC(year, month - 1, 1, 12));
+    const offset = monthWeekdayOffsetMonday(firstDay);
+    const dayCount = daysInMonthUtc(year, month - 1);
+    const weekColumns = Math.ceil((offset + dayCount) / 7);
+    return { monthKey, year, month: month - 1, offset, dayCount, weekColumns };
+  });
+
+  const totalWeekColumns = months.reduce((sum, month) => sum + month.weekColumns, 0);
+  const gridWidth = rect.width - weekdayLabelWidth - monthGap * Math.max(months.length - 1, 0);
+  const columnWidth = gridWidth / Math.max(totalWeekColumns, 1);
+  const rowHeight = (rect.height - titleHeight - verticalGap) / 7;
+  const cellWidth = Math.max(columnWidth - 2, 6);
+  const cellHeight = Math.max(rowHeight - 2, 6);
+  let monthX = rect.x + weekdayLabelWidth;
+
+  for (const month of months) {
+    const monthWidth = month.weekColumns * columnWidth;
+    const title = opts.monthLabelFor(`${month.monthKey}-01`);
+    const titleWidth = doc.widthOf(title, 7, true);
+    doc.textAt(title, monthX + (monthWidth - titleWidth) / 2, rect.y + rect.height - 9, {
+      size: 7,
+      bold: true,
+      color: INK.muted,
     });
-    // Month initial above the first column of each new month.
-    if (day === 0) {
-      const month = opts.monthLabelFor(opts.dayKeys[index]);
-      if (month !== lastMonth) {
-        doc.textAt(month, x, y0 + cell + 4, {
-          size: 7,
-          color: INK.muted,
-        });
-        lastMonth = month;
-      }
+    doc.page.drawLine({
+      start: { x: monthX, y: rect.y + rect.height - titleHeight + 1 },
+      end: { x: monthX + monthWidth, y: rect.y + rect.height - titleHeight + 1 },
+      thickness: 0.5,
+      color: INK.line,
+    });
+
+    for (let dayNumber = 1; dayNumber <= month.dayCount; dayNumber++) {
+      const slot = month.offset + (dayNumber - 1);
+      const week = Math.floor(slot / 7);
+      const weekday = slot % 7;
+      const x = monthX + week * columnWidth + (columnWidth - cellWidth) / 2;
+      const y = rect.y + rect.height - titleHeight - verticalGap -
+        (weekday + 1) * rowHeight + (rowHeight - cellHeight) / 2;
+      const key = `${month.monthKey}-${String(dayNumber).padStart(2, "0")}`;
+      const index = indexByKey.get(key);
+      const inWindow = presentKeys.has(key);
+      const isMarked = index !== undefined && opts.marked.has(index);
+
+      doc.page.drawRectangle({
+        x,
+        y,
+        width: cellWidth,
+        height: cellHeight,
+        color: isMarked
+          ? opts.markedColor ?? COLORS.series1
+          : inWindow
+          ? COLORS.dotEmpty
+          : INK.white,
+        borderColor: INK.line,
+        borderWidth: 0.35,
+      });
+      const label = String(dayNumber);
+      const labelWidth = doc.widthOf(label, 5.5, isMarked);
+      doc.textAt(label, x + cellWidth - labelWidth - 1.4, y + 1.2, {
+        size: 5.5,
+        bold: isMarked,
+        color: isMarked ? INK.white : inWindow ? INK.muted : INK.faint,
+      });
     }
+
+    monthX += monthWidth + monthGap;
   }
-  // Keep the grid inside the reserved rect (defensive; sizes are fixed).
-  void gridWidth;
 }
 
 export type HBarItem = { label: string; value: number; caption?: string };
