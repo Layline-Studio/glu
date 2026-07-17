@@ -14,7 +14,9 @@ final subscriptionProvider = FutureProvider<SubscriptionStatus>((ref) async {
   final authSession = ref.watch(authSessionProvider).value;
   if (authSession == null) return SubscriptionStatus.free;
   final email = authSession.user.email?.trim().toLowerCase();
-  final emailHasPro = email?.endsWith('@layline.ventures') ?? false;
+  final emailHasPro =
+      email?.endsWith('@layline.ventures') == true ||
+      email?.endsWith('@layline.software') == true;
   final isInternalUser = emailHasPro;
 
   final service = ref.read(revenueCatServiceProvider);
