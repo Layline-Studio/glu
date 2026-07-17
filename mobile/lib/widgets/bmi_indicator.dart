@@ -232,28 +232,6 @@ class BmiIndicator extends StatelessWidget {
                             ),
                           ),
                         ),
-                      if (!showValueLabel && showCategoryLabel)
-                        Positioned(
-                          right: 0,
-                          top: -8,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              color: statusColor.withValues(alpha: 0.14),
-                              borderRadius: BorderRadius.circular(999),
-                            ),
-                            child: Text(
-                              metrics.category.label,
-                              style: theme.textTheme.labelLarge?.copyWith(
-                                color: colors.textPrimary,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        ),
                       Positioned(
                         left: markerLeft,
                         top: -8,
