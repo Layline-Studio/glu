@@ -1663,49 +1663,49 @@ abstract class AppLocalizations {
   /// No description provided for @homeInsightLogTodayTitle.
   ///
   /// In en, this message translates to:
-  /// **'Turn logs into insight'**
+  /// **'Tap to see your insight'**
   String get homeInsightLogTodayTitle;
 
   /// No description provided for @homeInsightMoreLogsVariant1Title.
   ///
   /// In en, this message translates to:
-  /// **'More logs, better insight'**
+  /// **'Tap to see today\'s insight'**
   String get homeInsightMoreLogsVariant1Title;
 
   /// No description provided for @homeInsightMoreLogsVariant1Body.
   ///
   /// In en, this message translates to:
-  /// **'Your logs are starting to show a pattern.'**
+  /// **'Your logs are starting to show a pattern — tap in to see it.'**
   String get homeInsightMoreLogsVariant1Body;
 
   /// No description provided for @homeInsightMoreLogsVariant2Title.
   ///
   /// In en, this message translates to:
-  /// **'Your insight is taking shape'**
+  /// **'Tap to see your insight'**
   String get homeInsightMoreLogsVariant2Title;
 
   /// No description provided for @homeInsightMoreLogsVariant2Body.
   ///
   /// In en, this message translates to:
-  /// **'A few more logs could make the picture much clearer.'**
+  /// **'A few more logs could make the picture clearer — tap in anytime.'**
   String get homeInsightMoreLogsVariant2Body;
 
   /// No description provided for @homeInsightMoreLogsVariant3Title.
   ///
   /// In en, this message translates to:
-  /// **'Today’s logs hint at'**
+  /// **'Tap to uncover today\'s insight'**
   String get homeInsightMoreLogsVariant3Title;
 
   /// No description provided for @homeInsightMoreLogsVariant3Body.
   ///
   /// In en, this message translates to:
-  /// **'There may already be a pattern hiding in your day.'**
+  /// **'There may already be a pattern hiding in your day — tap to see.'**
   String get homeInsightMoreLogsVariant3Body;
 
   /// No description provided for @homeInsightLogTodayBodyNoLogs.
   ///
   /// In en, this message translates to:
-  /// **'Log at least once today to see a clearer picture of your progress.'**
+  /// **'Log something today, then tap to see what it reveals.'**
   String get homeInsightLogTodayBodyNoLogs;
 
   /// No description provided for @homeInsightExpandedTitle.
@@ -1983,6 +1983,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share your progress with your doctor'**
   String get homeDoctorReportBody;
+
+  /// No description provided for @doctorReportViewerRenderError.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t display the report. Please try again.'**
+  String get doctorReportViewerRenderError;
+
+  /// No description provided for @doctorReportViewerShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get doctorReportViewerShare;
 
   /// No description provided for @homeGoalsStatusTitle.
   ///
@@ -4107,18 +4119,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your report was generated, but we could not open it. Please try again.'**
   String get progressReportOpenError;
-
-  /// No description provided for @progressReportOpenedInBrowser.
-  ///
-  /// In en, this message translates to:
-  /// **'Report ready. Opened in your browser.'**
-  String get progressReportOpenedInBrowser;
-
-  /// No description provided for @progressReportCopiedLink.
-  ///
-  /// In en, this message translates to:
-  /// **'Report ready. Sharing was unavailable, so the link was copied to your clipboard.'**
-  String get progressReportCopiedLink;
 
   /// No description provided for @progressAllProgressTitle.
   ///

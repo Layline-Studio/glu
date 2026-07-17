@@ -1651,14 +1651,15 @@ class _TodayInsightCardState extends ConsumerState<TodayInsightCard>
   }
 
   Future<void> _handleTap() async {
-    final isArrowInteractive =
-        switch (widget.insightCardMode?.trim().toLowerCase()) {
-      'on' => true,
-      'off' => false,
-      'auto' => DateTime.now().hour >= 19,
-      _ => DateTime.now().hour >= 19,
-    };
-    if (!isArrowInteractive) {
+    if (!widget.hasLogsToday) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.homeInsightLogTodayBodyNoLogs),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
       return;
     }
 
@@ -1889,13 +1890,8 @@ class _TodayInsightCardState extends ConsumerState<TodayInsightCard>
     final hasSummary = _summary != null && _summary!.trim().isNotEmpty;
     final showArrow = widget.hasLogsToday;
     final iconChipBackground = Colors.white.withValues(alpha: 0.92);
-    final isArrowInteractive = widget.hasLogsToday &&
-        switch (widget.insightCardMode?.trim().toLowerCase()) {
-          'on' => true,
-          'off' => false,
-          'auto' => DateTime.now().hour >= 19,
-          _ => DateTime.now().hour >= 19,
-        };
+    final canInteract = widget.insightCardMode?.trim().toLowerCase() != 'off';
+    final isArrowInteractive = canInteract && widget.hasLogsToday;
     final headerTitle =
         _isExpanded ? l10n.homeInsightExpandedTitle : widget.title;
     final headerCopy = _isExpanded ? l10n.homeInsightExpandedBody : widget.copy;
@@ -1929,7 +1925,7 @@ class _TodayInsightCardState extends ConsumerState<TodayInsightCard>
               mainAxisSize: MainAxisSize.min,
               children: [
                 InkWell(
-                  onTap: isArrowInteractive ? _handleTap : null,
+                  onTap: canInteract ? _handleTap : null,
                   borderRadius: BorderRadius.circular(20),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

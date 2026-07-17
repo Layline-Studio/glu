@@ -904,33 +904,36 @@ class AppLocalizationsHi extends AppLocalizations {
       'आज कुछ लॉग करें, और आप अपनी अंतर्दृष्टि रात में देखेंगे।';
 
   @override
-  String get homeInsightLogTodayTitle => 'लॉग को अंतर्दृष्टि में बदलें';
+  String get homeInsightLogTodayTitle =>
+      'अपनी अंतर्दृष्टि देखने के लिए टैप करें';
 
   @override
-  String get homeInsightMoreLogsVariant1Title => 'ज़्यादा लॉग, बेहतर संकेत';
+  String get homeInsightMoreLogsVariant1Title =>
+      'आज की अंतर्दृष्टि देखने के लिए टैप करें';
 
   @override
   String get homeInsightMoreLogsVariant1Body =>
-      'आपके लॉग अब एक पैटर्न दिखाने लगे हैं।';
+      'आपके लॉग अब एक पैटर्न दिखाने लगे हैं — देखने के लिए टैप करें।';
 
   @override
-  String get homeInsightMoreLogsVariant2Title => 'आपकी समझ आकार ले रही है';
+  String get homeInsightMoreLogsVariant2Title =>
+      'अपनी अंतर्दृष्टि देखने के लिए टैप करें';
 
   @override
   String get homeInsightMoreLogsVariant2Body =>
-      'कुछ और लॉग तस्वीर को काफी साफ़ कर सकते हैं।';
+      'कुछ और लॉग तस्वीर को काफी साफ़ कर सकते हैं — कभी भी टैप करें।';
 
   @override
   String get homeInsightMoreLogsVariant3Title =>
-      'आज के लॉग किस ओर इशारा कर रहे हैं';
+      'आज की अंतर्दृष्टि जानने के लिए टैप करें';
 
   @override
   String get homeInsightMoreLogsVariant3Body =>
-      'शायद आपके दिन में पहले से ही एक पैटर्न छुपा हुआ है।';
+      'शायद आपके दिन में पहले से ही एक पैटर्न छुपा हुआ है — देखने के लिए टैप करें।';
 
   @override
   String get homeInsightLogTodayBodyNoLogs =>
-      'आज कम से कम एक बार लॉग करें ताकि आपको अपनी प्रगति की साफ़ तस्वीर दिखे।';
+      'आज कुछ लॉग करें, फिर देखने के लिए टैप करें कि इससे क्या पता चलता है।';
 
   @override
   String get homeInsightExpandedTitle => 'क्या यह उपयोगी था?';
@@ -1081,6 +1084,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => 'अपनी प्रगति अपने डॉक्टर के साथ साझा करें';
+
+  @override
+  String get doctorReportViewerRenderError =>
+      'रिपोर्ट नहीं दिखाई जा सकी. कृपया फिर कोशिश करें.';
+
+  @override
+  String get doctorReportViewerShare => 'साझा करें';
 
   @override
   String get homeGoalsStatusTitle => 'आज के लक्ष्य';
@@ -2229,14 +2239,6 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get progressReportOpenError =>
       'आपकी रिपोर्ट बन गई, लेकिन हम उसे खोल नहीं सके। कृपया फिर से प्रयास करें।';
-
-  @override
-  String get progressReportOpenedInBrowser =>
-      'रिपोर्ट तैयार है। आपके ब्राउज़र में खोली गई।';
-
-  @override
-  String get progressReportCopiedLink =>
-      'रिपोर्ट तैयार है। शेयरिंग उपलब्ध नहीं थी, इसलिए लिंक आपके क्लिपबोर्ड पर कॉपी कर दिया गया है।';
 
   @override
   String get progressAllProgressTitle => 'सभी प्रगति';

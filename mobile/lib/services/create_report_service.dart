@@ -1,9 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 enum CreateReportFailureStage {
   request,
   polling,
-  signing,
+  download,
 }
 
 class CreateReportException implements Exception {
@@ -22,11 +24,11 @@ class CreateReportService {
 
   final SupabaseClient _client;
   static const int _pollingRetryLimit = 3;
-  static const int _signingRetryLimit = 3;
+  static const int _downloadRetryLimit = 3;
   static const Duration _pollDelay = Duration(seconds: 2);
   static const Duration _retryDelay = Duration(seconds: 1);
 
-  Future<String> createTodayReport({
+  Future<Uint8List> createTodayReport({
     void Function(String status)? onStatusChanged,
   }) async {
     final user = _client.auth.currentUser;
@@ -71,7 +73,7 @@ class CreateReportService {
     return requestId;
   }
 
-  Future<String> _pollReport({
+  Future<Uint8List> _pollReport({
     required String requestId,
     void Function(String status)? onStatusChanged,
   }) async {
@@ -163,32 +165,30 @@ class CreateReportService {
         );
       }
 
-      return _createSignedUrl(path);
+      return _downloadReportBytes(path);
     }
   }
 
-  Future<String> _createSignedUrl(String path) async {
-    for (var attempt = 1; attempt <= _signingRetryLimit; attempt++) {
+  Future<Uint8List> _downloadReportBytes(String path) async {
+    for (var attempt = 1; attempt <= _downloadRetryLimit; attempt++) {
       try {
-        final signedResponse = await _client.storage
-            .from('assets')
-            .createSignedUrl(path, 60 * 60 * 24 * 7);
+        final bytes = await _client.storage.from('assets').download(path);
 
-        if (signedResponse.trim().isEmpty) {
+        if (bytes.isEmpty) {
           throw const CreateReportException(
-            CreateReportFailureStage.signing,
-            'Signed report URL is empty.',
+            CreateReportFailureStage.download,
+            'Downloaded report is empty.',
           );
         }
 
-        return signedResponse;
+        return bytes;
       } on CreateReportException {
         rethrow;
       } on Exception catch (error) {
-        if (attempt >= _signingRetryLimit) {
+        if (attempt >= _downloadRetryLimit) {
           throw CreateReportException(
-            CreateReportFailureStage.signing,
-            'Could not create a signed report URL: $error',
+            CreateReportFailureStage.download,
+            'Could not download the report: $error',
           );
         }
         await Future<void>.delayed(_retryDelay);
@@ -196,8 +196,8 @@ class CreateReportService {
     }
 
     throw const CreateReportException(
-      CreateReportFailureStage.signing,
-      'Could not create a signed report URL.',
+      CreateReportFailureStage.download,
+      'Could not download the report.',
     );
   }
 }

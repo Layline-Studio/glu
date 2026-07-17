@@ -1,18 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../l10n/l10n.dart';
 import '../providers/analytics_provider.dart';
 import '../providers/subscription_provider.dart';
+import '../screens/reports/doctor_report_viewer_screen.dart';
 import '../widgets/pro_gate.dart';
 import 'create_report_service.dart';
 
 /// Runs the "create doctor report" flow shared between Progress and Home:
-/// gates on Pro subscription, generates today's report, and shares the
-/// resulting link (or falls back to opening it / copying it to clipboard).
+/// gates on Pro subscription, generates today's report, saves it to a temp
+/// file, and opens it in [DoctorReportViewerScreen].
 Future<void> requestDoctorReport({
   required BuildContext context,
   required WidgetRef ref,
@@ -50,10 +51,27 @@ Future<void> requestDoctorReport({
   messenger.showSnackBar(snackBar);
 
   try {
-    final url = await CreateReportService().createTodayReport();
+    final bytes = await CreateReportService().createTodayReport();
+    final dir = await getTemporaryDirectory();
+    final filePath =
+        '${dir.path}/doctor_report_${DateTime.now().millisecondsSinceEpoch}.pdf';
+    await File(filePath).writeAsBytes(bytes);
     if (!context.mounted) return;
     messenger.hideCurrentSnackBar();
-    await _shareReportUrl(context, url);
+
+    ref.read(analyticsServiceProvider).capture(
+      eventName: 'progress_doctor_report_viewed',
+      properties: {'source': analyticsSource},
+    );
+
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => DoctorReportViewerScreen(
+          filePath: filePath,
+          analyticsSource: analyticsSource,
+        ),
+      ),
+    );
   } on CreateReportException catch (error) {
     if (!context.mounted) return;
     messenger.hideCurrentSnackBar();
@@ -73,52 +91,6 @@ Future<void> requestDoctorReport({
   }
 }
 
-Future<void> _shareReportUrl(BuildContext context, String url) async {
-  final messenger = ScaffoldMessenger.of(context);
-  final l10n = context.l10n;
-  final uri = Uri.parse(url);
-
-  try {
-    final result = await SharePlus.instance.share(ShareParams(uri: uri));
-    if (result.status != ShareResultStatus.unavailable) {
-      return;
-    }
-  } catch (error) {
-    debugPrint('SharePlus.share(uri) failed for report URL: $error');
-  }
-
-  try {
-    final result = await SharePlus.instance.share(ShareParams(text: url));
-    if (result.status != ShareResultStatus.unavailable) {
-      return;
-    }
-  } catch (error) {
-    debugPrint('SharePlus.share(text) failed for report URL: $error');
-  }
-
-  try {
-    final opened = await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-    );
-    if (opened) {
-      if (!context.mounted) return;
-      messenger.showSnackBar(
-        SnackBar(content: Text(l10n.progressReportOpenedInBrowser)),
-      );
-      return;
-    }
-  } catch (error) {
-    debugPrint('launchUrl failed for report URL: $error');
-  }
-
-  await Clipboard.setData(ClipboardData(text: url));
-  if (!context.mounted) return;
-  messenger.showSnackBar(
-    SnackBar(content: Text(l10n.progressReportCopiedLink)),
-  );
-}
-
 String _messageForReportError(
   CreateReportException error,
   AppLocalizations l10n,
@@ -128,7 +100,7 @@ String _messageForReportError(
       return l10n.progressReportError;
     case CreateReportFailureStage.polling:
       return l10n.progressReportPendingRetry;
-    case CreateReportFailureStage.signing:
+    case CreateReportFailureStage.download:
       return l10n.progressReportOpenError;
   }
 }

@@ -901,33 +901,34 @@ class AppLocalizationsNl extends AppLocalizations {
       'Log vandaag iets en je ziet vanavond je inzicht.';
 
   @override
-  String get homeInsightLogTodayTitle => 'Maak van logs inzicht';
+  String get homeInsightLogTodayTitle => 'Tik om je inzicht te zien';
 
   @override
-  String get homeInsightMoreLogsVariant1Title => 'Meer logs, beter inzicht';
+  String get homeInsightMoreLogsVariant1Title =>
+      'Tik om het inzicht van vandaag te zien';
 
   @override
   String get homeInsightMoreLogsVariant1Body =>
-      'Je logs beginnen een patroon te laten zien.';
+      'Je logs beginnen een patroon te laten zien — tik om het te zien.';
 
   @override
-  String get homeInsightMoreLogsVariant2Title => 'Je inzicht krijgt vorm';
+  String get homeInsightMoreLogsVariant2Title => 'Tik om je inzicht te zien';
 
   @override
   String get homeInsightMoreLogsVariant2Body =>
-      'Een paar logs extra kunnen het beeld veel duidelijker maken.';
+      'Een paar logs extra kunnen het beeld veel duidelijker maken — tik wanneer je wilt.';
 
   @override
   String get homeInsightMoreLogsVariant3Title =>
-      'Waar de logs van vandaag op hinten';
+      'Tik om het inzicht van vandaag te ontdekken';
 
   @override
   String get homeInsightMoreLogsVariant3Body =>
-      'Er zit misschien al een patroon verborgen in je dag.';
+      'Er zit misschien al een patroon verborgen in je dag — tik om het te zien.';
 
   @override
   String get homeInsightLogTodayBodyNoLogs =>
-      'Log vandaag minstens één keer om een duidelijker beeld van je voortgang te zien.';
+      'Log vandaag iets, en tik dan om te zien wat het onthult.';
 
   @override
   String get homeInsightExpandedTitle => 'Was dit nuttig?';
@@ -1078,6 +1079,13 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => 'Deel je voortgang met je arts';
+
+  @override
+  String get doctorReportViewerRenderError =>
+      'Het rapport kon niet worden weergegeven. Probeer het opnieuw.';
+
+  @override
+  String get doctorReportViewerShare => 'Delen';
 
   @override
   String get homeGoalsStatusTitle => 'Doelen voor vandaag';
@@ -2230,14 +2238,6 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get progressReportOpenError =>
       'Je rapport is gegenereerd, maar we konden het niet openen. Probeer het opnieuw.';
-
-  @override
-  String get progressReportOpenedInBrowser =>
-      'Rapport klaar. Geopend in je browser.';
-
-  @override
-  String get progressReportCopiedLink =>
-      'Rapport klaar. Delen was niet beschikbaar, dus de link is naar je klembord gekopieerd.';
 
   @override
   String get progressAllProgressTitle => 'All voortgang';

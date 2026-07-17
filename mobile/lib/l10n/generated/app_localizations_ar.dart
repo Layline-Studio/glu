@@ -877,31 +877,32 @@ class AppLocalizationsAr extends AppLocalizations {
       'إذا سجّلت شيئًا اليوم، سترى تحليلك الليلة.';
 
   @override
-  String get homeInsightLogTodayTitle => 'حوّل السجلات إلى تحليل';
+  String get homeInsightLogTodayTitle => 'اضغط لرؤية تحليلك';
 
   @override
-  String get homeInsightMoreLogsVariant1Title => 'سجلات أكثر، تحليل أفضل';
+  String get homeInsightMoreLogsVariant1Title => 'اضغط لرؤية تحليل اليوم';
 
   @override
-  String get homeInsightMoreLogsVariant1Body => 'بدأت سجلاتك تُظهر نمطًا.';
+  String get homeInsightMoreLogsVariant1Body =>
+      'سجلاتك بدأت تُظهر نمطًا — اضغط لرؤيته.';
 
   @override
-  String get homeInsightMoreLogsVariant2Title => 'تحليلك يتشكّل';
+  String get homeInsightMoreLogsVariant2Title => 'اضغط لرؤية تحليلك';
 
   @override
   String get homeInsightMoreLogsVariant2Body =>
-      'قد تجعل بضع سجلات إضافية الصورة أوضح بكثير.';
+      'قد تجعل بضع سجلات إضافية الصورة أوضح بكثير — اضغط في أي وقت.';
 
   @override
-  String get homeInsightMoreLogsVariant3Title => 'ما تلمّح إليه سجلات اليوم';
+  String get homeInsightMoreLogsVariant3Title => 'اضغط لاكتشاف تحليل اليوم';
 
   @override
   String get homeInsightMoreLogsVariant3Body =>
-      'قد يكون هناك نمط يختبئ بالفعل في يومك.';
+      'قد يكون هناك نمط يختبئ بالفعل في يومك — اضغط لترى.';
 
   @override
   String get homeInsightLogTodayBodyNoLogs =>
-      'سجّل مرة واحدة على الأقل اليوم لترى صورة أوضح لتقدّمك.';
+      'سجّل شيئًا اليوم، ثم اضغط لترى ما يكشفه.';
 
   @override
   String get homeInsightExpandedTitle => 'هل كان هذا مفيدًا؟';
@@ -1050,6 +1051,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => 'شارك تقدمك مع طبيبك';
+
+  @override
+  String get doctorReportViewerRenderError =>
+      'تعذّر عرض التقرير. يُرجى المحاولة مرة أخرى.';
+
+  @override
+  String get doctorReportViewerShare => 'مشاركة';
 
   @override
   String get homeGoalsStatusTitle => 'أهداف اليوم';
@@ -2181,14 +2189,6 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get progressReportOpenError =>
       'تم إنشاء تقريرك، لكننا لم نتمكن من فتحه. يرجى المحاولة مرة أخرى.';
-
-  @override
-  String get progressReportOpenedInBrowser =>
-      'التقرير جاهز. تم فتحه في المتصفح.';
-
-  @override
-  String get progressReportCopiedLink =>
-      'التقرير جاهز. لم تكن المشاركة متاحة، لذا تم نسخ الرابط إلى الحافظة.';
 
   @override
   String get progressAllProgressTitle => 'كل التقدّم';

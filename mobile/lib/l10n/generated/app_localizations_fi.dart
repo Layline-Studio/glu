@@ -897,34 +897,35 @@ class AppLocalizationsFi extends AppLocalizations {
       'Kirjaa jotain tänään, niin näet analyysisi illalla.';
 
   @override
-  String get homeInsightLogTodayTitle => 'Muunna kirjaukset analyysiksi';
+  String get homeInsightLogTodayTitle => 'Napauta nähdäksesi näkemyksesi';
 
   @override
   String get homeInsightMoreLogsVariant1Title =>
-      'Lisää kirjauksia, parempi näkemys';
+      'Napauta nähdäksesi tämän päivän näkemyksen';
 
   @override
   String get homeInsightMoreLogsVariant1Body =>
-      'Kirjauksesi alkavat jo näyttää mallia.';
+      'Kirjauksesi alkavat jo näyttää mallia — napauta nähdäksesi sen.';
 
   @override
-  String get homeInsightMoreLogsVariant2Title => 'Näkemyksesi on hahmottumassa';
+  String get homeInsightMoreLogsVariant2Title =>
+      'Napauta nähdäksesi näkemyksesi';
 
   @override
   String get homeInsightMoreLogsVariant2Body =>
-      'Muutama kirjauksia lisää voisi tehdä kuvasta paljon selkeämmän.';
+      'Muutama kirjaus lisää voisi tehdä kuvasta paljon selkeämmän — napauta milloin vain.';
 
   @override
   String get homeInsightMoreLogsVariant3Title =>
-      'Mitä tämän päivän kirjaukset vihjaavat';
+      'Napauta paljastaaksesi tämän päivän näkemyksen';
 
   @override
   String get homeInsightMoreLogsVariant3Body =>
-      'Päivässäsi saattaa jo piillä jokin kaava.';
+      'Päivässäsi saattaa jo piillä jokin kaava — napauta nähdäksesi.';
 
   @override
   String get homeInsightLogTodayBodyNoLogs =>
-      'Kirjaa vähintään kerran tänään, niin näet selkeämmän kuvan edistymisestäsi.';
+      'Kirjaa jotain tänään ja napauta sitten nähdäksesi, mitä se paljastaa.';
 
   @override
   String get homeInsightExpandedTitle => 'Oliko tästä hyötyä?';
@@ -1076,6 +1077,13 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => 'Jaa edistymisesi lääkärillesi';
+
+  @override
+  String get doctorReportViewerRenderError =>
+      'Raportin näyttäminen epäonnistui. Yritä uudelleen.';
+
+  @override
+  String get doctorReportViewerShare => 'Jaa';
 
   @override
   String get homeGoalsStatusTitle => 'Tämän päivän tavoitteet';
@@ -2226,14 +2234,6 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get progressReportOpenError =>
       'Raporttisi luotiin, mutta emme voineet avata sitä. Yritä uudelleen.';
-
-  @override
-  String get progressReportOpenedInBrowser =>
-      'Raportti on valmis. Avattu selaimessasi.';
-
-  @override
-  String get progressReportCopiedLink =>
-      'Raportti on valmis. Jakaminen ei ollut käytettävissä, joten linkki kopioitiin leikepöydällesi.';
 
   @override
   String get progressAllProgressTitle => 'Kaikki edistyminen';

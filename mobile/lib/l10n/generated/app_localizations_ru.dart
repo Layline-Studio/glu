@@ -905,35 +905,35 @@ class AppLocalizationsRu extends AppLocalizations {
       'Запишите что-нибудь сегодня, и вечером увидите свой инсайт.';
 
   @override
-  String get homeInsightLogTodayTitle => 'Превратите записи в инсайт';
+  String get homeInsightLogTodayTitle => 'Нажмите, чтобы увидеть свой инсайт';
 
   @override
   String get homeInsightMoreLogsVariant1Title =>
-      'Больше записей, лучше понимание';
+      'Нажмите, чтобы увидеть инсайт дня';
 
   @override
   String get homeInsightMoreLogsVariant1Body =>
-      'Ваши записи уже начинают показывать закономерность.';
+      'Ваши записи уже начинают показывать закономерность — нажмите, чтобы увидеть.';
 
   @override
   String get homeInsightMoreLogsVariant2Title =>
-      'Ваше понимание обретает форму';
+      'Нажмите, чтобы увидеть свой инсайт';
 
   @override
   String get homeInsightMoreLogsVariant2Body =>
-      'Ещё несколько записей могут сделать картину гораздо яснее.';
+      'Ещё несколько записей могут сделать картину гораздо яснее — нажмите в любое время.';
 
   @override
   String get homeInsightMoreLogsVariant3Title =>
-      'На что намекают сегодняшние записи';
+      'Нажмите, чтобы раскрыть инсайт дня';
 
   @override
   String get homeInsightMoreLogsVariant3Body =>
-      'В вашем дне уже может скрываться закономерность.';
+      'В вашем дне уже может скрываться закономерность — нажмите, чтобы увидеть.';
 
   @override
   String get homeInsightLogTodayBodyNoLogs =>
-      'Запишите хотя бы что-нибудь сегодня, чтобы увидеть более ясную картину своего прогресса.';
+      'Запишите что-нибудь сегодня, а затем нажмите, чтобы увидеть, что это раскрывает.';
 
   @override
   String get homeInsightExpandedTitle => 'Это было полезно?';
@@ -1085,6 +1085,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => 'Поделитесь своим прогрессом с врачом';
+
+  @override
+  String get doctorReportViewerRenderError =>
+      'Не удалось отобразить отчет. Попробуйте еще раз.';
+
+  @override
+  String get doctorReportViewerShare => 'Поделиться';
 
   @override
   String get homeGoalsStatusTitle => 'Цели на сегодня';
@@ -2238,14 +2245,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get progressReportOpenError =>
       'Ваш отчет был создан, но нам не удалось его открыть. Попробуйте еще раз.';
-
-  @override
-  String get progressReportOpenedInBrowser =>
-      'Отчет готов. Открыт в вашем браузере.';
-
-  @override
-  String get progressReportCopiedLink =>
-      'Отчет готов. Поделиться не удалось, поэтому ссылка была скопирована в буфер обмена.';
 
   @override
   String get progressAllProgressTitle => 'Весь прогресс';

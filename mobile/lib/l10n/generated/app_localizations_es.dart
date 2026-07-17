@@ -900,35 +900,34 @@ class AppLocalizationsEs extends AppLocalizations {
       'Registra algo hoy y verás tu análisis esta noche.';
 
   @override
-  String get homeInsightLogTodayTitle => 'Convierte los registros en análisis';
+  String get homeInsightLogTodayTitle => 'Toca para ver tu análisis';
 
   @override
   String get homeInsightMoreLogsVariant1Title =>
-      'Más registros, mejor perspectiva';
+      'Toca para ver la perspectiva de hoy';
 
   @override
   String get homeInsightMoreLogsVariant1Body =>
-      'Tus registros ya empiezan a mostrar un patrón.';
+      'Tus registros ya empiezan a mostrar un patrón — tócalo para verlo.';
 
   @override
-  String get homeInsightMoreLogsVariant2Title =>
-      'Tu insight está tomando forma';
+  String get homeInsightMoreLogsVariant2Title => 'Toca para ver tu insight';
 
   @override
   String get homeInsightMoreLogsVariant2Body =>
-      'Unos cuantos registros más podrían aclarar mucho la imagen.';
+      'Unos cuantos registros más podrían aclarar mucho la imagen — toca cuando quieras.';
 
   @override
   String get homeInsightMoreLogsVariant3Title =>
-      'Lo que sugieren los registros de hoy';
+      'Toca para descubrir el insight de hoy';
 
   @override
   String get homeInsightMoreLogsVariant3Body =>
-      'Puede que ya haya un patrón escondido en tu día.';
+      'Puede que ya haya un patrón escondido en tu día — toca para verlo.';
 
   @override
   String get homeInsightLogTodayBodyNoLogs =>
-      'Registra al menos una vez hoy para ver una imagen más clara de tu progreso.';
+      'Registra algo hoy y luego toca para ver qué revela.';
 
   @override
   String get homeInsightExpandedTitle => '¿Te fue útil?';
@@ -1079,6 +1078,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => 'Comparte tu progreso con tu médico';
+
+  @override
+  String get doctorReportViewerRenderError =>
+      'No se pudo mostrar el informe. Inténtalo de nuevo.';
+
+  @override
+  String get doctorReportViewerShare => 'Compartir';
 
   @override
   String get homeGoalsStatusTitle => 'Metas de hoy';
@@ -2234,14 +2240,6 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get progressReportOpenError =>
       'Tu informe se generó, pero no pudimos abrirlo. Inténtalo de nuevo.';
-
-  @override
-  String get progressReportOpenedInBrowser =>
-      'Informe listo. Abierto en tu navegador.';
-
-  @override
-  String get progressReportCopiedLink =>
-      'Informe listo. El uso compartido no estaba disponible, así que el enlace se copió a tu portapapeles.';
 
   @override
   String get progressAllProgressTitle => 'Todo el progreso';

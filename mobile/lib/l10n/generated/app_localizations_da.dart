@@ -897,35 +897,34 @@ class AppLocalizationsDa extends AppLocalizations {
       'Registrer noget i dag, så ser du din analyse i aften.';
 
   @override
-  String get homeInsightLogTodayTitle => 'Gør logfiler til indsigt';
+  String get homeInsightLogTodayTitle => 'Tryk for at se din indsigt';
 
   @override
   String get homeInsightMoreLogsVariant1Title =>
-      'Flere logninger, bedre indsigt';
+      'Tryk for at se dagens indsigt';
 
   @override
   String get homeInsightMoreLogsVariant1Body =>
-      'Dine logninger begynder at vise et mønster.';
+      'Dine logninger begynder at vise et mønster — tryk for at se det.';
 
   @override
-  String get homeInsightMoreLogsVariant2Title =>
-      'Din indsigt er ved at tage form';
+  String get homeInsightMoreLogsVariant2Title => 'Tryk for at se din indsigt';
 
   @override
   String get homeInsightMoreLogsVariant2Body =>
-      'Et par logninger mere kan gøre billedet meget klarere.';
+      'Et par logninger mere kan gøre billedet meget klarere — tryk når som helst.';
 
   @override
   String get homeInsightMoreLogsVariant3Title =>
-      'Hvad dagens logninger antyder';
+      'Tryk for at afdække dagens indsigt';
 
   @override
   String get homeInsightMoreLogsVariant3Body =>
-      'Der kan allerede gemme sig et mønster i din dag.';
+      'Der kan allerede gemme sig et mønster i din dag — tryk for at se.';
 
   @override
   String get homeInsightLogTodayBodyNoLogs =>
-      'Log mindst én gang i dag for at få et klarere billede af din fremgang.';
+      'Log noget i dag, og tryk så for at se, hvad det afslører.';
 
   @override
   String get homeInsightExpandedTitle => 'Var det nyttigt?';
@@ -1077,6 +1076,13 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => 'Del dine fremskridt med din læge';
+
+  @override
+  String get doctorReportViewerRenderError =>
+      'Kunne ikke vise rapporten. Prøv igen.';
+
+  @override
+  String get doctorReportViewerShare => 'Del';
 
   @override
   String get homeGoalsStatusTitle => 'Dagens mål';
@@ -2226,14 +2232,6 @@ class AppLocalizationsDa extends AppLocalizations {
   @override
   String get progressReportOpenError =>
       'Din rapport blev oprettet, men vi kunne ikke åbne den. Prøv igen.';
-
-  @override
-  String get progressReportOpenedInBrowser =>
-      'Rapport klar. Åbnet i din browser.';
-
-  @override
-  String get progressReportCopiedLink =>
-      'Rapport klar. Deling var ikke tilgængelig, så linket blev kopieret til din udklipsholder.';
 
   @override
   String get progressAllProgressTitle => 'Alt fremskridt';

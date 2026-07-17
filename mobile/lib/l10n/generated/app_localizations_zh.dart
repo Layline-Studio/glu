@@ -805,28 +805,28 @@ class AppLocalizationsZh extends AppLocalizations {
   String get homeInsightEmptyBody => '今天记录一些内容，你今晚就能看到分析。';
 
   @override
-  String get homeInsightLogTodayTitle => '把记录变成洞察';
+  String get homeInsightLogTodayTitle => '点击查看你的洞察';
 
   @override
-  String get homeInsightMoreLogsVariant1Title => '更多记录，更好的洞察';
+  String get homeInsightMoreLogsVariant1Title => '点击查看今天的洞察';
 
   @override
-  String get homeInsightMoreLogsVariant1Body => '你的记录已经开始显示出规律。';
+  String get homeInsightMoreLogsVariant1Body => '你的记录已经开始显示出规律 — 点击查看。';
 
   @override
-  String get homeInsightMoreLogsVariant2Title => '你的洞察正在成形';
+  String get homeInsightMoreLogsVariant2Title => '点击查看你的洞察';
 
   @override
-  String get homeInsightMoreLogsVariant2Body => '再多记几条，就能让画面清晰很多。';
+  String get homeInsightMoreLogsVariant2Body => '再多记几条，就能让画面清晰很多 — 随时点击查看。';
 
   @override
-  String get homeInsightMoreLogsVariant3Title => '今天的记录在暗示什么';
+  String get homeInsightMoreLogsVariant3Title => '点击揭晓今天的洞察';
 
   @override
-  String get homeInsightMoreLogsVariant3Body => '你的这一天里，也许已经藏着一个规律。';
+  String get homeInsightMoreLogsVariant3Body => '你的这一天里，也许已经藏着一个规律 — 点击查看。';
 
   @override
-  String get homeInsightLogTodayBodyNoLogs => '今天至少记录一次，你就能看到更清晰的进展。';
+  String get homeInsightLogTodayBodyNoLogs => '今天记录一些内容，然后点击查看揭示了什么。';
 
   @override
   String get homeInsightExpandedTitle => '这对你有帮助吗？';
@@ -973,6 +973,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => '与医生分享你的进展';
+
+  @override
+  String get doctorReportViewerRenderError => '无法显示报告。请重试。';
+
+  @override
+  String get doctorReportViewerShare => '分享';
 
   @override
   String get homeGoalsStatusTitle => '今日目标';
@@ -2083,12 +2089,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get progressReportOpenError => '您的报告已生成，但我们无法打开它。请再试一次。';
-
-  @override
-  String get progressReportOpenedInBrowser => '报告已准备好。已在您的浏览器中打开。';
-
-  @override
-  String get progressReportCopiedLink => '报告已准备好。由于无法分享，链接已复制到您的剪贴板。';
 
   @override
   String get progressAllProgressTitle => '全部进展';

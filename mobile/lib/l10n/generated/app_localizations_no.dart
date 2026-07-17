@@ -892,32 +892,34 @@ class AppLocalizationsNo extends AppLocalizations {
       'Logg noe i dag, så ser du innsikten din i kveld.';
 
   @override
-  String get homeInsightLogTodayTitle => 'Gjør logger om til innsikt';
+  String get homeInsightLogTodayTitle => 'Trykk for å se innsikten din';
 
   @override
-  String get homeInsightMoreLogsVariant1Title => 'Flere logger, bedre innsikt';
+  String get homeInsightMoreLogsVariant1Title =>
+      'Trykk for å se dagens innsikt';
 
   @override
   String get homeInsightMoreLogsVariant1Body =>
-      'Loggene dine begynner å vise et mønster.';
+      'Loggene dine begynner å vise et mønster — trykk for å se det.';
 
   @override
-  String get homeInsightMoreLogsVariant2Title => 'Innsikten din tar form';
+  String get homeInsightMoreLogsVariant2Title => 'Trykk for å se innsikten din';
 
   @override
   String get homeInsightMoreLogsVariant2Body =>
-      'Noen få logger til kan gjøre bildet mye klarere.';
+      'Noen få logger til kan gjøre bildet mye klarere — trykk når som helst.';
 
   @override
-  String get homeInsightMoreLogsVariant3Title => 'Hva dagens logger antyder';
+  String get homeInsightMoreLogsVariant3Title =>
+      'Trykk for å avdekke dagens innsikt';
 
   @override
   String get homeInsightMoreLogsVariant3Body =>
-      'Det kan allerede ligge et mønster skjult i dagen din.';
+      'Det kan allerede ligge et mønster skjult i dagen din — trykk for å se.';
 
   @override
   String get homeInsightLogTodayBodyNoLogs =>
-      'Logg minst én gang i dag for å få et tydeligere bilde av fremgangen din.';
+      'Logg noe i dag, og trykk deretter for å se hva det avslører.';
 
   @override
   String get homeInsightExpandedTitle => 'Var dette nyttig?';
@@ -1069,6 +1071,13 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get homeDoctorReportBody => 'Del fremgangen din med legen din';
+
+  @override
+  String get doctorReportViewerRenderError =>
+      'Kunne ikke vise rapporten. Prøv igjen.';
+
+  @override
+  String get doctorReportViewerShare => 'Del';
 
   @override
   String get homeGoalsStatusTitle => 'Dagens mål';
@@ -2213,14 +2222,6 @@ class AppLocalizationsNo extends AppLocalizations {
   @override
   String get progressReportOpenError =>
       'Rapporten din ble generert, men vi kunne ikke åpne den. Prøv igjen.';
-
-  @override
-  String get progressReportOpenedInBrowser =>
-      'Rapporten er klar. Åpnet i nettleseren din.';
-
-  @override
-  String get progressReportCopiedLink =>
-      'Rapporten er klar. Deling var ikke tilgjengelig, så lenken ble kopiert til utklippstavlen.';
 
   @override
   String get progressAllProgressTitle => 'All fremgang';
